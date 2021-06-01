@@ -1,0 +1,7 @@
+Iterators:
+- List: bidirectional_iterator_tag
+- Vector: random_access_iterator_tag
+- Map: bidirectional_iterator_tag
+- Stack: NULL
+- Queue: NULL
+
