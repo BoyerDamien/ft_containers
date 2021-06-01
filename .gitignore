@@ -36,3 +36,6 @@ ft_containers
 .idea
 .idea/
 .idea/*
+
+# compile_commands
+compile_commands.json
