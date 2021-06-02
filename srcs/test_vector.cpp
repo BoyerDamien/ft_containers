@@ -6,11 +6,13 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 17:01:18 by dess              #+#    #+#             */
-/*   Updated: 2021/05/31 10:49:15 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/06/02 14:47:34 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_containers.hpp"
+#include "test/test_accessors.hpp"
+#include "test/test_capacity.hpp"
 #include <vector>
 
 /******************************************************************************************
@@ -41,14 +43,22 @@ bool unittest::test_vector( void )
                 unittest::check_with_cap ),
         ::Test( "test vector size()", unittest::test_size< test_type, ref_type >, unittest::check_with_cap ),
         ::Test( "test vector max_size()", unittest::test_max_size< test_type, ref_type >, unittest::check_with_cap ),
-        ::Test( "test vector clear()", unittest::test_clear< test_type, ref_type >, unittest::check_with_cap ),
-        ::Test( "test vector swap()", unittest::test_swap< test_type, ref_type >, unittest::check_with_cap ),
-        ::Test( "test vector push_back()", unittest::test_push_back< test_type, ref_type >, unittest::check_with_cap ),
-        ::Test( "test vector assign()", unittest::test_assign< test_type, ref_type >, unittest::check_with_cap ),
         ::Test( "test vector resize()", unittest::test_resize< test_type, ref_type >, unittest::check_with_cap ),
+        ::Test( "test vector capacity()", unittest::test_capacity< test_type, ref_type >, unittest::check_with_cap ),
+        ::Test( "test vector empty()", unittest::test_empty< test_type, ref_type >, unittest::check_with_cap ),
+        ::Test( "test vector reserve()", unittest::test_reserve< test_type, ref_type >, unittest::check_with_cap ),
+        ::Test( "test vector assign()", unittest::test_assign< test_type, ref_type >, unittest::check_with_cap ),
+        ::Test( "test vector push_back()", unittest::test_push_back< test_type, ref_type >, unittest::check_with_cap ),
+        ::Test( "test vector pop_back()", unittest::test_pop_back< test_type, ref_type >, unittest::check_with_cap ),
         ::Test( "test vector insert()", unittest::test_insert< test_type, ref_type >, unittest::check_with_cap ),
         ::Test( "test vector erase()", unittest::test_erase< test_type, ref_type >, unittest::check_with_cap ),
-        ::Test( "test vector pop_back()", unittest::test_pop_back< test_type, ref_type >, unittest::check_with_cap ),
+        ::Test( "test vector swap()", unittest::test_swap< test_type, ref_type >, unittest::check_with_cap ),
+        ::Test( "test vector clear()", unittest::test_clear< test_type, ref_type >, unittest::check_with_cap ),
+        ::Test( "test vector front()", unittest::test_front< test_type, ref_type >, unittest::check_with_cap ),
+        ::Test( "test vector back()", unittest::test_back< test_type, ref_type >, unittest::check_with_cap ),
+        ::Test( "test vector at()", unittest::test_at< test_type, ref_type >, unittest::check_with_cap ),
+        ::Test( "test vector operator[]()", unittest::test_operator_access< test_type, ref_type >,
+                unittest::check_with_cap ),
         ::Test( "test vector operator==()", unittest::test_operator_eq< test_type, ref_type >,
                 unittest::check_with_cap ),
         ::Test( "test vector operator!=()", unittest::test_operator_diff< test_type, ref_type >,
