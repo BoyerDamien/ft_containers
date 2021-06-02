@@ -39,3 +39,6 @@ ft_containers
 
 # compile_commands
 compile_commands.json
+.cache
+.cache/
+.cache/*
