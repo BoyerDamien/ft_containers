@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 11:23:46 by dboyer            #+#    #+#             */
-/*   Updated: 2021/06/04 16:39:14 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/06/04 17:04:34 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 namespace ft
 {
 
-template < typename key_type, typename value_type > struct pair
+template < typename key_type, typename mapped_type > struct pair
 {
     typedef key_type first_type;
-    typedef value_type second_type;
+    typedef mapped_type second_type;
     typedef pair< first_type, second_type > _self;
 
     first_type first;
@@ -49,38 +49,38 @@ template < typename key_type, typename value_type > struct pair
     }
 };
 
-template < typename key_type, typename value_type >
-bool operator==( const pair< key_type, value_type > &p1, const pair< key_type, value_type > &p2 )
+template < typename key_type, typename mapped_type >
+bool operator==( const pair< key_type, mapped_type > &p1, const pair< key_type, mapped_type > &p2 )
 {
     return p1.first == p2.first && p1.second == p2.second;
 }
 
-template < typename key_type, typename value_type >
-bool operator!=( const pair< key_type, value_type > &p1, const pair< key_type, value_type > &p2 )
+template < typename key_type, typename mapped_type >
+bool operator!=( const pair< key_type, mapped_type > &p1, const pair< key_type, mapped_type > &p2 )
 {
     return !( p1 == p2 );
 }
 
-template < typename key_type, typename value_type >
-bool operator<( const pair< key_type, value_type > &p1, const pair< key_type, value_type > &p2 )
+template < typename key_type, typename mapped_type >
+bool operator<( const pair< key_type, mapped_type > &p1, const pair< key_type, mapped_type > &p2 )
 {
     return p1.first < p2.first;
 }
 
-template < typename key_type, typename value_type >
-bool operator<=( const pair< key_type, value_type > &p1, const pair< key_type, value_type > &p2 )
+template < typename key_type, typename mapped_type >
+bool operator<=( const pair< key_type, mapped_type > &p1, const pair< key_type, mapped_type > &p2 )
 {
     return !( p2 < p1 ) || p1 == p2;
 }
 
-template < typename key_type, typename value_type >
-bool operator>( const pair< key_type, value_type > &p1, const pair< key_type, value_type > &p2 )
+template < typename key_type, typename mapped_type >
+bool operator>( const pair< key_type, mapped_type > &p1, const pair< key_type, mapped_type > &p2 )
 {
     return p1.first > p2.first;
 }
 
-template < typename key_type, typename value_type >
-bool operator>=( const pair< key_type, value_type > &p1, const pair< key_type, value_type > &p2 )
+template < typename key_type, typename mapped_type >
+bool operator>=( const pair< key_type, mapped_type > &p1, const pair< key_type, mapped_type > &p2 )
 {
     return p1 > p2 || p1 == p2;
 }
