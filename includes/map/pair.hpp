@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 11:23:46 by dboyer            #+#    #+#             */
-/*   Updated: 2021/06/04 15:16:15 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/06/04 16:39:14 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ template < typename key_type, typename value_type > struct pair
     {
     }
 
-    _self operator=( const _self &other )
+    _self &operator=( const _self &other )
     {
         first = other.first;
         second = other.second;
@@ -70,7 +70,7 @@ bool operator<( const pair< key_type, value_type > &p1, const pair< key_type, va
 template < typename key_type, typename value_type >
 bool operator<=( const pair< key_type, value_type > &p1, const pair< key_type, value_type > &p2 )
 {
-    return p1 < p2 || p1 == p2;
+    return !( p2 < p1 ) || p1 == p2;
 }
 
 template < typename key_type, typename value_type >
