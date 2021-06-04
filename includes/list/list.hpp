@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 10:28:01 by dboyer            #+#    #+#             */
-/*   Updated: 2021/05/24 16:12:34 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/06/04 10:27:10 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,39 +65,39 @@ template < class T, class Alloc = std::allocator< T > > class list
     /******************************************************************************
      *							Constructor
      *****************************************************************************/
-    list(void) : _begin(new node_type(value_type())), _n(0)
+    list( void ) : _begin( new node_type( value_type() ) ), _n( 0 )
     {
     }
 
-    list(size_t n, const value_type &val = value_type()) : _begin(new node_type(value_type())), _n(0)
+    list( size_t n, const value_type &val = value_type() ) : _begin( new node_type( value_type() ) ), _n( 0 )
     {
-        assign(n, val);
+        assign( n, val );
     }
 
-    list(pointer first, pointer last) : _begin(new node_type(value_type())), _n(0)
+    list( pointer first, pointer last ) : _begin( new node_type( value_type() ) ), _n( 0 )
     {
-        for (pointer begin = first; begin != last; begin++)
-            push_back(*begin);
+        for ( pointer begin = first; begin != last; begin++ )
+            push_back( *begin );
     }
 
-    list(iterator first, iterator last) : _begin(new node_type(value_type())), _n(0)
+    list( iterator first, iterator last ) : _begin( new node_type( value_type() ) ), _n( 0 )
     {
-        assign(first, last);
+        assign( first, last );
     }
 
-    list(const list &x) : _begin(new node_type(value_type())), _n(0)
+    list( const list &x ) : _begin( new node_type( value_type() ) ), _n( 0 )
     {
-        assign(x.begin(), x.end());
+        assign( x.begin(), x.end() );
     }
 
-    list &operator=(const self &x)
+    list &operator=( const self &x )
     {
-        assign(x.begin(), x.end());
+        assign( x.begin(), x.end() );
         x.clear();
         return *this;
     }
 
-    ~list(void)
+    ~list( void )
     {
         clear();
         delete _begin;
@@ -106,72 +106,72 @@ template < class T, class Alloc = std::allocator< T > > class list
     /******************************************************************************
      *								Member functions
      *****************************************************************************/
-    iterator begin(void) const
+    iterator begin( void ) const
     {
-        return iterator(_begin->next());
+        return iterator( _begin->next() );
     }
-    iterator end(void) const
+    iterator end( void ) const
     {
-        return iterator(_begin);
-    }
-
-    void assign(iterator first, iterator last)
-    {
-        clear();
-        while (first != last)
-            push_back(*first++);
-    }
-    void assign(size_type n, const value_type &val)
-    {
-        clear();
-        while (_n < n)
-            push_back(val);
+        return iterator( _begin );
     }
 
-    reference back(void)
+    void assign( iterator first, iterator last )
+    {
+        clear();
+        while ( first != last )
+            push_back( *first++ );
+    }
+    void assign( size_type n, const value_type &val )
+    {
+        clear();
+        while ( _n < n )
+            push_back( val );
+    }
+
+    reference back( void )
     {
         return _begin->previous()->getContent();
     }
-    const_reference back(void) const
+    const_reference back( void ) const
     {
-        return static_cast< const_reference >(_begin->previous()->getContent());
+        return static_cast< const_reference >( _begin->previous()->getContent() );
     }
-    reference front(void)
+    reference front( void )
     {
         return _begin->next()->getContent();
     }
-    const_reference front(void) const
+    const_reference front( void ) const
     {
-        return static_cast< const_reference >(_begin->next()->getContent());
+        return static_cast< const_reference >( _begin->next()->getContent() );
     }
 
-    void clear(void)
+    void clear( void )
     {
-        while (_n)
+        while ( _n )
             pop_back();
     }
 
-    bool empty(void) const
+    bool empty( void ) const
     {
         return _n == 0 && _begin->next() == _begin && _begin->previous() == _begin;
     }
 
-    size_type size(void) const
+    size_type size( void ) const
     {
         return _n;
     }
 
-    void swap(list &other)
+    void swap( list &other )
     {
-        ft::swap(_begin, other._begin);
-        ft::swap(_n, other._n);
+        ft::swap( _begin, other._begin );
+        ft::swap( _n, other._n );
     }
 
-    iterator erase(iterator position)
+    iterator erase( iterator position )
     {
         node_type *to_delete = position.getNode();
         iterator ret = ++position;
-        if (_n && _begin != to_delete)
+        if ( _n && _begin != to_delete )
         {
             delete to_delete;
             _n--;
@@ -179,26 +179,26 @@ template < class T, class Alloc = std::allocator< T > > class list
         return ret;
     }
 
-    iterator erase(iterator begin, iterator end)
+    iterator erase( iterator begin, iterator end )
     {
-        if (begin != end)
+        if ( begin != end )
         {
-            return erase(erase(begin++), end);
+            return erase( erase( begin++ ), end );
         }
         return begin;
     }
 
-    iterator insert(iterator position, const value_type &val)
+    iterator insert( iterator position, const value_type &val )
     {
-        node_type *to_insert = new list_element< value_type >(val);
+        node_type *to_insert = new list_element< value_type >( val );
         node_type *node = position.getNode();
-        node->previous()->setNext(to_insert);
-        to_insert->setNext(node);
+        node->previous()->setNext( to_insert );
+        to_insert->setNext( node );
         _n++;
-        return iterator(to_insert);
+        return iterator( to_insert );
     }
 
-    size_type max_size(void) const
+    size_type max_size( void ) const
     {
         // std::cout << "test = " << std::allocator< node_type >().max_size() << std::endl;
         // std::cout << value_type().max_size() / (sizeof(value_type) - sizeof(difference_type)) << std::endl;
@@ -206,98 +206,100 @@ template < class T, class Alloc = std::allocator< T > > class list
         return node_allocator_type().max_size();
     }
 
-    void pop_back(void)
+    void pop_back( void )
     {
-        if (_n > 0)
+        if ( _n > 0 )
         {
             delete _begin->previous();
             --_n;
         }
     }
 
-    void pop_front(void)
+    void pop_front( void )
     {
-        if (_n > 0)
+        if ( _n > 0 )
         {
             delete _begin->next();
             --_n;
         }
     }
 
-    void push_back(const value_type &val)
+    void push_back( const value_type &val )
     {
-        insert(end(), val);
+        insert( end(), val );
     }
 
-    void push_front(const value_type &val)
+    void push_front( const value_type &val )
     {
-        insert(begin(), val);
+        insert( begin(), val );
     }
 
-    reverse_iterator rbegin(void)
+    reverse_iterator rbegin( void )
     {
-        return reverse_iterator(--end());
+        return reverse_iterator( --end() );
     }
-    const_reverse_iterator rbegin(void) const
+    const_reverse_iterator rbegin( void ) const
     {
-        return const_reverse_iterator(--end());
-    }
-
-    reverse_iterator rend(void)
-    {
-        return reverse_iterator(--begin());
-    }
-    const_reverse_iterator rend(void) const
-    {
-        return const_reverse_iterator(--begin());
+        return const_reverse_iterator( --end() );
     }
 
-    void remove(const value_type &val)
+    reverse_iterator rend( void )
     {
-        _remove(val, begin());
+        return reverse_iterator( --begin() );
+    }
+    const_reverse_iterator rend( void ) const
+    {
+        return const_reverse_iterator( --begin() );
     }
 
-    template < class Predicate > void remove_if(Predicate pred)
+    void remove( const value_type &val )
     {
-        _remove_if(pred, begin());
+        _remove( val, begin() );
     }
 
-    void resize(size_type n, value_type val = value_type())
+    template < class Predicate > void remove_if( Predicate pred )
     {
-        while (n > _n)
-            push_back(val);
-        while (n < _n)
-            erase(--end());
+        _remove_if( pred, begin() );
     }
 
-    void reverse(void)
+    void resize( size_type n, value_type val = value_type() )
+    {
+        while ( n > _n )
+            push_back( val );
+        while ( n < _n )
+            erase( --end() );
+    }
+
+    void reverse( void )
     {
         iterator begin = this->begin();
         iterator end = this->end();
-        while (begin != --end)
-            ft::swap< value_type >(*begin++, *end);
+        while ( begin != --end )
+            ft::swap< value_type >( *begin++, *end );
     }
 
-    void sort(void)
+    void sort( void )
     {
-        ft::bubbleSort(begin(), end());
+        if ( _n > 1 )
+            ft::QSort( begin(), --end(), ft::defaulSortComp< value_type > );
     }
 
-    template < class Compare > void sort(Compare comp)
+    template < class Compare > void sort( Compare comp )
     {
-        ft::bubbleSort(begin(), end(), comp);
+        if ( _n > 1 )
+            ft::QSort( begin(), --end(), comp );
     }
 
-    void splice(iterator position, list &x)
+    void splice( iterator position, list &x )
     {
-        if (x.size())
+        if ( x.size() )
         {
             node_type *pos_node = position.getNode();
             node_type *to_insert = x.begin().getNode();
             node_type *to_insert_end = x.rbegin().base().getNode();
 
-            pos_node->previous()->setNext(to_insert);
-            pos_node->setPrevious(to_insert_end);
+            pos_node->previous()->setNext( to_insert );
+            pos_node->setPrevious( to_insert_end );
 
             x._begin->init();
 
@@ -306,57 +308,57 @@ template < class T, class Alloc = std::allocator< T > > class list
         }
     }
 
-    void splice(iterator position, list &x, iterator i)
+    void splice( iterator position, list &x, iterator i )
     {
-        if (x.size())
+        if ( x.size() )
         {
             node_type *pos_node = position.getNode();
             node_type *to_insert = i.getNode();
 
-            to_insert->previous()->setNext(to_insert->next());
-            pos_node->previous()->setNext(to_insert);
-            to_insert->setNext(pos_node);
+            to_insert->previous()->setNext( to_insert->next() );
+            pos_node->previous()->setNext( to_insert );
+            to_insert->setNext( pos_node );
 
             _n += 1;
             x._n--;
 
-            if (x._n == 0)
+            if ( x._n == 0 )
                 x._begin->init();
         }
     }
 
-    void splice(iterator position, list &x, iterator first, iterator last)
+    void splice( iterator position, list &x, iterator first, iterator last )
     {
-        while (first != last)
-            splice(position, x, first++);
+        while ( first != last )
+            splice( position, x, first++ );
     }
 
-    void merge(list &x)
+    void merge( list &x )
     {
-        splice(begin(), x);
+        splice( begin(), x );
         sort();
     }
 
-    template < class Compare > void merge(list &x, Compare comp)
+    template < class Compare > void merge( list &x, Compare comp )
     {
-        splice(begin(), x);
-        sort(comp);
+        splice( begin(), x );
+        sort( comp );
     }
 
-    void unique(void)
+    void unique( void )
     {
-        _unique(begin(), ++begin());
+        _unique( begin(), ++begin() );
     }
 
-    template < class BinaryPredicate > void unique(BinaryPredicate binary_pred)
+    template < class BinaryPredicate > void unique( BinaryPredicate binary_pred )
     {
         sort();
         iterator it = begin();
         iterator tmp = it;
-        while (++it != end())
+        while ( ++it != end() )
         {
-            if (binary_pred(*it, *tmp))
-                erase(tmp);
+            if ( binary_pred( *it, *tmp ) )
+                erase( tmp );
             tmp = it;
         }
     }
@@ -372,36 +374,36 @@ template < class T, class Alloc = std::allocator< T > > class list
      *			Private functions
      *****************************************************************************/
 
-    void _remove(const value_type &val, iterator it)
+    void _remove( const value_type &val, iterator it )
     {
-        if (it != end())
+        if ( it != end() )
         {
-            if (*it == val)
-                _remove(val, erase(it));
+            if ( *it == val )
+                _remove( val, erase( it ) );
             else
-                _remove(val, ++it);
+                _remove( val, ++it );
         }
     }
 
-    template < class Predicate > void _remove_if(Predicate pred, iterator it)
+    template < class Predicate > void _remove_if( Predicate pred, iterator it )
     {
-        if (it != end())
+        if ( it != end() )
         {
-            if (pred(*it))
-                _remove_if(pred, erase(it));
+            if ( pred( *it ) )
+                _remove_if( pred, erase( it ) );
             else
-                _remove_if(pred, ++it);
+                _remove_if( pred, ++it );
         }
     }
 
-    void _unique(iterator prev, iterator it)
+    void _unique( iterator prev, iterator it )
     {
-        if (it != end())
+        if ( it != end() )
         {
-            if (*prev == *it)
-                _unique(erase(prev), ++it);
+            if ( *prev == *it )
+                _unique( erase( prev ), ++it );
             else
-                _unique(it, ++it);
+                _unique( it, ++it );
         }
     }
 };
@@ -409,14 +411,14 @@ template < class T, class Alloc = std::allocator< T > > class list
 /******************************************************************************
  *			Operator overloading
  *****************************************************************************/
-template < typename T > bool operator==(const ft::list< T > &l1, const ft::list< T > &l2)
+template < typename T > bool operator==( const ft::list< T > &l1, const ft::list< T > &l2 )
 {
     typename ft::list< T >::iterator beg1 = l1.begin();
     typename ft::list< T >::iterator beg2 = l2.begin();
 
-    while (beg1 != l1.end())
+    while ( beg1 != l1.end() )
     {
-        if (*beg1 != *beg2 || beg2 == l2.end())
+        if ( *beg1 != *beg2 || beg2 == l2.end() )
             return false;
         beg1++;
         beg2++;
@@ -424,21 +426,21 @@ template < typename T > bool operator==(const ft::list< T > &l1, const ft::list<
     return beg2 == l2.end();
 }
 
-template < typename T > bool operator!=(const ft::list< T > &l1, const ft::list< T > &l2)
+template < typename T > bool operator!=( const ft::list< T > &l1, const ft::list< T > &l2 )
 {
-    return !(l1 == l2);
+    return !( l1 == l2 );
 }
 
-template < typename T > bool operator<(const ft::list< T > &l1, const ft::list< T > &l2)
+template < typename T > bool operator<( const ft::list< T > &l1, const ft::list< T > &l2 )
 {
     typename ft::list< T >::iterator beg1 = l1.begin();
     typename ft::list< T >::iterator beg2 = l2.begin();
 
-    while (beg1 != l1.end())
+    while ( beg1 != l1.end() )
     {
-        if (*beg1 > *beg2 || beg2 == l2.end())
+        if ( *beg1 > *beg2 || beg2 == l2.end() )
             return false;
-        if (*beg1 < *beg2)
+        if ( *beg1 < *beg2 )
             return true;
         beg1++;
         beg2++;
@@ -446,16 +448,16 @@ template < typename T > bool operator<(const ft::list< T > &l1, const ft::list< 
     return beg2 != l2.end();
 }
 
-template < typename T > bool operator<=(const ft::list< T > &l1, const ft::list< T > &l2)
+template < typename T > bool operator<=( const ft::list< T > &l1, const ft::list< T > &l2 )
 {
     typename ft::list< T >::iterator beg1 = l1.begin();
     typename ft::list< T >::iterator beg2 = l2.begin();
 
-    while (beg1 != l1.end())
+    while ( beg1 != l1.end() )
     {
-        if (*beg1 > *beg2 || beg2 == l2.end())
+        if ( *beg1 > *beg2 || beg2 == l2.end() )
             return false;
-        if (*beg1 < *beg2)
+        if ( *beg1 < *beg2 )
             return true;
         beg1++;
         beg2++;
@@ -463,16 +465,16 @@ template < typename T > bool operator<=(const ft::list< T > &l1, const ft::list<
     return true;
 }
 
-template < typename T > bool operator>(const ft::list< T > &l1, const ft::list< T > &l2)
+template < typename T > bool operator>( const ft::list< T > &l1, const ft::list< T > &l2 )
 {
     typename ft::list< T >::iterator beg1 = l1.begin();
     typename ft::list< T >::iterator beg2 = l2.begin();
 
-    while (beg2 != l2.end())
+    while ( beg2 != l2.end() )
     {
-        if (*beg1 < *beg2 || beg1 == l1.end())
+        if ( *beg1 < *beg2 || beg1 == l1.end() )
             return false;
-        if (*beg1 > *beg2)
+        if ( *beg1 > *beg2 )
             return true;
         beg1++;
         beg2++;
@@ -480,16 +482,16 @@ template < typename T > bool operator>(const ft::list< T > &l1, const ft::list< 
     return beg1 != l1.end();
 }
 
-template < typename T > bool operator>=(const ft::list< T > &l1, const ft::list< T > &l2)
+template < typename T > bool operator>=( const ft::list< T > &l1, const ft::list< T > &l2 )
 {
     typename ft::list< T >::iterator beg1 = l1.begin();
     typename ft::list< T >::iterator beg2 = l2.begin();
 
-    while (beg2 != l2.end())
+    while ( beg2 != l2.end() )
     {
-        if (*beg1 < *beg2 || beg1 == l1.end())
+        if ( *beg1 < *beg2 || beg1 == l1.end() )
             return false;
-        if (*beg1 > *beg2)
+        if ( *beg1 > *beg2 )
             return true;
         beg1++;
         beg2++;
@@ -497,20 +499,20 @@ template < typename T > bool operator>=(const ft::list< T > &l1, const ft::list<
     return true;
 }
 
-template < typename T > std::ostream &operator<<(std::ostream &os, const ft::list< T > &l)
+template < typename T > std::ostream &operator<<( std::ostream &os, const ft::list< T > &l )
 {
     os << "[ ";
 
-    for (typename ft::list< T >::iterator it = l.begin(); it != l.end(); it++)
+    for ( typename ft::list< T >::iterator it = l.begin(); it != l.end(); it++ )
         os << *it << " ";
 
     os << "]";
     return os;
 }
 
-template < typename T > void swap(ft::list< T > &l1, ft::list< T > &l2)
+template < typename T > void swap( ft::list< T > &l1, ft::list< T > &l2 )
 {
-    l1.swap(l2);
+    l1.swap( l2 );
 }
 
 } // namespace ft

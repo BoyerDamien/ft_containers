@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 14:18:02 by dboyer            #+#    #+#             */
-/*   Updated: 2021/06/02 14:52:44 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/06/02 15:01:51 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ void test_front( void ( *check )( test_type &, ref_type & ) ) throw( std::except
     check( test, test_ref );
     assert( test.front() == test_ref.front(), "wrong value" );
 
-    test.clear();
+    /*test.clear();
     test_ref.clear();
-    assert( test.front() == test_ref.front(), "wrong value" );
+    assert( test.front() == test_ref.front(), "wrong value" );*/
 }
 
 template < typename test_type, typename ref_type >
@@ -64,10 +64,10 @@ void test_back( void ( *check )( test_type &, ref_type & ) ) throw( std::excepti
     check( test, test_ref );
     assert( test.back() == test_ref.back(), "wrong value" );
 
-    test.clear();
+    /*test.clear();
     test_ref.clear();
     std::cout << test.back() << test_ref.back() << std::endl;
-    assert( test.back() == test_ref.back(), "wrong value" );
+    assert( test.back() == test_ref.back(), "wrong value" );*/
 }
 
 template < typename test_type, typename ref_type >
