@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 17:12:28 by dboyer            #+#    #+#             */
-/*   Updated: 2021/06/02 14:54:54 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/06/04 15:17:58 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void test_max_size( void ( *check )( test_type &, ref_type & ) ) throw( std::exc
 
     check( test, test_ref );
 
-    std::cout << test.max_size() << " " << test_ref.max_size() << std::endl;
+    // std::cout << test.max_size() << " " << test_ref.max_size() << std::endl;
     unittest::assert( test.max_size() == test_ref.max_size(), "wrong max size value" );
 }
 

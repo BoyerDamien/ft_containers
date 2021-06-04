@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 10:28:01 by dboyer            #+#    #+#             */
-/*   Updated: 2021/06/04 10:27:10 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/06/04 10:29:37 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,7 +281,7 @@ template < class T, class Alloc = std::allocator< T > > class list
     void sort( void )
     {
         if ( _n > 1 )
-            ft::QSort( begin(), --end(), ft::defaulSortComp< value_type > );
+            ft::QSort( begin(), --end(), ft::defaultSortComp< value_type > );
     }
 
     template < class Compare > void sort( Compare comp )

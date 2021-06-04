@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 17:59:07 by dboyer            #+#    #+#             */
-/*   Updated: 2021/06/04 10:23:11 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/06/04 10:29:46 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ template < typename Iterator, typename Comp > void bubbleSort( Iterator begin, I
     }
 }
 
-template < typename value_type > bool defaulSortComp( value_type curr, value_type pivot )
+template < typename value_type > bool defaultSortComp( value_type curr, value_type pivot )
 {
     return curr <= pivot;
 }

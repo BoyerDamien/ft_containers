@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 18:21:32 by dboyer            #+#    #+#             */
-/*   Updated: 2021/06/04 09:42:58 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/06/04 15:17:32 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,6 @@ void test_sort( void ( *check )( test_type &, ref_type & ) ) throw( std::excepti
 
     test.sort();
     test_ref.sort();
-    std::cout << test << std::endl;
     check( test, test_ref );
 
     test2.sort( compare< int > );

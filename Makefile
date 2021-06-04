@@ -6,7 +6,7 @@
 #    By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/10 16:36:02 by dboyer            #+#    #+#              #
-#    Updated: 2021/05/26 11:27:44 by dboyer           ###   ########.fr        #
+#    Updated: 2021/06/04 14:52:58 by dboyer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ MAIN				= 	./srcs/main.cpp
 
 SRCS    			= 	assert\
 						test_list\
-						test_vector
+						test_vector\
+						test_pair
 
 INCLUDES			=	-I ./includes
 
