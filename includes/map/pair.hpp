@@ -6,13 +6,13 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 11:23:46 by dboyer            #+#    #+#             */
-/*   Updated: 2021/06/04 17:04:34 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/06/05 11:08:59 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PAIR_HPP
 #define PAIR_HPP
-
+#include <iostream>
 namespace ft
 {
 
@@ -83,6 +83,12 @@ template < typename key_type, typename mapped_type >
 bool operator>=( const pair< key_type, mapped_type > &p1, const pair< key_type, mapped_type > &p2 )
 {
     return p1 > p2 || p1 == p2;
+}
+
+template < typename key_type, typename mapped_type >
+std::ostream &operator<<( std::ostream &os, const ft::pair< key_type, mapped_type > &p )
+{
+    return os << "(" << p.first << ", " << p.second << ")";
 }
 
 } // namespace ft

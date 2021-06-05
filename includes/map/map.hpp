@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 15:07:21 by dboyer            #+#    #+#             */
-/*   Updated: 2021/06/04 17:22:05 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/06/05 13:04:13 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define MAP_HPP
 #include "./bst_element.hpp"
 #include "./pair.hpp"
+#include "iterators/map_iterator.hpp"
 #include <functional>
 #include <memory>
 namespace ft
@@ -21,7 +22,7 @@ namespace ft
 
 template < typename key, typename T, typename Compare = std::less< key >,
            typename Alloc = std::allocator< ft::pair< key, T > > >
-class Map
+class map
 {
   public:
     typedef key key_type;
