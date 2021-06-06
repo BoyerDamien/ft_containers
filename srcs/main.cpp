@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 16:45:01 by dboyer            #+#    #+#             */
-/*   Updated: 2021/06/06 18:11:31 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/06/06 20:36:09 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,20 @@
 
 int main( void )
 {
+    ft::map< int, int > test;
+
+    ft::map< int, int >::iterator it = test.begin();
+    ft::map< int, int >::iterator it2 = test.end();
+    ft::map< int, int >::reverse_iterator rev_it = test.rbegin();
+    ft::map< int, int >::reverse_iterator rev_it2 = test.end();
+
+    std::cout << *it << std::endl;
+    std::cout << *it2 << std::endl;
+    std::cout << *rev_it << std::endl;
+    std::cout << *rev_it2 << std::endl;
     /*if ( unittest::test_list() && unittest::test_vector() && unittest::test_pair() )
         return 0;*/
-    ft::bst_element< int, int > test1;
+    /*ft::bst_element< int, int > test1;
     test1.setPair( ft::pair< int, int >( 1, 10 ) );
 
     ft::bst_element< int, int > test3;
@@ -83,6 +94,6 @@ int main( void )
     {
         std::cout << *it << std::endl;
         it--;
-    }
+    }*/
     return 0;
 }
