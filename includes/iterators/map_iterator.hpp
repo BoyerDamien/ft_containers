@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/05 09:33:43 by dboyer            #+#    #+#             */
-/*   Updated: 2021/06/06 18:06:46 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/06/06 18:13:13 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include "iterator_base.hpp"
 #include "map/bst_element.hpp"
 #include "map/pair.hpp"
-#include <bits/types/struct_sched_param.h>
 
 namespace ft
 {
