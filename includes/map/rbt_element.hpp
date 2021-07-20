@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bst_element.hpp                                    :+:      :+:    :+:   */
+/*   rbt_element.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BST_ELEMENT_HPP
-#define BST_ELEMENT_HPP
+#ifndef rbt_element_HPP
+#define rbt_element_HPP
 #include "./pair.hpp"
 #include <iostream>
 #include <memory>
@@ -20,14 +20,13 @@ namespace ft
 {
 template < typename key_type, typename mapped_type,
            typename Alloc = std::allocator< ft::pair< key_type, mapped_type > > >
-class bst_element
+class rbt_element
 {
   public:
-    typedef bst_element< key_type, mapped_type > _self;
+    typedef rbt_element< key_type, mapped_type > _self;
     typedef _self *pointer;
-    typedef pointer const_pointer;
     typedef Alloc allocator_type;
-    typedef ft::pair< key_type, mapped_type > _node_pair;
+    typedef ft::pair< key_type, mapped_type > value_type;
     typedef typename allocator_type::pointer pair_pointer;
     typedef typename allocator_type::reference pair_reference;
     typedef typename allocator_type::difference_type pair_difference_type;
@@ -37,43 +36,45 @@ class bst_element
      *                  Constructors
      ********************************************************************************/
 
-    bst_element( allocator_type alloc = allocator_type() )
-        : _pair( alloc.allocate( 1 ) ), _parent( NULL ), _right( NULL ), _left( NULL )
+    rbt_element( allocator_type alloc = allocator_type() )
+        : _pair( alloc.allocate( 1 ) ), _parent( NULL ), _right( NULL ), _left( NULL ), _black( false )
     {
-        alloc.construct( _pair, _node_pair() );
+        alloc.construct( _pair, value_type() );
     }
 
-    bst_element( key_type key, mapped_type value, allocator_type alloc = allocator_type() )
-        : _pair( alloc.allocate( 1 ) ), _parent( NULL ), _right( NULL ), _left( NULL )
+    rbt_element( key_type key, mapped_type value, allocator_type alloc = allocator_type() )
+        : _pair( alloc.allocate( 1 ) ), _parent( NULL ), _right( NULL ), _left( NULL ), _black( false )
     {
-        alloc.construct( _pair, _node_pair( key, value ) );
+        alloc.construct( _pair, value_type( key, value ) );
     }
 
-    bst_element( _node_pair pair, allocator_type alloc = allocator_type() )
-        : _pair( alloc.allocate( 1 ) ), _parent( NULL ), _right( NULL ), _left( NULL )
+    rbt_element( value_type pair, allocator_type alloc = allocator_type() )
+        : _pair( alloc.allocate( 1 ) ), _parent( NULL ), _right( NULL ), _left( NULL ), _black( false )
     {
-        alloc.construct( _pair, _node_pair( pair.first, pair.second ) );
+        alloc.construct( _pair, value_type( pair.first, pair.second ) );
     }
 
-    bst_element( const _self &other, allocator_type alloc = allocator_type() )
-        : _pair( alloc.allocate( 1 ) ), _parent( other._parent ), _right( other._right ), _left( other._left )
+    rbt_element( const _self &other, allocator_type alloc = allocator_type() )
+        : _pair( alloc.allocate( 1 ) ), _parent( other._parent ), _right( other._right ), _left( other._left ),
+          _black( other._black )
     {
-        alloc.construct( _pair, _node_pair( other._pair->first, other._pair->second ) );
+        alloc.construct( _pair, value_type( other._pair->first, other._pair->second ) );
     }
 
     _self &operator=( const _self &other )
     {
         allocator_type alloc = allocator_type();
         alloc.destroy( _pair );
-        alloc.construct( _pair, _node_pair( other._pair->first, other._pair->second ) );
+        alloc.construct( _pair, value_type( other._pair->first, other._pair->second ) );
 
         _parent = other._parent;
         _right = other._right;
         _left = other._left;
+        _black = other._black;
         return *this;
     }
 
-    ~bst_element()
+    ~rbt_element()
     {
         allocator_type alloc = allocator_type();
         alloc.destroy( _pair );
@@ -96,7 +97,23 @@ class bst_element
     {
         return _parent;
     }
-    _node_pair &getPair( void )
+    pointer grandParent( void ) const
+    {
+        pointer p = parent();
+        if ( p )
+            return p->parent();
+        return NULL;
+    }
+    pointer uncle( void ) const
+    {
+        pointer gp = grandParent();
+        if ( gp && gp->left() != this )
+            return gp->left();
+        if ( gp && gp->right() != this )
+            return gp->right();
+        return NULL;
+    }
+    value_type &getPair( void ) const
     {
         return *_pair;
     }
@@ -104,12 +121,12 @@ class bst_element
      *                  Setters
      ********************************************************************************/
 
-    void setParent( const_pointer parent )
+    void setParent( pointer parent )
     {
         _parent = parent;
     }
 
-    void setRight( const_pointer right )
+    void setRight( pointer right )
     {
         if ( _right )
             _right->setParent( right );
@@ -117,7 +134,7 @@ class bst_element
         _right = right;
     }
 
-    void setLeft( const_pointer left )
+    void setLeft( pointer left )
     {
         if ( _left )
             _left->setParent( left );
@@ -125,25 +142,26 @@ class bst_element
         _left = left;
     }
 
-    void setChild( const_pointer child )
-    {
-        if ( child->getPair() < getPair() )
-            setLeft( child );
-        else if ( child->getPair() > getPair() )
-            setRight( child );
-    }
-
-    void setPair( const _node_pair pair )
+    void setPair( const value_type pair )
     {
         _pair->first = pair.first;
         _pair->second = pair.second;
     }
 
+    void setColor( const bool color )
+    {
+        _black = color;
+    }
+
+    bool black( void ) const
+    {
+        return _black;
+    }
+
   private:
     pair_pointer _pair;
-    pointer _parent;
-    pointer _right;
-    pointer _left;
+    pointer _parent, _right, _left;
+    bool _black;
 };
 } // namespace ft
 

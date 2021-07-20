@@ -14,20 +14,18 @@
 #define MAP_ITERATOR_HPP
 #include "category.hpp"
 #include "iterator_base.hpp"
-#include "map/bst_element.hpp"
 #include "map/pair.hpp"
+#include "map/rbt_element.hpp"
 
 namespace ft
 {
 
-template < typename key_type, typename mapped_type >
-class map_iterator
-    : public ft::iterator_base< ft::pair< key_type, mapped_type >, ft::bst_element< key_type, mapped_type > >
+template < typename node > class map_iterator : public ft::iterator_base< typename node::value_type, node >
 {
   public:
-    typedef ft::pair< key_type, mapped_type > value_type;
-    typedef ft::bst_element< key_type, mapped_type > node_type;
-    typedef map_iterator< key_type, mapped_type > self;
+    typedef node node_type;
+    typedef typename node_type::value_type value_type;
+    typedef map_iterator< node_type > self;
     typedef ft::iterator_base< value_type, node_type > base;
     typedef typename base::pointer pointer;
     typedef typename base::reference reference;
@@ -50,7 +48,7 @@ class map_iterator
         return *this;
     }
 
-    ~map_iterator< key_type, mapped_type >( void )
+    ~map_iterator( void )
     {
     }
 

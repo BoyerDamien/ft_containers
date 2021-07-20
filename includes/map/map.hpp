@@ -12,8 +12,8 @@
 
 #ifndef MAP_HPP
 #define MAP_HPP
-#include "./bst_element.hpp"
 #include "./pair.hpp"
+#include "./rbt_element.hpp"
 #include "iterators/map_iterator.hpp"
 #include "iterators/reverse_iterator.hpp"
 #include <functional>
@@ -22,7 +22,7 @@ namespace ft
 {
 
 template < typename key, typename T, typename Compare = std::less< key >,
-           typename Alloc = std::allocator< ft::pair< key, T > > >
+           typename Alloc = std::allocator< ft::pair< const key, T > > >
 class map
 {
   public:
@@ -30,9 +30,9 @@ class map
 
     typedef T mapped_type;
 
-    typedef Compare key_compare;
-
     typedef ft::pair< const key_type, mapped_type > value_type;
+
+    typedef Compare key_compare;
 
     typedef Alloc allocator_type;
 
@@ -44,25 +44,53 @@ class map
 
     typedef typename allocator_type::const_pointer const_pointer;
 
+    typedef ft::rbt_element< const key_type, mapped_type, allocator_type > node_type;
+
+    typedef map_iterator< node_type > iterator;
+
+    typedef map_iterator< const node_type > const_iterator;
+
+    typedef reverse_iterator< const_iterator > const_reverse_iterator;
+
+    typedef reverse_iterator< iterator > reverse_iterator;
+
     typedef typename allocator_type::difference_type difference_type;
 
     typedef typename allocator_type::size_type size_type;
 
-    typedef ft::bst_element< key_type, mapped_type, allocator_type > node_type;
+    typedef typename Alloc::template rebind< node_type >::other node_allocator_type;
 
-    typedef map_iterator< key_type, mapped_type > iterator;
+    /******************************************************************************
+     *                  Nested Class
+     *****************************************************************************/
+    // See https://www.cplusplus.com/reference/map/map/value_comp/
+    class value_compare
+    {
+        friend class map;
 
-    typedef const iterator const_iterator;
+      protected:
+        Compare comp;
+        value_compare( Compare c ) : comp( c )
+        {
+        }
 
-    typedef reverse_iterator< iterator > reverse_iterator;
+      public:
+        typedef bool result_type;
+        typedef value_type first_argument_type;
+        typedef value_type second_argument_type;
+        bool operator()( const value_type &x, const value_type &y ) const
+        {
+            return comp( x.first, y.first );
+        }
+    };
 
-    typedef const reverse_iterator const_reverse_iterator;
-
+    /*****************************************************************************
+     *                  Constructor
+     ****************************************************************************/
     map( const Compare &comp = key_compare(), allocator_type alloc = allocator_type() )
-        : _first( new node_type() ), _last( _first )
+        : _first( NULL ), _last( _first ), _root( new node_type( alloc ) ), _n( 0 )
     {
         (void)comp;
-        (void)alloc;
     }
 
     /*map( iterator first, iterator last, const key_compare &comp = key_compare(),
@@ -73,7 +101,7 @@ class map
 
     ~map( void )
     {
-        delete _first;
+        delete _root;
     }
 
     /************************************************************************************
@@ -109,8 +137,134 @@ class map
         return const_reverse_iterator( _last );
     }
 
+    /************************************************************************************
+     *          Capacity
+     ***********************************************************************************/
+
+    bool empty() const
+    {
+        return _n == 0;
+    }
+
+    size_type size() const
+    {
+        return _n;
+    }
+
+    size_type max_size() const
+    {
+        return node_allocator_type().max_size();
+    }
+
+    /************************************************************************************
+     *                      Observers
+     ***********************************************************************************/
+    key_compare key_comp() const
+    {
+        return key_compare();
+    }
+
+    value_compare value_comp() const
+    {
+        return value_compare();
+    }
+
+    /************************************************************************************
+     *                      Modifiers
+     ***********************************************************************************/
+    pair< iterator, bool > insert( const value_type &val )
+    {
+        if ( !_first )
+        {
+            _last = _root;
+            node_type *n = new node_type( val.first, val.second );
+            n->setLeft( _last );
+            _root = n;
+            _first = n;
+            _n++;
+            return ft::pair< iterator, bool >( iterator( _root ), true );
+        }
+
+        if ( !count( val.first ) )
+        {
+            _first->setRight( new node_type( val.first, val.second ) );
+            std::cout << "not found" << std::endl;
+        }
+
+        return ft::pair< iterator, bool >( iterator( _root ), false );
+    }
+
+    /************************************************************************************
+     *                      Operations
+     ***********************************************************************************/
+    iterator _find( const key_type &k, node_type *node ) const
+    {
+        if ( node && node != _last )
+        {
+            value_type val = node->getPair();
+            bool result_left = key_comp()( val.first, k );
+            bool result_right = key_comp()( k, val.first );
+
+            if ( ( !result_left && !result_right ) || ( result_left && !node->left() ) ||
+                 ( result_right && !node->right() ) )
+                return iterator( node );
+            if ( result_left && node->left() )
+                return _find( k, node->left() );
+            if ( result_right && node->right() )
+                return _find( k, node->right() );
+        }
+        return iterator( node );
+    }
+
+    iterator find( const key_type &k )
+    {
+        return _find( k, _root );
+    }
+
+    const_iterator find( const key_type &k ) const
+    {
+        return const_iterator( _find( k, _root ).getNode() );
+    }
+
+    size_type count( const key_type &k ) const
+    {
+        return find( k ) != end();
+    }
+
+    iterator lower_bound( const key_type &k )
+    {
+        iterator r = find( k );
+        return r != begin() ? --r : r;
+    }
+
+    const_iterator lower_bound( const key_type &k ) const
+    {
+        return const_iterator( lower_bound( k ).getNode() );
+    }
+
+    iterator upper_bound( const key_type &k )
+    {
+        iterator r = find( k );
+        return r != end() ? ++r : r;
+    }
+
+    const_iterator upper_bound( const key_type &k ) const
+    {
+        return const_iterator( upper_bound( k ).getNode() );
+    }
+
+    ft::pair< iterator, iterator > equal_range( const key_type &k )
+    {
+        return ft::pair< iterator, iterator >( lower_bound( k ), upper_bound( k ) );
+    }
+
+    ft::pair< const_iterator, const_iterator > equal_range( const key_type &k ) const
+    {
+        return ft::pair< const_iterator, const_iterator >( lower_bound( k ), upper_bound( k ) );
+    }
+
   private:
-    node_type *_first, *_last;
+    node_type *_first, *_last, *_root;
     size_type _n;
 };
 
