@@ -187,7 +187,6 @@ class map
 
         if ( !count( val.first ) )
         {
-            _first->setRight( new node_type( val.first, val.second ) );
             std::cout << "not found" << std::endl;
         }
 
@@ -231,10 +230,20 @@ class map
         return find( k ) != end();
     }
 
+    iterator _lower( const key_type &k, node_type *node )
+    {
+        if ( node && node != _last && node->left() )
+        {
+            value_type val = node->getPair();
+            if ( key_comp()( val.first, k ) && node->left() )
+                return _lower( k, node->left() );
+        }
+        return iterator( node );
+    }
+
     iterator lower_bound( const key_type &k )
     {
-        iterator r = find( k );
-        return r != begin() ? --r : r;
+        return _lower( k, _root );
     }
 
     const_iterator lower_bound( const key_type &k ) const
@@ -242,10 +251,20 @@ class map
         return const_iterator( lower_bound( k ).getNode() );
     }
 
+    iterator _upper( const key_type &k, node_type *node )
+    {
+        if ( node && node != _last && node->right() )
+        {
+            value_type val = node->getPair();
+            if ( !key_comp()( val.first, k ) && node->right() )
+                return _upper( k, node->left() );
+        }
+        return iterator( node );
+    }
+
     iterator upper_bound( const key_type &k )
     {
-        iterator r = find( k );
-        return r != end() ? ++r : r;
+        return _upper( k, _root );
     }
 
     const_iterator upper_bound( const key_type &k ) const
