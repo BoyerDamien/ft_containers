@@ -33,8 +33,8 @@ int main( void )
     test.insert( p );
     test.insert( p2 );
 
-    std::cout << test.lower_bound( "p" ).getNode()->getPair() << std::endl;
+    std::cout << test.lower_bound( "ok" ).getNode()->getPair() << std::endl;
 
-    std::cout << test.upper_bound( "ok" ).getNode()->getPair() << std::endl;
+    std::cout << test.upper_bound( "p" ).getNode()->getPair() << std::endl;
     return 0;
 }

@@ -178,6 +178,7 @@ class map
         {
             _last = _root;
             node_type *n = new node_type( val.first, val.second );
+            n->setColor( true );
             n->setLeft( _last );
             _root = n;
             _first = n;
@@ -187,6 +188,7 @@ class map
 
         if ( !count( val.first ) )
         {
+            ft::pair< iterator, iterator > range = equal_range( val.first );
             std::cout << "not found" << std::endl;
         }
 
@@ -235,7 +237,7 @@ class map
         if ( node && node != _last && node->left() )
         {
             value_type val = node->getPair();
-            if ( key_comp()( val.first, k ) && node->left() )
+            if ( key_comp()( k, val.first ) && node->left() )
                 return _lower( k, node->left() );
         }
         return iterator( node );
@@ -253,11 +255,12 @@ class map
 
     iterator _upper( const key_type &k, node_type *node )
     {
+        std::cout << "ici" << std::endl;
         if ( node && node != _last && node->right() )
         {
             value_type val = node->getPair();
-            if ( !key_comp()( val.first, k ) && node->right() )
-                return _upper( k, node->left() );
+            if ( key_comp()( val.first, k ) && node->right() )
+                return _upper( k, node->right() );
         }
         return iterator( node );
     }
