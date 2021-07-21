@@ -188,8 +188,13 @@ class map
 
         if ( !count( val.first ) )
         {
-            ft::pair< iterator, iterator > range = equal_range( val.first );
-            std::cout << "not found" << std::endl;
+            iterator r;
+            if ( key_comp()( val.first, _root->getPair().first ) )
+                r = lower_bound( val.first );
+            else
+                r = upper_bound( val.first );
+
+            std::cout << *r << std::endl;
         }
 
         return ft::pair< iterator, bool >( iterator( _root ), false );
@@ -255,7 +260,6 @@ class map
 
     iterator _upper( const key_type &k, node_type *node )
     {
-        std::cout << "ici" << std::endl;
         if ( node && node != _last && node->right() )
         {
             value_type val = node->getPair();

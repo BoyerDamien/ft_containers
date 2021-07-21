@@ -33,6 +33,9 @@ template < typename node > class map_iterator : public ft::iterator_base< typena
     typedef typename base::size_type size_type;
     typedef bidirectional_iterator_tag iterator_category;
 
+    map_iterator( void ) : base( NULL )
+    {
+    }
     map_iterator( node_type *current ) : base( current )
     {
     }
@@ -91,10 +94,6 @@ template < typename node > class map_iterator : public ft::iterator_base< typena
     }
 
   private:
-    map_iterator( void )
-    {
-    }
-
     node_type *_next( node_type *current, bool down = false, bool up = false, bool left = false, bool right = false )
     {
         node_type *parent = current->parent();
