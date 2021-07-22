@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 15:07:21 by dboyer            #+#    #+#             */
-/*   Updated: 2021/07/22 15:06:14 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/07/22 18:17:32 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,26 @@ class map
     /************************************************************************************
      *                      Modifiers
      ***********************************************************************************/
+
+    iterator _findLeaf( const key_type &k, node_type *node ) const
+    {
+        if ( node && node != _last )
+        {
+            value_type val = node->getPair();
+            bool result_right = key_comp()( val.first, k );
+            bool result_left = key_comp()( k, val.first );
+
+            if ( !( !result_left && !result_right ) )
+            {
+                if ( result_left && node->left() && node->left() != _last )
+                    return _findLeaf( k, node->left() );
+                if ( result_right && node->right() && node->right() != _last )
+                    return _findLeaf( k, node->right() );
+            }
+        }
+        return iterator( node );
+    }
+
     pair< iterator, bool > insert( const value_type &val )
     {
         if ( !_first )
@@ -180,7 +200,7 @@ class map
             _last->setColor( true );
             node_type *n = new node_type( val.first, val.second );
             n->setColor( true );
-            n->setLeft( _last );
+            n->setRight( _last );
             _root = n;
             _first = n;
             _n++;
@@ -189,16 +209,13 @@ class map
 
         if ( !count( val.first ) )
         {
-            iterator r;
-            if ( key_comp()( val.first, _root->getPair().first ) )
-                r = lower_bound( val.first );
-            else
-                r = upper_bound( val.first );
+            iterator r = _findLeaf( val.first, _root );
 
             node_type *child = new node_type( val.first, val.second );
             node_type *parent = r.getNode();
             parent->setChild( child );
 
+            std::cout << "Parent = " << parent->getPair() << std::endl;
             if ( child->parent() && !child->parent()->black() )
             {
                 if ( child->uncle() && !child->uncle()->black() )
@@ -227,18 +244,18 @@ class map
         if ( node && node != _last )
         {
             value_type val = node->getPair();
-            bool result_left = key_comp()( val.first, k );
-            bool result_right = key_comp()( k, val.first );
+            bool result_right = key_comp()( val.first, k );
+            bool result_left = key_comp()( k, val.first );
 
-            if ( ( !result_left && !result_right ) || ( result_left && !node->left() ) ||
-                 ( result_right && !node->right() ) )
-                return iterator( node );
-            if ( result_left && node->left() )
-                return _find( k, node->left() );
-            if ( result_right && node->right() )
-                return _find( k, node->right() );
+            if ( !( !result_left && !result_right ) )
+            {
+                if ( result_left && node->left() && node->left() != _last )
+                    return _find( k, node->left() );
+                if ( result_right && node->right() && node->right() != _last )
+                    return _find( k, node->right() );
+            }
         }
-        return iterator( node );
+        return iterator( _last );
     }
 
     iterator find( const key_type &k )

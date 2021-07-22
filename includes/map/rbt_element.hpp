@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 16:23:57 by dboyer            #+#    #+#             */
-/*   Updated: 2021/07/22 14:44:09 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/07/22 15:43:40 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,11 +148,11 @@ class rbt_element
         bool result1 = key_compare()( child->_pair->first, _pair->first );
         bool result2 = key_compare()( _pair->first, child->_pair->first );
 
-        if ( !result2 && !result2 )
+        if ( !result1 && !result2 )
             _pair->second = child->_pair->second;
         else if ( result1 )
             setLeft( child );
-        else
+        else if ( result2 )
             setRight( child );
     }
 
