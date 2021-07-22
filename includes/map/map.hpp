@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 15:07:21 by dboyer            #+#    #+#             */
-/*   Updated: 2021/06/06 20:35:41 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/07/22 15:06:14 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ class map
 
     typedef typename allocator_type::const_pointer const_pointer;
 
-    typedef ft::rbt_element< const key_type, mapped_type, allocator_type > node_type;
+    typedef ft::rbt_element< const key_type, mapped_type, key_compare, allocator_type > node_type;
 
     typedef map_iterator< node_type > iterator;
 
@@ -177,6 +177,7 @@ class map
         if ( !_first )
         {
             _last = _root;
+            _last->setColor( true );
             node_type *n = new node_type( val.first, val.second );
             n->setColor( true );
             n->setLeft( _last );
@@ -194,7 +195,25 @@ class map
             else
                 r = upper_bound( val.first );
 
-            std::cout << *r << std::endl;
+            node_type *child = new node_type( val.first, val.second );
+            node_type *parent = r.getNode();
+            parent->setChild( child );
+
+            if ( child->parent() && !child->parent()->black() )
+            {
+                if ( child->uncle() && !child->uncle()->black() )
+                {
+                    std::cout << "Parent red && uncle red" << std::endl;
+                }
+                else if ( ( child->uncle() && child->uncle()->black() ) || ( !child->uncle() ) )
+                {
+                    std::cout << "Parent red && uncle black" << std::endl;
+                }
+            }
+            if ( child->parent() && child->parent()->black() )
+            {
+                std::cout << "Parent black" << std::endl;
+            }
         }
 
         return ft::pair< iterator, bool >( iterator( _root ), false );

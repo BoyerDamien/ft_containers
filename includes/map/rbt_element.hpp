@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 16:23:57 by dboyer            #+#    #+#             */
-/*   Updated: 2021/06/06 20:03:56 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/07/22 14:44:09 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,16 @@
 
 namespace ft
 {
-template < typename key_type, typename mapped_type,
+template < typename key_type, typename mapped_type, typename Compare,
            typename Alloc = std::allocator< ft::pair< key_type, mapped_type > > >
 class rbt_element
 {
   public:
-    typedef rbt_element< key_type, mapped_type > _self;
+    typedef rbt_element< key_type, mapped_type, Compare > _self;
     typedef _self *pointer;
     typedef Alloc allocator_type;
     typedef ft::pair< key_type, mapped_type > value_type;
+    typedef Compare key_compare;
     typedef typename allocator_type::pointer pair_pointer;
     typedef typename allocator_type::reference pair_reference;
     typedef typename allocator_type::difference_type pair_difference_type;
@@ -140,6 +141,19 @@ class rbt_element
             _left->setParent( left );
         left->setParent( this );
         _left = left;
+    }
+
+    void setChild( pointer child )
+    {
+        bool result1 = key_compare()( child->_pair->first, _pair->first );
+        bool result2 = key_compare()( _pair->first, child->_pair->first );
+
+        if ( !result2 && !result2 )
+            _pair->second = child->_pair->second;
+        else if ( result1 )
+            setLeft( child );
+        else
+            setRight( child );
     }
 
     void setPair( const value_type pair )
