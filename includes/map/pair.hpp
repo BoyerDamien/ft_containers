@@ -33,7 +33,8 @@ template < typename key_type, typename mapped_type > struct pair
     {
     }
 
-    pair( const first_type &first, const second_type &second ) : first( first ), second( second )
+    pair( const first_type &first, const second_type &second )
+        : first( first ), second( second )
     {
     }
 
@@ -50,37 +51,43 @@ template < typename key_type, typename mapped_type > struct pair
 };
 
 template < typename key_type, typename mapped_type >
-bool operator==( const pair< key_type, mapped_type > &p1, const pair< key_type, mapped_type > &p2 )
+bool operator==( const pair< key_type, mapped_type > &p1,
+                 const pair< key_type, mapped_type > &p2 )
 {
     return p1.first == p2.first && p1.second == p2.second;
 }
 
 template < typename key_type, typename mapped_type >
-bool operator!=( const pair< key_type, mapped_type > &p1, const pair< key_type, mapped_type > &p2 )
+bool operator!=( const pair< key_type, mapped_type > &p1,
+                 const pair< key_type, mapped_type > &p2 )
 {
     return !( p1 == p2 );
 }
 
 template < typename key_type, typename mapped_type >
-bool operator<( const pair< key_type, mapped_type > &p1, const pair< key_type, mapped_type > &p2 )
+bool operator<( const pair< key_type, mapped_type > &p1,
+                const pair< key_type, mapped_type > &p2 )
 {
     return p1.first < p2.first;
 }
 
 template < typename key_type, typename mapped_type >
-bool operator<=( const pair< key_type, mapped_type > &p1, const pair< key_type, mapped_type > &p2 )
+bool operator<=( const pair< key_type, mapped_type > &p1,
+                 const pair< key_type, mapped_type > &p2 )
 {
     return !( p2 < p1 ) || p1 == p2;
 }
 
 template < typename key_type, typename mapped_type >
-bool operator>( const pair< key_type, mapped_type > &p1, const pair< key_type, mapped_type > &p2 )
+bool operator>( const pair< key_type, mapped_type > &p1,
+                const pair< key_type, mapped_type > &p2 )
 {
     return p1.first > p2.first;
 }
 
 template < typename key_type, typename mapped_type >
-bool operator>=( const pair< key_type, mapped_type > &p1, const pair< key_type, mapped_type > &p2 )
+bool operator>=( const pair< key_type, mapped_type > &p1,
+                 const pair< key_type, mapped_type > &p2 )
 {
     return p1 > p2 || p1 == p2;
 }

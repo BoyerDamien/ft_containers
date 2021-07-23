@@ -22,7 +22,8 @@ namespace unittest
 {
 
 template < typename test_type, typename ref_type >
-void test_operator_access( void ( *check )( test_type &, ref_type & ) ) throw( std::exception )
+void test_operator_access( void ( *check )( test_type &,
+                                            ref_type & ) ) throw( std::exception )
 {
     int init[] = { 1, 2, 3, 4, 5 };
 

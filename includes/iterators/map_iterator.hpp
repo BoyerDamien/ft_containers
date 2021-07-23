@@ -20,7 +20,8 @@
 namespace ft
 {
 
-template < typename node > class map_iterator : public ft::iterator_base< typename node::value_type, node >
+template < typename node >
+class map_iterator : public ft::iterator_base< typename node::value_type, node >
 {
   public:
     typedef node node_type;
@@ -94,7 +95,8 @@ template < typename node > class map_iterator : public ft::iterator_base< typena
     }
 
   private:
-    node_type *_next( node_type *current, bool down = false, bool up = false, bool left = false, bool right = false )
+    node_type *_next( node_type *current, bool down = false, bool up = false,
+                      bool left = false, bool right = false )
     {
         node_type *parent = current->parent();
         if ( up && ( left || ( right && !parent ) ) )
@@ -104,13 +106,14 @@ template < typename node > class map_iterator : public ft::iterator_base< typena
         if ( down && current->left() )
             return _next( current->left(), true, false, true, false );
         if ( parent && ( ( up && right ) || ( !current->left() && !current->right() ) ) )
-            return _next( parent, false, true, parent->left() == current, parent->right() == current );
+            return _next( parent, false, true, parent->left() == current,
+                          parent->right() == current );
         if ( current->right() )
             return _next( current->right(), true, false, false, true );
         return current;
     }
-    node_type *_previous( node_type *current, bool down = false, bool up = false, bool left = false,
-                          bool right = false )
+    node_type *_previous( node_type *current, bool down = false, bool up = false,
+                          bool left = false, bool right = false )
     {
         node_type *parent = current->parent();
         if ( up && ( right || ( left && !parent ) ) )
@@ -120,9 +123,11 @@ template < typename node > class map_iterator : public ft::iterator_base< typena
         if ( down && current->right() )
             return _previous( current->right(), true, false, false, true );
         if ( ( left || !current->left() ) && up && parent )
-            return _previous( parent, false, true, parent->left() == current, parent->right() == current );
+            return _previous( parent, false, true, parent->left() == current,
+                              parent->right() == current );
         if ( ( ( !current->left() && !current->right() ) || !current->left() ) && parent )
-            return _previous( parent, false, true, parent->left() == current, parent->right() == current );
+            return _previous( parent, false, true, parent->left() == current,
+                              parent->right() == current );
         if ( current->left() )
             return _previous( current->left(), true, false, true, false );
         return current;

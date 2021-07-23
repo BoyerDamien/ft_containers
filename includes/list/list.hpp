@@ -69,7 +69,8 @@ template < class T, class Alloc = std::allocator< T > > class list
     {
     }
 
-    list( size_t n, const value_type &val = value_type() ) : _begin( new node_type( value_type() ) ), _n( 0 )
+    list( size_t n, const value_type &val = value_type() )
+        : _begin( new node_type( value_type() ) ), _n( 0 )
     {
         assign( n, val );
     }
@@ -80,7 +81,8 @@ template < class T, class Alloc = std::allocator< T > > class list
             push_back( *begin );
     }
 
-    list( iterator first, iterator last ) : _begin( new node_type( value_type() ) ), _n( 0 )
+    list( iterator first, iterator last )
+        : _begin( new node_type( value_type() ) ), _n( 0 )
     {
         assign( first, last );
     }
@@ -200,9 +202,10 @@ template < class T, class Alloc = std::allocator< T > > class list
 
     size_type max_size( void ) const
     {
-        // std::cout << "test = " << std::allocator< node_type >().max_size() << std::endl;
-        // std::cout << value_type().max_size() / (sizeof(value_type) - sizeof(difference_type)) << std::endl;
-        // return std::numeric_limits< size_t >::max() / (2 * sizeof(self));
+        // std::cout << "test = " << std::allocator< node_type >().max_size() <<
+        // std::endl; std::cout << value_type().max_size() / (sizeof(value_type) -
+        // sizeof(difference_type)) << std::endl; return std::numeric_limits< size_t
+        // >::max() / (2 * sizeof(self));
         return node_allocator_type().max_size();
     }
 
@@ -411,7 +414,8 @@ template < class T, class Alloc = std::allocator< T > > class list
 /******************************************************************************
  *			Operator overloading
  *****************************************************************************/
-template < typename T > bool operator==( const ft::list< T > &l1, const ft::list< T > &l2 )
+template < typename T >
+bool operator==( const ft::list< T > &l1, const ft::list< T > &l2 )
 {
     typename ft::list< T >::iterator beg1 = l1.begin();
     typename ft::list< T >::iterator beg2 = l2.begin();
@@ -426,7 +430,8 @@ template < typename T > bool operator==( const ft::list< T > &l1, const ft::list
     return beg2 == l2.end();
 }
 
-template < typename T > bool operator!=( const ft::list< T > &l1, const ft::list< T > &l2 )
+template < typename T >
+bool operator!=( const ft::list< T > &l1, const ft::list< T > &l2 )
 {
     return !( l1 == l2 );
 }
@@ -448,7 +453,8 @@ template < typename T > bool operator<( const ft::list< T > &l1, const ft::list<
     return beg2 != l2.end();
 }
 
-template < typename T > bool operator<=( const ft::list< T > &l1, const ft::list< T > &l2 )
+template < typename T >
+bool operator<=( const ft::list< T > &l1, const ft::list< T > &l2 )
 {
     typename ft::list< T >::iterator beg1 = l1.begin();
     typename ft::list< T >::iterator beg2 = l2.begin();
@@ -482,7 +488,8 @@ template < typename T > bool operator>( const ft::list< T > &l1, const ft::list<
     return beg1 != l1.end();
 }
 
-template < typename T > bool operator>=( const ft::list< T > &l1, const ft::list< T > &l2 )
+template < typename T >
+bool operator>=( const ft::list< T > &l1, const ft::list< T > &l2 )
 {
     typename ft::list< T >::iterator beg1 = l1.begin();
     typename ft::list< T >::iterator beg2 = l2.begin();
@@ -499,7 +506,8 @@ template < typename T > bool operator>=( const ft::list< T > &l1, const ft::list
     return true;
 }
 
-template < typename T > std::ostream &operator<<( std::ostream &os, const ft::list< T > &l )
+template < typename T >
+std::ostream &operator<<( std::ostream &os, const ft::list< T > &l )
 {
     os << "[ ";
 

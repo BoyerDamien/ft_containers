@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 16:23:57 by dboyer            #+#    #+#             */
-/*   Updated: 2021/07/22 15:43:40 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/07/23 11:30:28 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,26 +38,30 @@ class rbt_element
      ********************************************************************************/
 
     rbt_element( allocator_type alloc = allocator_type() )
-        : _pair( alloc.allocate( 1 ) ), _parent( NULL ), _right( NULL ), _left( NULL ), _black( false )
+        : _pair( alloc.allocate( 1 ) ), _parent( NULL ), _right( NULL ), _left( NULL ),
+          _black( false )
     {
         alloc.construct( _pair, value_type() );
     }
 
-    rbt_element( key_type key, mapped_type value, allocator_type alloc = allocator_type() )
-        : _pair( alloc.allocate( 1 ) ), _parent( NULL ), _right( NULL ), _left( NULL ), _black( false )
+    rbt_element( key_type key, mapped_type value,
+                 allocator_type alloc = allocator_type() )
+        : _pair( alloc.allocate( 1 ) ), _parent( NULL ), _right( NULL ), _left( NULL ),
+          _black( false )
     {
         alloc.construct( _pair, value_type( key, value ) );
     }
 
     rbt_element( value_type pair, allocator_type alloc = allocator_type() )
-        : _pair( alloc.allocate( 1 ) ), _parent( NULL ), _right( NULL ), _left( NULL ), _black( false )
+        : _pair( alloc.allocate( 1 ) ), _parent( NULL ), _right( NULL ), _left( NULL ),
+          _black( false )
     {
         alloc.construct( _pair, value_type( pair.first, pair.second ) );
     }
 
     rbt_element( const _self &other, allocator_type alloc = allocator_type() )
-        : _pair( alloc.allocate( 1 ) ), _parent( other._parent ), _right( other._right ), _left( other._left ),
-          _black( other._black )
+        : _pair( alloc.allocate( 1 ) ), _parent( other._parent ), _right( other._right ),
+          _left( other._left ), _black( other._black )
     {
         alloc.construct( _pair, value_type( other._pair->first, other._pair->second ) );
     }
@@ -114,6 +118,7 @@ class rbt_element
             return gp->right();
         return NULL;
     }
+
     value_type &getPair( void ) const
     {
         return *_pair;

@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 16:45:01 by dboyer            #+#    #+#             */
-/*   Updated: 2021/07/22 18:15:37 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/07/23 16:46:35 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int main( void )
     // std::cout << test.upper_bound( p4.first ).getNode()->getPair() << std::endl;
     test.insert( p4 );
 
-    // for ( ft::map< std::string, int >::iterator it = test.begin(); it != test.end(); it++ )
-    //     std::cout << *it << std::endl;
+    for ( ft::map< std::string, int >::iterator it = test.begin(); it != test.end();
+          it++ )
+        std::cout << *it << std::endl;
     return 0;
 }

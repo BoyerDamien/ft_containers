@@ -40,8 +40,9 @@ template < typename test_type, typename ref_type >
 void check_with_cap( test_type &test, ref_type &test_ref ) throw( std::exception )
 {
     //   std::cout << test << std::endl;
-    //    std::cout << "My size: " << test.size() << " Real size: " << test_ref.size() << std::endl;
-    //    std::cout << "My capacity: " << test.capacity() << " Real capacity: " << test_ref.capacity() << std::endl;
+    //    std::cout << "My size: " << test.size() << " Real size: " << test_ref.size() <<
+    //    std::endl; std::cout << "My capacity: " << test.capacity() << " Real capacity: "
+    //    << test_ref.capacity() << std::endl;
     assert( test.capacity() == test_ref.capacity(), "wrong capacity" );
     default_check( test, test_ref );
 }
@@ -49,8 +50,9 @@ void check_with_cap( test_type &test, ref_type &test_ref ) throw( std::exception
 template < typename test_type, typename ref_type >
 void check_pair( test_type &test, ref_type &test_ref ) throw( std::exception )
 {
-    // std::cout << "test_first: " << test.first << " ref_first: " << test_ref.first << std::endl;
-    // std::cout << "test_second: " << test.second << " ref_second: " << test_ref.second << std::endl;
+    // std::cout << "test_first: " << test.first << " ref_first: " << test_ref.first <<
+    // std::endl; std::cout << "test_second: " << test.second << " ref_second: " <<
+    // test_ref.second << std::endl;
     assert( test.first == test_ref.first, "wrong first check equal" );
     assert( test.second == test_ref.second, "wrong second check equal" );
 }

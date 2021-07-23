@@ -24,7 +24,8 @@
  *		Reimplemantation of iterator base structure
  *		Ref: https://www.cplusplus.com/reference/iterator/iterator
  */
-template < class Category, class T, class Distance = ptrdiff_t, class Pointer = T *, class Reference = T & >
+template < class Category, class T, class Distance = ptrdiff_t, class Pointer = T *,
+           class Reference = T & >
 struct iterator
 {
     typedef T value_type;

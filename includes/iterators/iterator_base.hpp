@@ -29,13 +29,15 @@ template < typename T, typename N > class iterator_base
     typedef std::ptrdiff_t difference_type;
     typedef size_t size_type;
 
-    iterator_base< value_type, node_type >( node_type *current ) : _current( current ), _null( current == NULL )
+    iterator_base< value_type, node_type >( node_type *current )
+        : _current( current ), _null( current == NULL )
     {
         if ( _null )
             _current = new node_type( value_type() );
     }
 
-    iterator_base< value_type, node_type >( const self &other ) : _current( other._current ), _null( other._null )
+    iterator_base< value_type, node_type >( const self &other )
+        : _current( other._current ), _null( other._null )
     {
     }
 

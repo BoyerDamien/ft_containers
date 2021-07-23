@@ -21,7 +21,7 @@
  */
 
 // Base iterator_traits template
-template <typename Iterator> struct iterator_traits
+template < typename Iterator > struct iterator_traits
 {
     typedef typename Iterator::iterator_category iterator_category;
     typedef typename Iterator::value_type value_type;
@@ -31,7 +31,7 @@ template <typename Iterator> struct iterator_traits
 };
 
 // Partial iterator_traits template specialisation for pointers type
-template <typename T> struct iterator_traits<T *>
+template < typename T > struct iterator_traits< T * >
 {
     typedef random_access_iterator_tag iterator_category;
     typedef T value_type;
@@ -41,7 +41,7 @@ template <typename T> struct iterator_traits<T *>
 };
 
 // Partial iterator_traits template specialisation for const pointers type
-template <typename T> struct iterator_traits<const T *>
+template < typename T > struct iterator_traits< const T * >
 {
     typedef random_access_iterator_tag iterator_category;
     typedef T value_type;

@@ -31,14 +31,19 @@ bool unittest::test_pair( void )
 {
     const ::Test tests[] = {
 
-        ::Test( "test pair default constructor", unittest::test_default_constructor< test_type, ref_type >,
+        ::Test( "test pair default constructor",
+                unittest::test_default_constructor< test_type, ref_type >,
                 unittest::check_pair ),
 
-        ::Test( "test pair copy constructor", unittest::test_copy_constructor< test_type, ref_type >,
+        ::Test( "test pair copy constructor",
+                unittest::test_copy_constructor< test_type, ref_type >,
                 unittest::check_pair ),
-        ::Test( "test pair assignation constructor", unittest::test_assignation_constructor< test_type, ref_type >,
+        ::Test( "test pair assignation constructor",
+                unittest::test_assignation_constructor< test_type, ref_type >,
                 unittest::check_pair ),
-        ::Test( "test pair operators", unittest::test_pair_operator< test_type, ref_type >, unittest::check_pair ),
+        ::Test( "test pair operators",
+                unittest::test_pair_operator< test_type, ref_type >,
+                unittest::check_pair ),
     };
 
     for ( size_t i = 0; i < sizeof( tests ) / sizeof( tests[ 0 ] ); i++ )

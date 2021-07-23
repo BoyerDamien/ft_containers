@@ -25,13 +25,16 @@ template < typename T > void swap( T &v1, T &v2 )
     v2 = tmp;
 }
 
-template < typename Container, typename Func > void for_each( Container &container, Func f )
+template < typename Container, typename Func >
+void for_each( Container &container, Func f )
 {
-    for ( typename Container::iterator begin = container.begin(); begin != container.end(); begin++ )
+    for ( typename Container::iterator begin = container.begin();
+          begin != container.end(); begin++ )
         f( *begin );
 }
 
-template < typename Func, typename Iterator > void for_each( Iterator begin, Iterator end, Func f )
+template < typename Func, typename Iterator >
+void for_each( Iterator begin, Iterator end, Func f )
 {
     while ( begin != end )
         f( *begin++ );
@@ -49,7 +52,8 @@ template < typename Iterator > void bubbleSort( Iterator begin, Iterator end )
     }
 }
 
-template < typename Iterator, typename Comp > void bubbleSort( Iterator begin, Iterator end, Comp comp )
+template < typename Iterator, typename Comp >
+void bubbleSort( Iterator begin, Iterator end, Comp comp )
 {
     for ( Iterator it = begin; it != end; it++ )
     {
@@ -66,7 +70,8 @@ template < typename value_type > bool defaultSortComp( value_type curr, value_ty
     return curr <= pivot;
 }
 
-template < typename iterator, typename Compare > iterator partition( iterator &begin, iterator &last, Compare comp )
+template < typename iterator, typename Compare >
+iterator partition( iterator &begin, iterator &last, Compare comp )
 {
     iterator i = begin;
     iterator j = begin;
@@ -86,7 +91,8 @@ template < typename iterator, typename Compare > iterator partition( iterator &b
     return i;
 }
 
-template < typename iterator, typename Compare > void QSort( iterator begin, iterator last, Compare comp )
+template < typename iterator, typename Compare >
+void QSort( iterator begin, iterator last, Compare comp )
 {
     if ( begin != last )
     {
