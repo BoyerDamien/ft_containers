@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 16:23:57 by dboyer            #+#    #+#             */
-/*   Updated: 2021/07/23 11:30:28 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/08/09 18:47:22 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,12 @@ class rbt_element
             _left->setParent( left );
         left->setParent( this );
         _left = left;
+    }
+
+    void setEnd( pointer start, pointer end )
+    {
+        _right = end;
+        end->_left = start;
     }
 
     void setChild( pointer child )

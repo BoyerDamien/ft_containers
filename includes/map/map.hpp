@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 15:07:21 by dboyer            #+#    #+#             */
-/*   Updated: 2021/07/23 16:48:01 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/08/09 18:48:07 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,10 @@ class map
      *                  Constructor
      ****************************************************************************/
     map( const Compare &comp = key_compare(), allocator_type alloc = allocator_type() )
-        : _first( NULL ), _last( _first ), _root( new node_type( alloc ) ), _n( 0 )
+        : _first( NULL ), _root( NULL ), _last( new node_type() ), _n( 0 )
     {
         (void)comp;
+        (void)alloc;
     }
 
     /*map( iterator first, iterator last, const key_compare &comp = key_compare(),
@@ -130,11 +131,15 @@ class map
 
     reverse_iterator rbegin( void )
     {
+        if ( _last->parent() )
+            return reverse_iterator( _last->parent() );
         return reverse_iterator( _last );
     }
 
     const_reverse_iterator rbegin() const
     {
+        if ( _last->parent() )
+            return const_reverse_iterator( _last->parent() );
         return const_reverse_iterator( _last );
     }
 
@@ -236,13 +241,9 @@ class map
     {
         if ( !_first )
         {
-            _last = _root;
-            _last->setColor( true );
             node_type *n = new node_type( val.first, val.second );
-            n->setColor( true );
             n->setRight( _last );
-            _root = n;
-            _first = n;
+            _root = _first = n;
             _n++;
             return ft::pair< iterator, bool >( iterator( _root ), true );
         }
@@ -253,31 +254,43 @@ class map
 
             node_type *child = new node_type( val.first, val.second );
             node_type *parent = r.getNode();
+            bool isEnd = parent->right() == _last;
             parent->setChild( child );
 
+            if ( r == begin() )
+                _first = child;
+            if ( isEnd && parent->right() == child )
+                child->setEnd( _first, _last );
+
             std::cout << "Parent = " << parent->getPair() << std::endl;
-            if ( child->parent() && !child->parent()->black() )
-            {
-                if ( child->uncle() && !child->uncle()->black() )
-                {
-                    std::cout << "Parent red && uncle red" << std::endl;
-                }
-                else if ( ( child->uncle() && child->uncle()->black() ) ||
-                          ( !child->uncle() ) )
-                {
-                    std::cout << "Parent red && uncle black" << std::endl;
-                    _rotate( child );
-                }
-            }
-            if ( child->parent() && child->parent()->black() )
-            {
-                std::cout << "Parent black" << std::endl;
-            }
-            if ( _root->parent() )
-            {
-                std::cout << "root parent = " << _root->parent() << std::endl;
-                //_root = _root->parent();
-            }
+            std::cout << "Parent Left ->" << ( parent->left() == _last ) << std::endl;
+            std::cout << "Parent Right ->" << ( parent->right() == _last ) << std::endl;
+
+            std::cout << "child = " << child->getPair() << std::endl;
+            std::cout << "Child Left ->" << ( child->left() == _last ) << std::endl;
+            std::cout << "Child Right ->" << ( child->right() == _last ) << std::endl;
+            /* if ( child->parent() && !child->parent()->black() ) */
+            /* { */
+            /*     if ( child->uncle() && !child->uncle()->black() ) */
+            /*     { */
+            /*         std::cout << "Parent red && uncle red" << std::endl; */
+            /*     } */
+            /*     else if ( ( child->uncle() && child->uncle()->black() ) || */
+            /*               ( !child->uncle() ) ) */
+            /*     { */
+            /*         std::cout << "Parent red && uncle black" << std::endl; */
+            /*         //_rotate( child ); */
+            /*     } */
+            /* } */
+            /* if ( child->parent() && child->parent()->black() ) */
+            /* { */
+            /*     std::cout << "Parent black" << std::endl; */
+            /* } */
+            /* if ( _root->parent() ) */
+            /* { */
+            /*     std::cout << "root parent = " << _root->parent() << std::endl; */
+            /*     //_root = _root->parent(); */
+            /* } */
         }
 
         return ft::pair< iterator, bool >( iterator( _root ), false );
@@ -374,7 +387,7 @@ class map
     }
 
   private:
-    node_type *_first, *_last, *_root;
+    node_type *_first, *_root, *_last;
     size_type _n;
 };
 
