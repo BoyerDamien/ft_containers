@@ -24,11 +24,11 @@ namespace unittest
 class FailedException : public std::exception
 {
   public:
-    const char *what(void) const throw()
+    const char *what( void ) const throw()
     {
         return _msg.c_str();
     }
-    FailedException(std::string msg) : _msg(msg)
+    FailedException( std::string msg ) : _msg( msg )
     {
     }
     virtual ~FailedException() throw()
@@ -41,36 +41,38 @@ class FailedException : public std::exception
 template < typename test_type, typename ref_type > class Test
 {
   public:
-    Test< test_type, ref_type >(std::string testName, void (*f)(void (*)(test_type &, ref_type &)),
-                                void (*check)(test_type &, ref_type &))
-        : _testName(testName), _f(f), _check(check)
+    Test< test_type, ref_type >( std::string testName,
+                                 void ( *f )( void ( * )( test_type &, ref_type & ) ),
+                                 void ( *check )( test_type &, ref_type & ) )
+        : _testName( testName ), _f( f ), _check( check )
     {
     }
 
-    Test< test_type, ref_type >(const Test &x) : _testName(x._testName), _f(x._f), _check(x._check)
+    Test< test_type, ref_type >( const Test &x )
+        : _testName( x._testName ), _f( x._f ), _check( x._check )
     {
     }
 
-    Test &operator=(const Test &x)
+    Test &operator=( const Test &x )
     {
         _check = x._check;
         _testName = x._testName;
         _f = x._f;
     }
 
-    ~Test(void)
+    ~Test( void )
     {
     }
 
-    bool run(void) const
+    bool run( void ) const
     {
         try
         {
-            _f(_check);
+            _f( _check );
             std::cout << GREEN << "Run " << _testName << " [OK]" << WHITE << std::endl;
             return true;
         }
-        catch (const std::exception &e)
+        catch ( const std::exception &e )
         {
             std::cerr << RED << "Run " << _testName << " [KO]" << WHITE << std::endl;
             std::cerr << RED << "Error: " << e.what() << WHITE << std::endl;
@@ -80,8 +82,8 @@ template < typename test_type, typename ref_type > class Test
 
   private:
     std::string _testName;
-    void (*_f)(void (*)(test_type &, ref_type &));
-    void (*_check)(test_type &, ref_type &);
+    void ( *_f )( void ( * )( test_type &, ref_type & ) );
+    void ( *_check )( test_type &, ref_type & );
 };
 
 } // namespace unittest

@@ -21,7 +21,8 @@ namespace unittest
 {
 
 template < typename test_type, typename ref_type >
-void test_operator_eq( void ( *check )( test_type &, ref_type & ) ) throw( std::exception )
+void test_operator_eq( void ( *check )( test_type &,
+                                        ref_type & ) ) throw( std::exception )
 {
     test_type test( 10, 10 );
     ref_type test_ref( 10, 10 );
@@ -43,7 +44,8 @@ void test_operator_eq( void ( *check )( test_type &, ref_type & ) ) throw( std::
 }
 
 template < typename test_type, typename ref_type >
-void test_operator_diff( void ( *check )( test_type &, ref_type & ) ) throw( std::exception )
+void test_operator_diff( void ( *check )( test_type &,
+                                          ref_type & ) ) throw( std::exception )
 {
     test_type test( 10, 10 );
     ref_type test_ref( 10, 10 );
@@ -65,7 +67,8 @@ void test_operator_diff( void ( *check )( test_type &, ref_type & ) ) throw( std
 }
 
 template < typename test_type, typename ref_type >
-void test_operator_inf_sup( void ( *check )( test_type &, ref_type & ) ) throw( std::exception )
+void test_operator_inf_sup( void ( *check )( test_type &,
+                                             ref_type & ) ) throw( std::exception )
 {
     test_type test( 10, 10 );
     ref_type test_ref( 10, 10 );
@@ -93,7 +96,8 @@ void test_operator_inf_sup( void ( *check )( test_type &, ref_type & ) ) throw( 
 }
 
 template < typename test_type, typename ref_type >
-void test_pair_operator( void ( *check )( test_type &, ref_type & ) ) throw( std::exception )
+void test_pair_operator( void ( *check )( test_type &,
+                                          ref_type & ) ) throw( std::exception )
 {
     int keys[] = { 1, 2, 3, 4, 5 };
     int values[] = { 5, 4, 3, 2, 1 };
@@ -109,12 +113,18 @@ void test_pair_operator( void ( *check )( test_type &, ref_type & ) ) throw( std
         ref_type test_ref2( keys[ size - 1 - i ], values[ size - 1 - i ] );
         check( test2, test_ref2 );
 
-        unittest::assert( ( test == test2 ) == ( test_ref == test_ref2 ), "wrong equal eval" );
-        unittest::assert( ( test != test2 ) == ( test_ref != test_ref2 ), "wrong diff eval" );
-        unittest::assert( ( test < test2 ) == ( test_ref < test_ref2 ), "wrong inf eval" );
-        unittest::assert( ( test <= test2 ) == ( test_ref <= test_ref2 ), "wrong inf equal eval" );
-        unittest::assert( ( test > test2 ) == ( test_ref > test_ref2 ), "wrong sup eval" );
-        unittest::assert( ( test >= test2 ) == ( test_ref >= test_ref2 ), "wrong sup equal eval" );
+        unittest::assert( ( test == test2 ) == ( test_ref == test_ref2 ),
+                          "wrong equal eval" );
+        unittest::assert( ( test != test2 ) == ( test_ref != test_ref2 ),
+                          "wrong diff eval" );
+        unittest::assert( ( test < test2 ) == ( test_ref < test_ref2 ),
+                          "wrong inf eval" );
+        unittest::assert( ( test <= test2 ) == ( test_ref <= test_ref2 ),
+                          "wrong inf equal eval" );
+        unittest::assert( ( test > test2 ) == ( test_ref > test_ref2 ),
+                          "wrong sup eval" );
+        unittest::assert( ( test >= test2 ) == ( test_ref >= test_ref2 ),
+                          "wrong sup equal eval" );
     }
 }
 } // namespace unittest

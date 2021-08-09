@@ -19,52 +19,60 @@ namespace unittest
 {
 
 template < typename test_type, typename ref_type >
-void test_iterator(void (*check)(test_type &, ref_type &)) throw(std::exception)
+void test_iterator( void ( *check )( test_type &, ref_type & ) ) throw( std::exception )
 {
     test_type test;
     ref_type test_ref;
 
-    test.push_back(3);
-    test_ref.push_back(3);
-    check(test, test_ref);
-    assert(test.begin() != test.end() && test_ref.begin() != test_ref.end(), "begin == end");
-    // assert(*test.begin() != *test.end() && *test_ref.begin() != *test_ref.end(), "begin == end");
+    test.push_back( 3 );
+    test_ref.push_back( 3 );
+    check( test, test_ref );
+    assert( test.begin() != test.end() && test_ref.begin() != test_ref.end(),
+            "begin == end" );
+    // assert(*test.begin() != *test.end() && *test_ref.begin() != *test_ref.end(), "begin
+    // == end");
 
-    test.push_back(4);
-    test_ref.push_back(4);
-    check(test, test_ref);
+    test.push_back( 4 );
+    test_ref.push_back( 4 );
+    check( test, test_ref );
 
-    assert(test.begin()++ == test.begin() && test_ref.begin()++ == test_ref.begin(),
-           "wrong value after post incrementation");
-    assert(test.end()-- == test.end()-- && test_ref.end()-- == test_ref.end()--,
-           "wrong value after post decrementation");
-    assert(*++test.begin() == *++test_ref.begin(), "wrong value after pre incrementation");
-    assert(*--test.end() == *--test_ref.end(), "wrong value after pre decrementation");
+    assert( test.begin()++ == test.begin() && test_ref.begin()++ == test_ref.begin(),
+            "wrong value after post incrementation" );
+    assert( test.end()-- == test.end()-- && test_ref.end()-- == test_ref.end()--,
+            "wrong value after post decrementation" );
+    assert( *++test.begin() == *++test_ref.begin(),
+            "wrong value after pre incrementation" );
+    assert( *--test.end() == *--test_ref.end(), "wrong value after pre decrementation" );
 }
 
 template < typename test_type, typename ref_type >
-void test_rev_iterator(void (*check)(test_type &, ref_type &)) throw(std::exception)
+void test_rev_iterator( void ( *check )( test_type &,
+                                         ref_type & ) ) throw( std::exception )
 {
     test_type test;
     ref_type test_ref;
 
-    test.push_back(3);
-    test_ref.push_back(3);
-    check(test, test_ref);
+    test.push_back( 3 );
+    test_ref.push_back( 3 );
+    check( test, test_ref );
 
-    assert(test.rbegin() != test.rend() && test_ref.rbegin() != test_ref.rend(), "rbegin == rend");
-    // assert(*test.rbegin() != *test.rend() && *test_ref.rbegin() != *test_ref.rend(), "rbegin == rend");
+    assert( test.rbegin() != test.rend() && test_ref.rbegin() != test_ref.rend(),
+            "rbegin == rend" );
+    // assert(*test.rbegin() != *test.rend() && *test_ref.rbegin() != *test_ref.rend(),
+    // "rbegin == rend");
 
-    test.push_back(4);
-    test_ref.push_back(4);
-    check(test, test_ref);
+    test.push_back( 4 );
+    test_ref.push_back( 4 );
+    check( test, test_ref );
 
-    assert(test.rbegin()++ == test.rbegin() && test_ref.rbegin()++ == test_ref.rbegin(),
-           "wrong value after post incrementation");
-    assert(test.rend()-- == test.rend()-- && test_ref.rend()-- == test_ref.rend()--,
-           "wrong value after post decrementation");
-    assert(*++test.rbegin() == *++test_ref.rbegin(), "wrong value after pre incrementation");
-    assert(*--test.rend() == *--test_ref.rend(), "wrong value after pre decrementation");
+    assert( test.rbegin()++ == test.rbegin() && test_ref.rbegin()++ == test_ref.rbegin(),
+            "wrong value after post incrementation" );
+    assert( test.rend()-- == test.rend()-- && test_ref.rend()-- == test_ref.rend()--,
+            "wrong value after post decrementation" );
+    assert( *++test.rbegin() == *++test_ref.rbegin(),
+            "wrong value after pre incrementation" );
+    assert( *--test.rend() == *--test_ref.rend(),
+            "wrong value after pre decrementation" );
 }
 
 } // namespace unittest

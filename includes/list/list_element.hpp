@@ -41,28 +41,29 @@ template < class T, class Alloc = std::allocator< T > > class list_element
      *	Constructors
      */
 
-    list_element(const_reference val, allocator_type alloc = allocator_type())
-        : _content(alloc.allocate(1)), _next(this), _previous(this)
+    list_element( const_reference val, allocator_type alloc = allocator_type() )
+        : _content( alloc.allocate( 1 ) ), _next( this ), _previous( this )
     {
-        alloc.construct(_content, val);
+        alloc.construct( _content, val );
     }
 
-    list_element(const self &other, allocator_type alloc = allocator_type())
-        : _content(alloc.allocate(1)), _next(other._next), _previous(other._previous)
+    list_element( const self &other, allocator_type alloc = allocator_type() )
+        : _content( alloc.allocate( 1 ) ), _next( other._next ),
+          _previous( other._previous )
     {
-        alloc.construct(_content, other._content);
+        alloc.construct( _content, other._content );
     }
 
-    ~list_element(void)
+    ~list_element( void )
     {
         allocator_type alloc = allocator_type();
-        if (_previous != this)
-            _previous->setNext(_next);
-        alloc.destroy(_content);
-        alloc.deallocate(_content, 1);
+        if ( _previous != this )
+            _previous->setNext( _next );
+        alloc.destroy( _content );
+        alloc.deallocate( _content, 1 );
     }
 
-    self &operator=(const self &other)
+    self &operator=( const self &other )
     {
         (void)other;
         return *this;
@@ -71,15 +72,15 @@ template < class T, class Alloc = std::allocator< T > > class list_element
     /*
      *	Getters
      */
-    self *next(void) const
+    self *next( void ) const
     {
         return _next;
     }
-    self *previous(void) const
+    self *previous( void ) const
     {
         return _previous;
     }
-    reference getContent(void) const
+    reference getContent( void ) const
     {
         return *_content;
     }
@@ -87,27 +88,27 @@ template < class T, class Alloc = std::allocator< T > > class list_element
     /*
      *	Setters
      */
-    void setNext(self *next)
+    void setNext( self *next )
     {
         _next = next;
         next->_previous = this;
     }
-    void setNext(const value_type &val)
+    void setNext( const value_type &val )
     {
-        setNext(new list_element< value_type >(val));
+        setNext( new list_element< value_type >( val ) );
     }
 
-    void setPrevious(self *previous)
+    void setPrevious( self *previous )
     {
         _previous = previous;
         previous->_next = this;
     }
-    void setPrevious(const value_type &val)
+    void setPrevious( const value_type &val )
     {
-        setPrevious(new list_element< value_type >(val));
+        setPrevious( new list_element< value_type >( val ) );
     }
 
-    void init(void)
+    void init( void )
     {
         _next = this;
         _previous = this;
@@ -118,7 +119,7 @@ template < class T, class Alloc = std::allocator< T > > class list_element
     self *_next;
     self *_previous;
 
-    list_element(void)
+    list_element( void )
     {
     }
 };

@@ -6,7 +6,7 @@
 #    By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/10 16:36:02 by dboyer            #+#    #+#              #
-#    Updated: 2021/06/04 14:52:58 by dboyer           ###   ########.fr        #
+#    Updated: 2021/07/22 15:14:18 by dboyer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,28 @@ SRCS    			= 	assert\
 
 INCLUDES			=	-I ./includes
 
-HEADERS				=	./includes/ft_containers.hpp
+HEADERS				=	./includes/ft_containers.hpp\
+						./includes/map/map.hpp\
+						./includes/map/pair.hpp\
+						./includes/map/rbt_element.hpp\
+						./includes/iterators/category.hpp\
+						./includes/iterators/iterator_base.hpp\
+						./includes/iterators/iterator_traits.hpp\
+						./includes/iterators/iterator.hpp\
+						./includes/iterators/map_iterator.hpp\
+						./includes/iterators/reverse_iterator.hpp\
+						./includes/iterators/vector_iterator.hpp\
+						./includes/algorithms/algorithms.hpp\
+						./includes/test/test_accessors.hpp\
+						./includes/test/test_capacity.hpp\
+						./includes/test/test_constructors.hpp\
+						./includes/test/test_iterators.hpp\
+						./includes/test/test_modifiers.hpp\
+						./includes/test/test_operations.hpp\
+						./includes/test/test_operators.hpp\
+						./includes/test/test_utils.hpp\
+						./includes/test/test_unittest.hpp\
+						./includes/vector/vector.hpp
 
 
 FIL					= $(addsuffix .cpp, $(addprefix ./srcs/, $(SRCS)))

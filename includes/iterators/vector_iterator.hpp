@@ -32,22 +32,22 @@ template < typename T > class vector_iterator : public ft::iterator_base< T, T >
     typedef typename base::size_type size_type;
     typedef input_iterator_tag iterator_category;
 
-    vector_iterator< value_type >(node_type current) : base(current)
+    vector_iterator< value_type >( node_type current ) : base( current )
     {
     }
 
-    vector_iterator< value_type >(const self &other) : base(other)
+    vector_iterator< value_type >( const self &other ) : base( other )
     {
     }
 
-    self &operator=(const self &other)
+    self &operator=( const self &other )
     {
-        this->setCurrent(other._current);
-        this->setNull(other._null);
+        this->setCurrent( other._current );
+        this->setNull( other._null );
         return *this;
     }
 
-    ~vector_iterator< value_type >(void)
+    ~vector_iterator< value_type >( void )
     {
     }
 
@@ -55,96 +55,98 @@ template < typename T > class vector_iterator : public ft::iterator_base< T, T >
      *				Operator overloading
      *************************************************************************/
 
-    self &operator++(void)
+    self &operator++( void )
     {
-        this->setCurrent(this->getNode() + 1);
+        this->setCurrent( this->getNode() + 1 );
         return *this;
     }
 
-    self operator++(int)
+    self operator++( int )
     {
         self temp = *this;
-        this->setCurrent(this->getNode() + 1);
+        this->setCurrent( this->getNode() + 1 );
         return temp;
     }
 
-    self &operator--(void)
+    self &operator--( void )
     {
-        this->setCurrent(this->getNode() - 1);
+        this->setCurrent( this->getNode() - 1 );
         return *this;
     }
 
-    self operator--(int)
+    self operator--( int )
     {
         self temp = *this;
-        this->setCurrent(this->getNode() - 1);
+        this->setCurrent( this->getNode() - 1 );
         return temp;
     }
 
-    self &operator+=(int n)
+    self &operator+=( int n )
     {
-        this->setCurrent(this->getNode() + n);
+        this->setCurrent( this->getNode() + n );
         return *this;
     }
 
-    self &operator-=(int n)
+    self &operator-=( int n )
     {
-        this->setCurrent(this->getNode() + n);
+        this->setCurrent( this->getNode() + n );
         return *this;
     }
 
-    reference &operator*(void) const
+    reference &operator*( void ) const
     {
         return *this->getNode();
     }
 
-    reference &operator[](size_type n) const
+    reference &operator[]( size_type n ) const
     {
-        return this->getNode()[n];
+        return this->getNode()[ n ];
     }
 
-    bool operator<(const self &other) const
+    bool operator<( const self &other ) const
     {
         return *operator*() < *other;
     }
-    bool operator<=(const self &other) const
+    bool operator<=( const self &other ) const
     {
         return operator*() <= *other;
     }
 
-    bool operator>(const self &other) const
+    bool operator>( const self &other ) const
     {
         return operator*() > *other;
     }
-    bool operator>=(const self &other) const
+    bool operator>=( const self &other ) const
     {
         return operator*() >= *other;
     }
-    difference_type operator-(const self &other) const
+    difference_type operator-( const self &other ) const
     {
         return this->getNode() - other.getNode();
     }
-    self operator+(size_type n)
+    self operator+( size_type n )
     {
-        return self(this->getNode() + n);
+        return self( this->getNode() + n );
     }
-    self operator-(size_type n)
+    self operator-( size_type n )
     {
-        return self(this->getConstNode() - n);
+        return self( this->getConstNode() - n );
     }
 
   private:
-    vector_iterator< T >(void)
+    vector_iterator< T >( void )
     {
     }
 };
 
-template < typename T > vector_iterator< T > operator+(size_t n, vector_iterator< T > &it)
+template < typename T >
+vector_iterator< T > operator+( size_t n, vector_iterator< T > &it )
 {
     return it += n;
 }
 
-template < typename T > vector_iterator< T > operator-(size_t n, vector_iterator< T > &it)
+template < typename T >
+vector_iterator< T > operator-( size_t n, vector_iterator< T > &it )
 {
     return it -= n;
 }

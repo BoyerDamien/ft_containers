@@ -14,20 +14,19 @@
 #define MAP_ITERATOR_HPP
 #include "category.hpp"
 #include "iterator_base.hpp"
-#include "map/bst_element.hpp"
 #include "map/pair.hpp"
+#include "map/rbt_element.hpp"
 
 namespace ft
 {
 
-template < typename key_type, typename mapped_type >
-class map_iterator
-    : public ft::iterator_base< ft::pair< key_type, mapped_type >, ft::bst_element< key_type, mapped_type > >
+template < typename node >
+class map_iterator : public ft::iterator_base< typename node::value_type, node >
 {
   public:
-    typedef ft::pair< key_type, mapped_type > value_type;
-    typedef ft::bst_element< key_type, mapped_type > node_type;
-    typedef map_iterator< key_type, mapped_type > self;
+    typedef node node_type;
+    typedef typename node_type::value_type value_type;
+    typedef map_iterator< node_type > self;
     typedef ft::iterator_base< value_type, node_type > base;
     typedef typename base::pointer pointer;
     typedef typename base::reference reference;
@@ -35,6 +34,9 @@ class map_iterator
     typedef typename base::size_type size_type;
     typedef bidirectional_iterator_tag iterator_category;
 
+    map_iterator( void ) : base( NULL )
+    {
+    }
     map_iterator( node_type *current ) : base( current )
     {
     }
@@ -50,7 +52,7 @@ class map_iterator
         return *this;
     }
 
-    ~map_iterator< key_type, mapped_type >( void )
+    ~map_iterator( void )
     {
     }
 
@@ -93,11 +95,8 @@ class map_iterator
     }
 
   private:
-    map_iterator( void )
-    {
-    }
-
-    node_type *_next( node_type *current, bool down = false, bool up = false, bool left = false, bool right = false )
+    node_type *_next( node_type *current, bool down = false, bool up = false,
+                      bool left = false, bool right = false )
     {
         node_type *parent = current->parent();
         if ( up && ( left || ( right && !parent ) ) )
@@ -107,13 +106,14 @@ class map_iterator
         if ( down && current->left() )
             return _next( current->left(), true, false, true, false );
         if ( parent && ( ( up && right ) || ( !current->left() && !current->right() ) ) )
-            return _next( parent, false, true, parent->left() == current, parent->right() == current );
+            return _next( parent, false, true, parent->left() == current,
+                          parent->right() == current );
         if ( current->right() )
             return _next( current->right(), true, false, false, true );
         return current;
     }
-    node_type *_previous( node_type *current, bool down = false, bool up = false, bool left = false,
-                          bool right = false )
+    node_type *_previous( node_type *current, bool down = false, bool up = false,
+                          bool left = false, bool right = false )
     {
         node_type *parent = current->parent();
         if ( up && ( right || ( left && !parent ) ) )
@@ -123,9 +123,11 @@ class map_iterator
         if ( down && current->right() )
             return _previous( current->right(), true, false, false, true );
         if ( ( left || !current->left() ) && up && parent )
-            return _previous( parent, false, true, parent->left() == current, parent->right() == current );
+            return _previous( parent, false, true, parent->left() == current,
+                              parent->right() == current );
         if ( ( ( !current->left() && !current->right() ) || !current->left() ) && parent )
-            return _previous( parent, false, true, parent->left() == current, parent->right() == current );
+            return _previous( parent, false, true, parent->left() == current,
+                              parent->right() == current );
         if ( current->left() )
             return _previous( current->left(), true, false, true, false );
         return current;
