@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 16:45:01 by dboyer            #+#    #+#             */
-/*   Updated: 2021/08/09 18:51:03 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/08/10 18:50:11 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int main( void )
 
     // std::cout << test.lower_bound( p4.first ).getNode()->getPair() << std::endl;
     // std::cout << test.upper_bound( p4.first ).getNode()->getPair() << std::endl;
-    test.insert( p4 );
+    /* test.insert( p4 ); */
 
     for ( ft::map< std::string, int >::iterator it = test.begin(); it != test.end();
           it++ )
@@ -59,12 +59,8 @@ int main( void )
     std::cout << *++it << std::endl;
     std::cout << *++it << std::endl;
 
-    std::cout << std::endl << *test.rbegin() << std::endl;
-    std::cout << test.rbegin().base().getNode()->left() << std::endl;
-    std::cout << test.rbegin().base().getNode()->right() << std::endl;
-
-    std::map< std::string, std::string > test2;
-    test2[ "ok" ] = "yes";
+    std::cout << *--test.end() << std::endl;
+    std::cout << *--( --test.begin() ) << std::endl;
 
     return 0;
 }

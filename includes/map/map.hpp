@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 15:07:21 by dboyer            #+#    #+#             */
-/*   Updated: 2021/08/09 18:48:07 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/08/10 18:49:34 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ class map
      *                  Constructor
      ****************************************************************************/
     map( const Compare &comp = key_compare(), allocator_type alloc = allocator_type() )
-        : _first( NULL ), _root( NULL ), _last( new node_type() ), _n( 0 )
+        : _root( NULL ), _last( new node_type() ), _n( 0 )
     {
         (void)comp;
         (void)alloc;
@@ -97,7 +97,7 @@ class map
 
     /*map( iterator first, iterator last, const key_compare &comp = key_compare(),
          allocator_type alloc = allocator_type() )
-        : _first( node_type() ), _last( node_type() )
+        : _root( node_type() ), _last( node_type() )
     {
     }*/
 
@@ -109,14 +109,28 @@ class map
     /************************************************************************************
      *          Iterators
      ***********************************************************************************/
+    node_type *_first( node_type *node )
+    {
+        if ( node && node->left() )
+            return _first( node->left() );
+        return node;
+    }
+
+    node_type *_bLast( node_type *node )
+    {
+        if ( node && node->right() )
+            return _bLast( node->right() );
+        return node;
+    }
+
     iterator begin( void )
     {
-        return iterator( _first );
+        return iterator( _first( _root ) );
     }
 
     const_iterator begin( void ) const
     {
-        return const_iterator( _first );
+        return const_iterator( _first( _root ) );
     }
 
     iterator end( void )
@@ -131,16 +145,12 @@ class map
 
     reverse_iterator rbegin( void )
     {
-        if ( _last->parent() )
-            return reverse_iterator( _last->parent() );
-        return reverse_iterator( _last );
+        return reverse_iterator( _bLast( _root ) );
     }
 
     const_reverse_iterator rbegin() const
     {
-        if ( _last->parent() )
-            return const_reverse_iterator( _last->parent() );
-        return const_reverse_iterator( _last );
+        return const_reverse_iterator( _bLast( _root ) );
     }
 
     /************************************************************************************
@@ -239,11 +249,13 @@ class map
     }
     pair< iterator, bool > insert( const value_type &val )
     {
-        if ( !_first )
+        if ( !_root )
         {
             node_type *n = new node_type( val.first, val.second );
-            n->setRight( _last );
-            _root = _first = n;
+            n->setParent( _last );
+            _last->setLeftSafe( n );
+            _last->setRightSafe( n );
+            _root = n;
             _n++;
             return ft::pair< iterator, bool >( iterator( _root ), true );
         }
@@ -254,21 +266,10 @@ class map
 
             node_type *child = new node_type( val.first, val.second );
             node_type *parent = r.getNode();
-            bool isEnd = parent->right() == _last;
             parent->setChild( child );
 
-            if ( r == begin() )
-                _first = child;
-            if ( isEnd && parent->right() == child )
-                child->setEnd( _first, _last );
+            _n++;
 
-            std::cout << "Parent = " << parent->getPair() << std::endl;
-            std::cout << "Parent Left ->" << ( parent->left() == _last ) << std::endl;
-            std::cout << "Parent Right ->" << ( parent->right() == _last ) << std::endl;
-
-            std::cout << "child = " << child->getPair() << std::endl;
-            std::cout << "Child Left ->" << ( child->left() == _last ) << std::endl;
-            std::cout << "Child Right ->" << ( child->right() == _last ) << std::endl;
             /* if ( child->parent() && !child->parent()->black() ) */
             /* { */
             /*     if ( child->uncle() && !child->uncle()->black() ) */
@@ -387,7 +388,7 @@ class map
     }
 
   private:
-    node_type *_first, *_root, *_last;
+    node_type *_root, *_last;
     size_type _n;
 };
 
