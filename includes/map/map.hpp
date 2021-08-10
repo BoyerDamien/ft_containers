@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 15:07:21 by dboyer            #+#    #+#             */
-/*   Updated: 2021/08/10 18:42:15 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/08/10 18:49:34 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ class map
             return _bLast( node->right() );
         return node;
     }
+
     iterator begin( void )
     {
         return iterator( _first( _root ) );
@@ -144,16 +145,12 @@ class map
 
     reverse_iterator rbegin( void )
     {
-        if ( _last->parent() )
-            return reverse_iterator( _last->parent() );
-        return reverse_iterator( _last );
+        return reverse_iterator( _bLast( _root ) );
     }
 
     const_reverse_iterator rbegin() const
     {
-        if ( _last->parent() )
-            return const_reverse_iterator( _last->parent() );
-        return const_reverse_iterator( _last );
+        return const_reverse_iterator( _bLast( _root ) );
     }
 
     /************************************************************************************
