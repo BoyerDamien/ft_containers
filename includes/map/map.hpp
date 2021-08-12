@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 15:07:21 by dboyer            #+#    #+#             */
-/*   Updated: 2021/08/10 18:49:34 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/08/11 19:02:08 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,45 +208,6 @@ class map
         return iterator( node );
     }
 
-    void _lineRotate( node_type *child )
-    {
-        node_type *parent = child->parent();
-        node_type *grandGrandParent = NULL;
-
-        if ( child->grandParent() )
-            grandGrandParent = child->grandParent()->parent();
-
-        parent->setChild( child->grandParent() );
-        parent->setChild( child );
-
-        if ( grandGrandParent )
-            grandGrandParent->setChild( parent );
-
-        if ( parent->left() )
-            parent->left()->setColor( false );
-        if ( parent->right() )
-            parent->right()->setColor( false );
-        parent->setColor( true );
-    }
-
-    void _rotate( node_type *child )
-    {
-        if ( child && child->parent() && child->grandParent() )
-        {
-            if ( child->parent()->left() == child &&
-                 child->grandParent()->left() == child->parent() )
-                _lineRotate( child );
-            else if ( child->parent()->left() == child &&
-                      child->grandParent()->right() == child->parent() )
-                _lineRotate( child );
-            else if ( child->parent()->right() == child &&
-                      child->grandParent()->right() == child->parent() )
-                _lineRotate( child );
-            else if ( child->parent()->right() == child &&
-                      child->grandParent()->left() == child->parent() )
-                _lineRotate( child );
-        }
-    }
     pair< iterator, bool > insert( const value_type &val )
     {
         if ( !_root )
@@ -259,7 +220,6 @@ class map
             _n++;
             return ft::pair< iterator, bool >( iterator( _root ), true );
         }
-
         if ( !count( val.first ) )
         {
             iterator r = _findLeaf( val.first, _root );
@@ -267,33 +227,9 @@ class map
             node_type *child = new node_type( val.first, val.second );
             node_type *parent = r.getNode();
             parent->setChild( child );
-
             _n++;
-
-            /* if ( child->parent() && !child->parent()->black() ) */
-            /* { */
-            /*     if ( child->uncle() && !child->uncle()->black() ) */
-            /*     { */
-            /*         std::cout << "Parent red && uncle red" << std::endl; */
-            /*     } */
-            /*     else if ( ( child->uncle() && child->uncle()->black() ) || */
-            /*               ( !child->uncle() ) ) */
-            /*     { */
-            /*         std::cout << "Parent red && uncle black" << std::endl; */
-            /*         //_rotate( child ); */
-            /*     } */
-            /* } */
-            /* if ( child->parent() && child->parent()->black() ) */
-            /* { */
-            /*     std::cout << "Parent black" << std::endl; */
-            /* } */
-            /* if ( _root->parent() ) */
-            /* { */
-            /*     std::cout << "root parent = " << _root->parent() << std::endl; */
-            /*     //_root = _root->parent(); */
-            /* } */
+            return ft::pair< iterator, bool >( iterator( _root ), true );
         }
-
         return ft::pair< iterator, bool >( iterator( _root ), false );
     }
 
