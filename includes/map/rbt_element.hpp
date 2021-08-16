@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 16:23:57 by dboyer            #+#    #+#             */
-/*   Updated: 2021/08/10 18:35:00 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/08/16 11:45:14 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ class rbt_element
     {
         allocator_type alloc = allocator_type();
         alloc.destroy( _pair );
-        alloc.construct( _pair, value_type( other._pair->first, other._pair->second ) );
+        alloc.construct( _pair, other._pair );
 
         _parent = other._parent;
         _right = other._right;
@@ -136,7 +136,8 @@ class rbt_element
     {
         if ( _right )
             _right->setParent( right );
-        right->setParent( this );
+        if ( right )
+            right->setParent( this );
         _right = right;
     }
 
@@ -144,7 +145,8 @@ class rbt_element
     {
         if ( _left )
             _left->setParent( left );
-        left->setParent( this );
+        if ( left )
+            left->setParent( this );
         _left = left;
     }
 
@@ -172,8 +174,8 @@ class rbt_element
 
     void setPair( const value_type pair )
     {
-        _pair->first = pair.first;
-        _pair->second = pair.second;
+        allocator_type alloc = allocator_type();
+        alloc.construct( _pair, pair );
     }
 
     void setColor( const bool color )
