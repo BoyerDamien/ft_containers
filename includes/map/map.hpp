@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 15:07:21 by dboyer            #+#    #+#             */
-/*   Updated: 2021/08/16 11:57:42 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/08/16 13:02:24 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,15 +250,15 @@ class map
             }
             else if ( n->left() && n->right() )
             {
-                node_type *next = ( ++position ).getNode();
-                if ( next )
+                node_type *prev = ( --position ).getNode();
+                if ( prev )
                 {
-                    n->setPair( next->getPair() );
-                    if ( next->parent() && next->parent()->left() == next )
-                        next->parent()->setLeft( NULL );
-                    else if ( next->parent() && next->parent()->right() == next )
-                        next->parent()->setRight( NULL );
-                    delete next;
+                    n->setPair( prev->getPair() );
+                    if ( prev->parent() && prev->parent()->left() == prev )
+                        prev->parent()->setLeft( NULL );
+                    else if ( prev->parent() && prev->parent()->right() == prev )
+                        prev->parent()->setRight( NULL );
+                    delete prev;
                 }
             }
             _n--;
