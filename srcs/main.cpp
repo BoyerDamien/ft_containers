@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 16:45:01 by dboyer            #+#    #+#             */
-/*   Updated: 2021/08/16 12:03:13 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/08/16 14:24:05 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int main( void )
     /*         std::cout << *it << std::endl; */
     /*  */
 
-    test.erase( ++test.begin() );
+    test.erase( test.begin() );
     ft::map< std::string, int >::iterator it = test.begin();
     std::cout << *it << std::endl;
     std::cout << *++it << std::endl;

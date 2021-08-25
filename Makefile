@@ -6,7 +6,7 @@
 #    By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/10 16:36:02 by dboyer            #+#    #+#              #
-#    Updated: 2021/07/22 15:14:18 by dboyer           ###   ########.fr        #
+#    Updated: 2021/08/16 13:06:52 by dboyer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ OBJS				= 	$(FIL:.cpp=.o)
 OBJS_MAIN			= 	$(MAIN:.cpp=.o)
 
 
-CXXFLAGS  			= 	-Werror -Wall -Wextra -std=c++98 -O3 ${INCLUDES}
+CXXFLAGS  			= 	-Werror -Wall -Wextra -std=c++98 -O3 -g ${INCLUDES}
 CXX     			= 	clang++
 RM      			= 	rm -f
 

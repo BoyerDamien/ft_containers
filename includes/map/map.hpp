@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 15:07:21 by dboyer            #+#    #+#             */
-/*   Updated: 2021/08/16 13:02:24 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/08/16 15:08:54 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,12 +119,18 @@ class map
 
     ~map( void )
     {
-        while ( _n )
+        while ( _n > 0 )
         {
+            std::cout << std::endl << "Before erase n = " << _n << std::endl;
+
+            if ( _root )
+                std::cout << "Root = " << _root << " " << _root->getPair() << std::endl;
+            else
+                std::cout << "No root shit!! " << std::endl;
             erase( begin() );
-            std::cout << "After erase n = " << _n << std::endl;
         }
-        delete _last;
+        std::cout << "Finished" << std::endl;
+        /* delete _last; */
     }
 
     /************************************************************************************
@@ -225,39 +231,43 @@ class map
     void erase( iterator position )
     {
         node_type *n = position.getNode();
-        if ( n && n != _last )
+        if ( n )
         {
+            std::cout << n->getPair() << std::endl;
             if ( !n->left() && !n->right() )
             {
+                std::cout << "No children" << std::endl;
                 if ( n->parent() && n->parent()->left() == n )
-                    n->parent()->setLeft( NULL );
+                    n->parent()->setLeftSafe( NULL );
                 if ( n->parent() && n->parent()->right() == n )
-                    n->parent()->setRight( NULL );
-                if ( n == _root )
-                    _root = NULL;
+                    n->parent()->setRightSafe( NULL );
+                delete n;
             }
             else if ( n->left() && !n->right() && n->parent() )
             {
+                std::cout << "Child left" << std::endl;
                 n->setPair( n->left()->getPair() );
                 delete n->left();
-                n->setLeft( NULL );
+                n->setLeftSafe( NULL );
             }
             else if ( !n->left() && n->right() && n->parent() )
             {
+                std::cout << "Child right" << std::endl;
                 n->setPair( n->right()->getPair() );
                 delete n->right();
-                n->setRight( NULL );
+                n->setRightSafe( NULL );
             }
             else if ( n->left() && n->right() )
             {
+                std::cout << "Double children" << std::endl;
                 node_type *prev = ( --position ).getNode();
                 if ( prev )
                 {
                     n->setPair( prev->getPair() );
                     if ( prev->parent() && prev->parent()->left() == prev )
-                        prev->parent()->setLeft( NULL );
+                        prev->parent()->setLeftSafe( NULL );
                     else if ( prev->parent() && prev->parent()->right() == prev )
-                        prev->parent()->setRight( NULL );
+                        prev->parent()->setRightSafe( NULL );
                     delete prev;
                 }
             }
