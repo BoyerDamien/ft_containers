@@ -1,0 +1,376 @@
+The system is: Linux - 5.4.0-81-generic - x86_64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /usr/bin/clang-10 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+
+The C compiler identification is Clang, found in "/mnt/nfs/homes/dboyer/code/ft_containers/build/CMakeFiles/3.20.2/CompilerIdC/a.out"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: /usr/bin/c++ 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+
+The CXX compiler identification is GNU, found in "/mnt/nfs/homes/dboyer/code/ft_containers/build/CMakeFiles/3.20.2/CompilerIdCXX/a.out"
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: /mnt/nfs/homes/dboyer/code/ft_containers/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/ninja cmTC_9514f && [1/2] Building C object CMakeFiles/cmTC_9514f.dir/CMakeCCompilerABI.c.o
+clang version 10.0.1 
+Target: x86_64-unknown-linux-gnu
+Thread model: posix
+InstalledDir: /usr/bin
+Found candidate GCC installation: /usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0
+Found candidate GCC installation: /usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0
+Selected GCC installation: /usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0
+Candidate multilib: .;@m64
+Selected multilib: .;@m64
+ (in-process)
+ "/usr/bin/clang-10" -cc1 -triple x86_64-unknown-linux-gnu -emit-obj -mrelax-all -disable-free -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model static -mthread-model posix -mframe-pointer=all -fmath-errno -fno-rounding-math -masm-verbose -mconstructor-aliases -munwind-tables -target-cpu x86-64 -dwarf-column-info -fno-split-dwarf-inlining -debugger-tuning=gdb -v -resource-dir /usr/lib/x86_64-linux-gnu/clang/10.0.1 -dependency-file CMakeFiles/cmTC_9514f.dir/CMakeCCompilerABI.c.o.d -MT CMakeFiles/cmTC_9514f.dir/CMakeCCompilerABI.c.o -sys-header-deps -internal-isystem /usr/local/include -internal-isystem /usr/lib/x86_64-linux-gnu/clang/10.0.1/include -internal-externc-isystem /usr/include/x86_64-linux-gnu -internal-externc-isystem /include -internal-externc-isystem /usr/include -fdebug-compilation-dir /mnt/nfs/homes/dboyer/code/ft_containers/build/CMakeFiles/CMakeTmp -ferror-limit 19 -fmessage-length 0 -fgnuc-version=4.2.1 -fobjc-runtime=gcc -fdiagnostics-show-option -faddrsig -o CMakeFiles/cmTC_9514f.dir/CMakeCCompilerABI.c.o -x c /usr/share/cmake-3.20/Modules/CMakeCCompilerABI.c
+clang -cc1 version 10.0.1 based upon LLVM 10.0.1 default target x86_64-unknown-linux-gnu
+ignoring nonexistent directory "/usr/local/include"
+ignoring nonexistent directory "/include"
+#include "..." search starts here:
+#include <...> search starts here:
+ /usr/lib/x86_64-linux-gnu/clang/10.0.1/include
+ /usr/include/x86_64-linux-gnu
+ /usr/include
+End of search list.
+[2/2] Linking C executable cmTC_9514f
+clang version 10.0.1 
+Target: x86_64-unknown-linux-gnu
+Thread model: posix
+InstalledDir: /usr/bin
+Found candidate GCC installation: /usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0
+Found candidate GCC installation: /usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0
+Selected GCC installation: /usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0
+Candidate multilib: .;@m64
+Selected multilib: .;@m64
+ "/usr/bin/ld" -export-dynamic --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_9514f /usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu/crt1.o /usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu/crti.o /usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/crtbegin.o -L/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0 -L/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu -L/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../lib64 -L/usr/bin/../lib/x86_64-linux-gnu -L/usr/bin/../lib64 -L/lib/x86_64-linux-gnu -L/lib/../lib64 -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib64 -L/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../x86_64-unknown-linux-gnu/lib -L/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../.. -L/usr/bin/../lib -L/lib -L/usr/lib CMakeFiles/cmTC_9514f.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/crtend.o /usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu/crtn.o
+
+
+
+Parsed C implicit include dir info from above output: rv=done
+  found start of include info
+  found start of implicit include info
+    add: [/usr/lib/x86_64-linux-gnu/clang/10.0.1/include]
+    add: [/usr/include/x86_64-linux-gnu]
+    add: [/usr/include]
+  end of search list found
+  collapse include dir [/usr/lib/x86_64-linux-gnu/clang/10.0.1/include] ==> [/usr/lib/x86_64-linux-gnu/clang/10.0.1/include]
+  collapse include dir [/usr/include/x86_64-linux-gnu] ==> [/usr/include/x86_64-linux-gnu]
+  collapse include dir [/usr/include] ==> [/usr/include]
+  implicit include dirs: [/usr/lib/x86_64-linux-gnu/clang/10.0.1/include;/usr/include/x86_64-linux-gnu;/usr/include]
+
+
+Parsed C implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /mnt/nfs/homes/dboyer/code/ft_containers/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command(s):/usr/bin/ninja cmTC_9514f && [1/2] Building C object CMakeFiles/cmTC_9514f.dir/CMakeCCompilerABI.c.o]
+  ignore line: [clang version 10.0.1 ]
+  ignore line: [Target: x86_64-unknown-linux-gnu]
+  ignore line: [Thread model: posix]
+  ignore line: [InstalledDir: /usr/bin]
+  ignore line: [Found candidate GCC installation: /usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0]
+  ignore line: [Found candidate GCC installation: /usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0]
+  ignore line: [Selected GCC installation: /usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0]
+  ignore line: [Candidate multilib: .]
+  ignore line: [@m64]
+  ignore line: [Selected multilib: .]
+  ignore line: [@m64]
+  ignore line: [ (in-process)]
+  ignore line: [ "/usr/bin/clang-10" -cc1 -triple x86_64-unknown-linux-gnu -emit-obj -mrelax-all -disable-free -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model static -mthread-model posix -mframe-pointer=all -fmath-errno -fno-rounding-math -masm-verbose -mconstructor-aliases -munwind-tables -target-cpu x86-64 -dwarf-column-info -fno-split-dwarf-inlining -debugger-tuning=gdb -v -resource-dir /usr/lib/x86_64-linux-gnu/clang/10.0.1 -dependency-file CMakeFiles/cmTC_9514f.dir/CMakeCCompilerABI.c.o.d -MT CMakeFiles/cmTC_9514f.dir/CMakeCCompilerABI.c.o -sys-header-deps -internal-isystem /usr/local/include -internal-isystem /usr/lib/x86_64-linux-gnu/clang/10.0.1/include -internal-externc-isystem /usr/include/x86_64-linux-gnu -internal-externc-isystem /include -internal-externc-isystem /usr/include -fdebug-compilation-dir /mnt/nfs/homes/dboyer/code/ft_containers/build/CMakeFiles/CMakeTmp -ferror-limit 19 -fmessage-length 0 -fgnuc-version=4.2.1 -fobjc-runtime=gcc -fdiagnostics-show-option -faddrsig -o CMakeFiles/cmTC_9514f.dir/CMakeCCompilerABI.c.o -x c /usr/share/cmake-3.20/Modules/CMakeCCompilerABI.c]
+  ignore line: [clang -cc1 version 10.0.1 based upon LLVM 10.0.1 default target x86_64-unknown-linux-gnu]
+  ignore line: [ignoring nonexistent directory "/usr/local/include"]
+  ignore line: [ignoring nonexistent directory "/include"]
+  ignore line: [#include "..." search starts here:]
+  ignore line: [#include <...> search starts here:]
+  ignore line: [ /usr/lib/x86_64-linux-gnu/clang/10.0.1/include]
+  ignore line: [ /usr/include/x86_64-linux-gnu]
+  ignore line: [ /usr/include]
+  ignore line: [End of search list.]
+  ignore line: [[2/2] Linking C executable cmTC_9514f]
+  ignore line: [clang version 10.0.1 ]
+  ignore line: [Target: x86_64-unknown-linux-gnu]
+  ignore line: [Thread model: posix]
+  ignore line: [InstalledDir: /usr/bin]
+  ignore line: [Found candidate GCC installation: /usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0]
+  ignore line: [Found candidate GCC installation: /usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0]
+  ignore line: [Selected GCC installation: /usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0]
+  ignore line: [Candidate multilib: .]
+  ignore line: [@m64]
+  ignore line: [Selected multilib: .]
+  ignore line: [@m64]
+  link line: [ "/usr/bin/ld" -export-dynamic --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_9514f /usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu/crt1.o /usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu/crti.o /usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/crtbegin.o -L/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0 -L/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu -L/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../lib64 -L/usr/bin/../lib/x86_64-linux-gnu -L/usr/bin/../lib64 -L/lib/x86_64-linux-gnu -L/lib/../lib64 -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib64 -L/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../x86_64-unknown-linux-gnu/lib -L/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../.. -L/usr/bin/../lib -L/lib -L/usr/lib CMakeFiles/cmTC_9514f.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/crtend.o /usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu/crtn.o]
+    arg [/usr/bin/ld] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_x86_64] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_9514f] ==> ignore
+    arg [/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu/crt1.o] ==> obj [/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu/crt1.o]
+    arg [/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu/crti.o] ==> obj [/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu/crti.o]
+    arg [/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/crtbegin.o] ==> obj [/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/crtbegin.o]
+    arg [-L/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0] ==> dir [/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0]
+    arg [-L/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu] ==> dir [/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu]
+    arg [-L/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../lib64] ==> dir [/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../lib64]
+    arg [-L/usr/bin/../lib/x86_64-linux-gnu] ==> dir [/usr/bin/../lib/x86_64-linux-gnu]
+    arg [-L/usr/bin/../lib64] ==> dir [/usr/bin/../lib64]
+    arg [-L/lib/x86_64-linux-gnu] ==> dir [/lib/x86_64-linux-gnu]
+    arg [-L/lib/../lib64] ==> dir [/lib/../lib64]
+    arg [-L/usr/lib/x86_64-linux-gnu] ==> dir [/usr/lib/x86_64-linux-gnu]
+    arg [-L/usr/lib/../lib64] ==> dir [/usr/lib/../lib64]
+    arg [-L/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../x86_64-unknown-linux-gnu/lib] ==> dir [/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../x86_64-unknown-linux-gnu/lib]
+    arg [-L/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../..] ==> dir [/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../..]
+    arg [-L/usr/bin/../lib] ==> dir [/usr/bin/../lib]
+    arg [-L/lib] ==> dir [/lib]
+    arg [-L/usr/lib] ==> dir [/usr/lib]
+    arg [CMakeFiles/cmTC_9514f.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [-lgcc] ==> lib [gcc]
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--no-as-needed] ==> ignore
+    arg [-lc] ==> lib [c]
+    arg [-lgcc] ==> lib [gcc]
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--no-as-needed] ==> ignore
+    arg [/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/crtend.o] ==> obj [/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/crtend.o]
+    arg [/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu/crtn.o] ==> obj [/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu/crtn.o]
+  collapse obj [/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu/crt1.o] ==> [/usr/lib/x86_64-linux-gnu/crt1.o]
+  collapse obj [/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu/crti.o] ==> [/usr/lib/x86_64-linux-gnu/crti.o]
+  collapse obj [/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/crtbegin.o] ==> [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/crtbegin.o]
+  collapse obj [/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/crtend.o] ==> [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/crtend.o]
+  collapse obj [/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu/crtn.o] ==> [/usr/lib/x86_64-linux-gnu/crtn.o]
+  collapse library dir [/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0] ==> [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0]
+  collapse library dir [/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
+  collapse library dir [/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../lib64] ==> [/usr/lib64]
+  collapse library dir [/usr/bin/../lib/x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
+  collapse library dir [/usr/bin/../lib64] ==> [/usr/lib64]
+  collapse library dir [/lib/x86_64-linux-gnu] ==> [/lib/x86_64-linux-gnu]
+  collapse library dir [/lib/../lib64] ==> [/lib64]
+  collapse library dir [/usr/lib/x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
+  collapse library dir [/usr/lib/../lib64] ==> [/usr/lib64]
+  collapse library dir [/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../x86_64-unknown-linux-gnu/lib] ==> [/usr/x86_64-unknown-linux-gnu/lib]
+  collapse library dir [/usr/bin/../lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../..] ==> [/usr/lib]
+  collapse library dir [/usr/bin/../lib] ==> [/usr/lib]
+  collapse library dir [/lib] ==> [/lib]
+  collapse library dir [/usr/lib] ==> [/usr/lib]
+  implicit libs: [gcc;gcc_s;c;gcc;gcc_s]
+  implicit objs: [/usr/lib/x86_64-linux-gnu/crt1.o;/usr/lib/x86_64-linux-gnu/crti.o;/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/crtbegin.o;/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/crtend.o;/usr/lib/x86_64-linux-gnu/crtn.o]
+  implicit dirs: [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0;/usr/lib/x86_64-linux-gnu;/usr/lib64;/lib/x86_64-linux-gnu;/lib64;/usr/x86_64-unknown-linux-gnu/lib;/usr/lib;/lib]
+  implicit fwks: []
+
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: /mnt/nfs/homes/dboyer/code/ft_containers/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/ninja cmTC_b5c0b && [1/2] Building CXX object CMakeFiles/cmTC_b5c0b.dir/CMakeCXXCompilerABI.cpp.o
+Using built-in specs.
+COLLECT_GCC=/usr/bin/c++
+Target: x86_64-unknown-linux-gnu
+Configured with: ../configure --prefix=/usr --exec-prefix=/usr --bindir=/usr/bin --sbindir=/usr/bin --sysconfdir=/etc --datadir=/usr/share --includedir=/usr/include --libdir=/usr/lib --libexecdir=/usr/libexec --localstatedir=/var --sharedstatedir=/usr/com --mandir=/usr/share/man --infodir=/usr/share/info --enable-deterministic-archives --enable-shared --build=x86_64-unknown-linux-gnu --host=x86_64-unknown-linux-gnu lt_cv_sys_lib_dlsearch_path_spec=/usr/lib/x86_64-linux-gnu --target=x86_64-unknown-linux-gnu --disable-multilib --enable-multiarch --disable-bootstrap --with-build-sysroot=/cross-installation --enable-languages=c,c++,fortran,objc,obj-c++ --enable-default-pie --enable-default-ssp --with-isl --disable-libssp --enable-linker-build-id --disable-libstdcxx-filesystem-ts --enable-cet host_configargs=lt_cv_sys_lib_dlsearch_path_spec=/usr/lib/x86_64-linux-gnu target_configargs=lt_cv_sys_lib_dlsearch_path_spec=/usr/lib/x86_64-linux-gnu
+Thread model: posix
+Supported LTO compression algorithms: zlib
+gcc version 10.2.0 (GCC) 
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_b5c0b.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/libexec/gcc/x86_64-unknown-linux-gnu/10.2.0/cc1plus -quiet -v -imultiarch x86_64-linux-gnu -D_GNU_SOURCE /usr/share/cmake-3.20/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_b5c0b.dir/CMakeCXXCompilerABI.cpp.o -version -o /tmp/cc5tJbmZ.s
+GNU C++14 (GCC) version 10.2.0 (x86_64-unknown-linux-gnu)
+	compiled by GNU C version 10.2.0, GMP version 6.2.0, MPFR version 4.1.0, MPC version 1.1.0, isl version isl-0.22.1-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+ignoring nonexistent directory "/usr/local/include/x86_64-linux-gnu"
+ignoring nonexistent directory "/usr/local/include"
+ignoring nonexistent directory "/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../x86_64-unknown-linux-gnu/include"
+#include "..." search starts here:
+#include <...> search starts here:
+ /usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../include/c++/10.2.0
+ /usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../include/c++/10.2.0/x86_64-unknown-linux-gnu
+ /usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../include/c++/10.2.0/backward
+ /usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/include
+ /usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/include-fixed
+ /usr/include/x86_64-linux-gnu
+ /usr/include
+End of search list.
+GNU C++14 (GCC) version 10.2.0 (x86_64-unknown-linux-gnu)
+	compiled by GNU C version 10.2.0, GMP version 6.2.0, MPFR version 4.1.0, MPC version 1.1.0, isl version isl-0.22.1-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: e31cb04a7e4b1d4c0a669faa07d82690
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_b5c0b.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../x86_64-unknown-linux-gnu/bin/as -v --64 -o CMakeFiles/cmTC_b5c0b.dir/CMakeCXXCompilerABI.cpp.o /tmp/cc5tJbmZ.s
+GNU assembler version 2.35.2 (x86_64-unknown-linux-gnu) using BFD version (GNU Binutils) 2.35.2
+COMPILER_PATH=/usr/libexec/gcc/x86_64-unknown-linux-gnu/10.2.0/:/usr/libexec/gcc/x86_64-unknown-linux-gnu/10.2.0/:/usr/libexec/gcc/x86_64-unknown-linux-gnu/:/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/:/usr/lib/gcc/x86_64-unknown-linux-gnu/:/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../x86_64-unknown-linux-gnu/bin/
+LIBRARY_PATH=/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/:/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../lib64/:/lib/x86_64-linux-gnu/:/lib/../lib64/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib64/:/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../x86_64-unknown-linux-gnu/lib/:/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_b5c0b.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+[2/2] Linking CXX executable cmTC_b5c0b
+Using built-in specs.
+COLLECT_GCC=/usr/bin/c++
+COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-unknown-linux-gnu/10.2.0/lto-wrapper
+Target: x86_64-unknown-linux-gnu
+Configured with: ../configure --prefix=/usr --exec-prefix=/usr --bindir=/usr/bin --sbindir=/usr/bin --sysconfdir=/etc --datadir=/usr/share --includedir=/usr/include --libdir=/usr/lib --libexecdir=/usr/libexec --localstatedir=/var --sharedstatedir=/usr/com --mandir=/usr/share/man --infodir=/usr/share/info --enable-deterministic-archives --enable-shared --build=x86_64-unknown-linux-gnu --host=x86_64-unknown-linux-gnu lt_cv_sys_lib_dlsearch_path_spec=/usr/lib/x86_64-linux-gnu --target=x86_64-unknown-linux-gnu --disable-multilib --enable-multiarch --disable-bootstrap --with-build-sysroot=/cross-installation --enable-languages=c,c++,fortran,objc,obj-c++ --enable-default-pie --enable-default-ssp --with-isl --disable-libssp --enable-linker-build-id --disable-libstdcxx-filesystem-ts --enable-cet host_configargs=lt_cv_sys_lib_dlsearch_path_spec=/usr/lib/x86_64-linux-gnu target_configargs=lt_cv_sys_lib_dlsearch_path_spec=/usr/lib/x86_64-linux-gnu
+Thread model: posix
+Supported LTO compression algorithms: zlib
+gcc version 10.2.0 (GCC) 
+COMPILER_PATH=/usr/libexec/gcc/x86_64-unknown-linux-gnu/10.2.0/:/usr/libexec/gcc/x86_64-unknown-linux-gnu/10.2.0/:/usr/libexec/gcc/x86_64-unknown-linux-gnu/:/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/:/usr/lib/gcc/x86_64-unknown-linux-gnu/:/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../x86_64-unknown-linux-gnu/bin/
+LIBRARY_PATH=/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/:/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../lib64/:/lib/x86_64-linux-gnu/:/lib/../lib64/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib64/:/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../x86_64-unknown-linux-gnu/lib/:/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_b5c0b' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/libexec/gcc/x86_64-unknown-linux-gnu/10.2.0/collect2 -plugin /usr/libexec/gcc/x86_64-unknown-linux-gnu/10.2.0/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-unknown-linux-gnu/10.2.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccEoIQ9e.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_b5c0b /usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/crtbeginS.o -L/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0 -L/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../lib64 -L/lib/x86_64-linux-gnu -L/lib/../lib64 -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../x86_64-unknown-linux-gnu/lib -L/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../.. CMakeFiles/cmTC_b5c0b.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/crtendS.o /usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu/crtn.o
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_b5c0b' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+
+
+
+Parsed CXX implicit include dir info from above output: rv=done
+  found start of include info
+  found start of implicit include info
+    add: [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../include/c++/10.2.0]
+    add: [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../include/c++/10.2.0/x86_64-unknown-linux-gnu]
+    add: [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../include/c++/10.2.0/backward]
+    add: [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/include]
+    add: [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/include-fixed]
+    add: [/usr/include/x86_64-linux-gnu]
+    add: [/usr/include]
+  end of search list found
+  collapse include dir [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../include/c++/10.2.0] ==> [/usr/include/c++/10.2.0]
+  collapse include dir [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../include/c++/10.2.0/x86_64-unknown-linux-gnu] ==> [/usr/include/c++/10.2.0/x86_64-unknown-linux-gnu]
+  collapse include dir [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../include/c++/10.2.0/backward] ==> [/usr/include/c++/10.2.0/backward]
+  collapse include dir [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/include] ==> [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/include]
+  collapse include dir [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/include-fixed] ==> [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/include-fixed]
+  collapse include dir [/usr/include/x86_64-linux-gnu] ==> [/usr/include/x86_64-linux-gnu]
+  collapse include dir [/usr/include] ==> [/usr/include]
+  implicit include dirs: [/usr/include/c++/10.2.0;/usr/include/c++/10.2.0/x86_64-unknown-linux-gnu;/usr/include/c++/10.2.0/backward;/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/include;/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/include-fixed;/usr/include/x86_64-linux-gnu;/usr/include]
+
+
+Parsed CXX implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /mnt/nfs/homes/dboyer/code/ft_containers/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command(s):/usr/bin/ninja cmTC_b5c0b && [1/2] Building CXX object CMakeFiles/cmTC_b5c0b.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/bin/c++]
+  ignore line: [Target: x86_64-unknown-linux-gnu]
+  ignore line: [Configured with: ../configure --prefix=/usr --exec-prefix=/usr --bindir=/usr/bin --sbindir=/usr/bin --sysconfdir=/etc --datadir=/usr/share --includedir=/usr/include --libdir=/usr/lib --libexecdir=/usr/libexec --localstatedir=/var --sharedstatedir=/usr/com --mandir=/usr/share/man --infodir=/usr/share/info --enable-deterministic-archives --enable-shared --build=x86_64-unknown-linux-gnu --host=x86_64-unknown-linux-gnu lt_cv_sys_lib_dlsearch_path_spec=/usr/lib/x86_64-linux-gnu --target=x86_64-unknown-linux-gnu --disable-multilib --enable-multiarch --disable-bootstrap --with-build-sysroot=/cross-installation --enable-languages=c c++ fortran objc obj-c++ --enable-default-pie --enable-default-ssp --with-isl --disable-libssp --enable-linker-build-id --disable-libstdcxx-filesystem-ts --enable-cet host_configargs=lt_cv_sys_lib_dlsearch_path_spec=/usr/lib/x86_64-linux-gnu target_configargs=lt_cv_sys_lib_dlsearch_path_spec=/usr/lib/x86_64-linux-gnu]
+  ignore line: [Thread model: posix]
+  ignore line: [Supported LTO compression algorithms: zlib]
+  ignore line: [gcc version 10.2.0 (GCC) ]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_b5c0b.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  ignore line: [ /usr/libexec/gcc/x86_64-unknown-linux-gnu/10.2.0/cc1plus -quiet -v -imultiarch x86_64-linux-gnu -D_GNU_SOURCE /usr/share/cmake-3.20/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_b5c0b.dir/CMakeCXXCompilerABI.cpp.o -version -o /tmp/cc5tJbmZ.s]
+  ignore line: [GNU C++14 (GCC) version 10.2.0 (x86_64-unknown-linux-gnu)]
+  ignore line: [	compiled by GNU C version 10.2.0  GMP version 6.2.0  MPFR version 4.1.0  MPC version 1.1.0  isl version isl-0.22.1-GMP]
+  ignore line: []
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [ignoring nonexistent directory "/usr/local/include/x86_64-linux-gnu"]
+  ignore line: [ignoring nonexistent directory "/usr/local/include"]
+  ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../x86_64-unknown-linux-gnu/include"]
+  ignore line: [#include "..." search starts here:]
+  ignore line: [#include <...> search starts here:]
+  ignore line: [ /usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../include/c++/10.2.0]
+  ignore line: [ /usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../include/c++/10.2.0/x86_64-unknown-linux-gnu]
+  ignore line: [ /usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../include/c++/10.2.0/backward]
+  ignore line: [ /usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/include]
+  ignore line: [ /usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/include-fixed]
+  ignore line: [ /usr/include/x86_64-linux-gnu]
+  ignore line: [ /usr/include]
+  ignore line: [End of search list.]
+  ignore line: [GNU C++14 (GCC) version 10.2.0 (x86_64-unknown-linux-gnu)]
+  ignore line: [	compiled by GNU C version 10.2.0  GMP version 6.2.0  MPFR version 4.1.0  MPC version 1.1.0  isl version isl-0.22.1-GMP]
+  ignore line: []
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [Compiler executable checksum: e31cb04a7e4b1d4c0a669faa07d82690]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_b5c0b.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  ignore line: [ /usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../x86_64-unknown-linux-gnu/bin/as -v --64 -o CMakeFiles/cmTC_b5c0b.dir/CMakeCXXCompilerABI.cpp.o /tmp/cc5tJbmZ.s]
+  ignore line: [GNU assembler version 2.35.2 (x86_64-unknown-linux-gnu) using BFD version (GNU Binutils) 2.35.2]
+  ignore line: [COMPILER_PATH=/usr/libexec/gcc/x86_64-unknown-linux-gnu/10.2.0/:/usr/libexec/gcc/x86_64-unknown-linux-gnu/10.2.0/:/usr/libexec/gcc/x86_64-unknown-linux-gnu/:/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/:/usr/lib/gcc/x86_64-unknown-linux-gnu/:/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../x86_64-unknown-linux-gnu/bin/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/:/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../lib64/:/lib/x86_64-linux-gnu/:/lib/../lib64/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib64/:/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../x86_64-unknown-linux-gnu/lib/:/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_b5c0b.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  ignore line: [[2/2] Linking CXX executable cmTC_b5c0b]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/bin/c++]
+  ignore line: [COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-unknown-linux-gnu/10.2.0/lto-wrapper]
+  ignore line: [Target: x86_64-unknown-linux-gnu]
+  ignore line: [Configured with: ../configure --prefix=/usr --exec-prefix=/usr --bindir=/usr/bin --sbindir=/usr/bin --sysconfdir=/etc --datadir=/usr/share --includedir=/usr/include --libdir=/usr/lib --libexecdir=/usr/libexec --localstatedir=/var --sharedstatedir=/usr/com --mandir=/usr/share/man --infodir=/usr/share/info --enable-deterministic-archives --enable-shared --build=x86_64-unknown-linux-gnu --host=x86_64-unknown-linux-gnu lt_cv_sys_lib_dlsearch_path_spec=/usr/lib/x86_64-linux-gnu --target=x86_64-unknown-linux-gnu --disable-multilib --enable-multiarch --disable-bootstrap --with-build-sysroot=/cross-installation --enable-languages=c c++ fortran objc obj-c++ --enable-default-pie --enable-default-ssp --with-isl --disable-libssp --enable-linker-build-id --disable-libstdcxx-filesystem-ts --enable-cet host_configargs=lt_cv_sys_lib_dlsearch_path_spec=/usr/lib/x86_64-linux-gnu target_configargs=lt_cv_sys_lib_dlsearch_path_spec=/usr/lib/x86_64-linux-gnu]
+  ignore line: [Thread model: posix]
+  ignore line: [Supported LTO compression algorithms: zlib]
+  ignore line: [gcc version 10.2.0 (GCC) ]
+  ignore line: [COMPILER_PATH=/usr/libexec/gcc/x86_64-unknown-linux-gnu/10.2.0/:/usr/libexec/gcc/x86_64-unknown-linux-gnu/10.2.0/:/usr/libexec/gcc/x86_64-unknown-linux-gnu/:/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/:/usr/lib/gcc/x86_64-unknown-linux-gnu/:/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../x86_64-unknown-linux-gnu/bin/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/:/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../lib64/:/lib/x86_64-linux-gnu/:/lib/../lib64/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib64/:/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../x86_64-unknown-linux-gnu/lib/:/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_b5c0b' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  link line: [ /usr/libexec/gcc/x86_64-unknown-linux-gnu/10.2.0/collect2 -plugin /usr/libexec/gcc/x86_64-unknown-linux-gnu/10.2.0/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-unknown-linux-gnu/10.2.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccEoIQ9e.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_b5c0b /usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/crtbeginS.o -L/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0 -L/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../lib64 -L/lib/x86_64-linux-gnu -L/lib/../lib64 -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../x86_64-unknown-linux-gnu/lib -L/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../.. CMakeFiles/cmTC_b5c0b.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/crtendS.o /usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu/crtn.o]
+    arg [/usr/libexec/gcc/x86_64-unknown-linux-gnu/10.2.0/collect2] ==> ignore
+    arg [-plugin] ==> ignore
+    arg [/usr/libexec/gcc/x86_64-unknown-linux-gnu/10.2.0/liblto_plugin.so] ==> ignore
+    arg [-plugin-opt=/usr/libexec/gcc/x86_64-unknown-linux-gnu/10.2.0/lto-wrapper] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/ccEoIQ9e.res] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [--build-id] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_x86_64] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+    arg [-pie] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_b5c0b] ==> ignore
+    arg [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu/Scrt1.o] ==> obj [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu/Scrt1.o]
+    arg [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu/crti.o] ==> obj [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu/crti.o]
+    arg [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/crtbeginS.o] ==> obj [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/crtbeginS.o]
+    arg [-L/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0] ==> dir [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0]
+    arg [-L/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu] ==> dir [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu]
+    arg [-L/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../lib64] ==> dir [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../lib64]
+    arg [-L/lib/x86_64-linux-gnu] ==> dir [/lib/x86_64-linux-gnu]
+    arg [-L/lib/../lib64] ==> dir [/lib/../lib64]
+    arg [-L/usr/lib/x86_64-linux-gnu] ==> dir [/usr/lib/x86_64-linux-gnu]
+    arg [-L/usr/lib/../lib64] ==> dir [/usr/lib/../lib64]
+    arg [-L/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../x86_64-unknown-linux-gnu/lib] ==> dir [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../x86_64-unknown-linux-gnu/lib]
+    arg [-L/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../..] ==> dir [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../..]
+    arg [CMakeFiles/cmTC_b5c0b.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [-lstdc++] ==> lib [stdc++]
+    arg [-lm] ==> lib [m]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [-lc] ==> lib [c]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/crtendS.o] ==> obj [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/crtendS.o]
+    arg [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu/crtn.o] ==> obj [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu/crtn.o]
+  collapse obj [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu/Scrt1.o] ==> [/usr/lib/x86_64-linux-gnu/Scrt1.o]
+  collapse obj [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu/crti.o] ==> [/usr/lib/x86_64-linux-gnu/crti.o]
+  collapse obj [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu/crtn.o] ==> [/usr/lib/x86_64-linux-gnu/crtn.o]
+  collapse library dir [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0] ==> [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0]
+  collapse library dir [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
+  collapse library dir [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../lib64] ==> [/usr/lib64]
+  collapse library dir [/lib/x86_64-linux-gnu] ==> [/lib/x86_64-linux-gnu]
+  collapse library dir [/lib/../lib64] ==> [/lib64]
+  collapse library dir [/usr/lib/x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
+  collapse library dir [/usr/lib/../lib64] ==> [/usr/lib64]
+  collapse library dir [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../../../x86_64-unknown-linux-gnu/lib] ==> [/usr/x86_64-unknown-linux-gnu/lib]
+  collapse library dir [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/../../..] ==> [/usr/lib]
+  implicit libs: [stdc++;m;gcc_s;gcc;c;gcc_s;gcc]
+  implicit objs: [/usr/lib/x86_64-linux-gnu/Scrt1.o;/usr/lib/x86_64-linux-gnu/crti.o;/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/crtbeginS.o;/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0/crtendS.o;/usr/lib/x86_64-linux-gnu/crtn.o]
+  implicit dirs: [/usr/lib/gcc/x86_64-unknown-linux-gnu/10.2.0;/usr/lib/x86_64-linux-gnu;/usr/lib64;/lib/x86_64-linux-gnu;/lib64;/usr/x86_64-unknown-linux-gnu/lib;/usr/lib]
+  implicit fwks: []
+
+
