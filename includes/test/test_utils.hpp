@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 17:15:48 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/10 17:00:22 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/10 18:43:50 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,13 @@
 
 namespace unittest {
 
-void assert(bool expr, const std::string &message);
+void
+assert(bool expr, const std::string& message);
 
-template <typename test_type, typename ref_type>
-void default_check(test_type &test, ref_type &test_ref) {
+template<typename test_type, typename ref_type>
+void
+default_check(test_type& test, ref_type& test_ref)
+{
   typename test_type::iterator test_begin = test.begin();
   typename ref_type::iterator ref_begin = test_ref.begin();
 
@@ -33,19 +36,18 @@ void default_check(test_type &test, ref_type &test_ref) {
   }
 }
 
-template <typename test_type, typename ref_type>
-void check_with_cap(test_type &test, ref_type &test_ref) {
-  //   std::cout << test << std::endl;
-  //    std::cout << "My size: " << test.size() << " Real size: " <<
-  //    test_ref.size() << std::endl; std::cout << "My capacity: " <<
-  //    test.capacity() << " Real capacity: "
-  //    << test_ref.capacity() << std::endl;
+template<typename test_type, typename ref_type>
+void
+check_with_cap(test_type& test, ref_type& test_ref)
+{
   assert(test.capacity() == test_ref.capacity(), "wrong capacity");
   default_check(test, test_ref);
 }
 
-template <typename test_type, typename ref_type>
-void check_pair(test_type &test, ref_type &test_ref) {
+template<typename test_type, typename ref_type>
+void
+check_pair(test_type& test, ref_type& test_ref)
+{
   // std::cout << "test_first: " << test.first << " ref_first: " <<
   // test_ref.first << std::endl; std::cout << "test_second: " << test.second <<
   // " ref_second: " << test_ref.second << std::endl;
@@ -53,5 +55,8 @@ void check_pair(test_type &test, ref_type &test_ref) {
   assert(test.second == test_ref.second, "wrong second check equal");
 }
 
-}  // namespace unittest
+template<typename type, type>
+struct check_type_traits
+{};
+} // namespace unittest
 #endif
