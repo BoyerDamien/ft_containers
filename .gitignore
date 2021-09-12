@@ -44,3 +44,7 @@ compile_commands.json
 .cache/*
 
 *vgcore*
+
+# Build
+build/
+.cache/
