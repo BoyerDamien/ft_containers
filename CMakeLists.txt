@@ -16,6 +16,9 @@ add_executable(ft_container
 
 include_directories(
     includes
+    includes/iterators
+    includes/algorithms
+    includes/test
 )
 
 

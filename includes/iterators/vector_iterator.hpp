@@ -6,137 +6,151 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 12:03:13 by dess              #+#    #+#             */
-/*   Updated: 2021/09/10 23:42:03 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/14 18:51:20 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef vector_ITERATOR_HPP
-#define vector_ITERATOR_HPP
-#include "category.hpp"
-#include "iterator_base.hpp"
+#pragma once
+
+#include "iterator.hpp"
+#include "iterator_traits.hpp"
 #include <cstddef>
 
 namespace ft
 {
-template < typename T > class vector_iterator : public ft::iterator_base< T, T >
+template < typename T > class vector_iterator : public iterator< random_access_iterator_tag, T >
 {
-
   public:
-    typedef T value_type;
-    typedef value_type *node_type;
-    typedef vector_iterator< value_type > self;
-    typedef ft::iterator_base< value_type, value_type > base;
-    typedef typename base::pointer pointer;
-    typedef typename base::reference reference;
-    typedef typename base::difference_type difference_type;
-    typedef typename base::size_type size_type;
-    typedef input_iterator_tag iterator_category;
+    typedef typename iterator< random_access_iterator_tag, T >::value_type value_type;
+    typedef typename iterator< random_access_iterator_tag, T >::difference_type difference_type;
+    typedef typename iterator< random_access_iterator_tag, T >::pointer pointer;
+    typedef typename iterator< random_access_iterator_tag, T >::reference reference;
+    typedef pointer iterator_type;
+    typedef random_access_iterator_tag iterator_category;
 
-    vector_iterator< value_type >(node_type current) : base(current)
+    vector_iterator(void) : _base(pointer(value_type()))
     {
     }
 
-    vector_iterator< value_type >(const self &other) : base(other)
+    vector_iterator(pointer current) : _base(current)
+    {
+        if (current == NULL)
+            _base = pointer();
+    }
+
+    vector_iterator(const vector_iterator &other) : _base(other._base)
     {
     }
 
-    self &operator=(const self &other)
+    vector_iterator &operator=(const vector_iterator &other)
     {
-        this->setCurrent(other._current);
-        this->setNull(other._null);
+        _base = other._base;
         return *this;
     }
 
-    ~vector_iterator< value_type >(void)
+    ~vector_iterator(void)
     {
     }
-
+    /**************************************************************************
+     *				Getters
+     *************************************************************************/
+    pointer base() const
+    {
+        return _base;
+    }
     /**************************************************************************
      *				Operator overloading
      *************************************************************************/
 
-    self &operator++(void)
+    vector_iterator &operator++(void)
     {
-        this->setCurrent(this->getNode() + 1);
+        _base++;
         return *this;
     }
 
-    self operator++(int)
+    vector_iterator operator++(int)
     {
-        self temp = *this;
-        this->setCurrent(this->getNode() + 1);
+        vector_iterator temp = *this;
+        _base++;
         return temp;
     }
 
-    self &operator--(void)
+    vector_iterator &operator--(void)
     {
-        this->setCurrent(this->getNode() - 1);
+        _base--;
         return *this;
     }
 
-    self operator--(int)
+    vector_iterator operator--(int)
     {
-        self temp = *this;
-        this->setCurrent(this->getNode() - 1);
+        vector_iterator temp = *this;
+        _base--;
         return temp;
     }
 
-    self &operator+=(int n)
+    vector_iterator &operator+=(int n)
     {
-        this->setCurrent(this->getNode() + n);
+        _base += n;
         return *this;
     }
 
-    self &operator-=(int n)
+    vector_iterator &operator-=(int n)
     {
-        this->setCurrent(this->getNode() + n);
+        _base -= n;
         return *this;
     }
 
     reference &operator*(void) const
     {
-        return *this->getNode();
+        return *_base;
     }
-
-    reference &operator[](size_type n) const
+    pointer *operator->(void) const
     {
-        return this->getNode()[n];
+        return &(this->operator*());
     }
 
-    bool operator<(const self &other) const
+    reference &operator[](difference_type n) const
+    {
+        return _base[n];
+    }
+
+    bool operator<(const vector_iterator &other) const
     {
         return *operator*() < *other;
     }
-    bool operator<=(const self &other) const
+
+    bool operator<=(const vector_iterator &other) const
     {
         return operator*() <= *other;
     }
 
-    bool operator>(const self &other) const
+    bool operator>(const vector_iterator &other) const
     {
         return operator*() > *other;
     }
-    bool operator>=(const self &other) const
+
+    bool operator>=(const vector_iterator &other) const
     {
         return operator*() >= *other;
     }
-    difference_type operator-(const self &other) const
+
+    difference_type operator-(const vector_iterator &other) const
     {
-        return this->getNode() - other.getNode();
+        return _base - other._base;
     }
-    self operator+(size_type n)
+
+    vector_iterator operator+(difference_type n)
     {
-        return self(this->getNode() + n);
+        return vector_iterator(_base + n);
     }
-    self operator-(size_type n)
+
+    vector_iterator operator-(difference_type n)
     {
-        return self(this->getConstNode() - n);
+        return vector_iterator(_base - n);
     }
 
   private:
-    vector_iterator< T >(void)
-    {
-    }
+    pointer _base;
 };
 
 template < typename T > vector_iterator< T > operator+(size_t n, vector_iterator< T > &it)
@@ -148,6 +162,15 @@ template < typename T > vector_iterator< T > operator-(size_t n, vector_iterator
 {
     return it -= n;
 }
-} // namespace ft
 
-#endif
+template < typename T > bool operator==(const vector_iterator< T > &it1, const vector_iterator< T > &it2)
+{
+    return it1.base() == it2.base();
+}
+
+template < typename T > bool operator!=(const vector_iterator< T > &it1, const vector_iterator< T > &it2)
+{
+    return !(it1 == it2);
+}
+
+} // namespace ft

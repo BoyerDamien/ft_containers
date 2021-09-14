@@ -1,3 +1,4 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -6,19 +7,13 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 09:31:57 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/10 23:41:58 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/05/22 14:23:07 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ITERATOR_HPP
-#define ITERATOR_HPP
-#include <cstddef>
+#pragma once
 
-#include "./category.hpp"
-#include "./iterator_base.hpp"
-#include "./iterator_traits.hpp"
-#include "./reverse_iterator.hpp"
-#include "./vector_iterator.hpp"
+#include <cstddef>
 
 /*
  *		Reimplemantation of iterator base structure
@@ -33,5 +28,3 @@ struct iterator
     typedef Reference reference;
     typedef Category iterator_category;
 };
-
-#endif
