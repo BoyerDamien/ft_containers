@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 13:42:31 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/15 13:44:52 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/15 14:42:35 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,8 @@ std::ostream &operator<<(std::ostream &os, const ft::pair< key_type, mapped_type
     return os << "(" << p.first << ", " << p.second << ")";
 }
 
-template < class T1, class T2 > std::pair< T1, T2 > make_pair(T1 t, T2 u)
+template < class T1, class T2 > ft::pair< T1, T2 > make_pair(T1 t, T2 u)
 {
-    return pair< T1, T2 >(t, u);
+    return ft::pair< T1, T2 >(t, u);
 }
-
 } // namespace ft

@@ -6,23 +6,22 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 16:45:01 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/15 13:37:31 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/15 15:09:04 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_containers.hpp"
 #include <iostream>
+#include <map>
 #include <vector>
 
 int main(void)
 {
+    ft::map< const std::string, int > m;
+    ft::pair< const std::string, int > p = ft::make_pair< const std::string, int >("ok", 1);
+    m.insert(p);
 
-    int arr[] = {1, 2, 3};
-    ft::vector< int > vec(10, 10);
+    std::cout << *m.begin() << std::endl;
 
-    for (ft::vector< int >::reverse_iterator it = vec.rbegin(); it != vec.rend(); it++)
-    {
-        std::cout << *it << std::endl;
-    }
     return 0;
 }

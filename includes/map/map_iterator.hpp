@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/05 09:33:43 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/15 14:28:55 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/15 15:07:21 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,24 @@
 namespace ft
 {
 
-template < typename node_type > class map_iterator : public iterator< bidirectional_iterator_tag, node_type >
+template < typename node_type >
+class map_iterator : public iterator< bidirectional_iterator_tag, typename node_type::value_type >
 {
   public:
-    typedef typename iterator< bidirectional_iterator_tag, node_type >::value_type value_type;
-    typedef typename iterator< bidirectional_iterator_tag, node_type >::difference_type difference_type;
-    typedef typename iterator< bidirectional_iterator_tag, node_type >::pointer pointer;
-    typedef typename iterator< bidirectional_iterator_tag, node_type >::reference reference;
+    typedef typename iterator< bidirectional_iterator_tag, typename node_type::value_type >::value_type value_type;
+    typedef typename iterator< bidirectional_iterator_tag, typename node_type::value_type >::difference_type
+        difference_type;
+    typedef typename iterator< bidirectional_iterator_tag, typename node_type::value_type >::pointer pointer;
+    typedef typename iterator< bidirectional_iterator_tag, typename node_type::value_type >::reference reference;
     typedef node_type *node_pointer;
     typedef bidirectional_iterator_tag iterator_category;
 
-    map_iterator(void) : _base(node_pointer(value_type()))
+    map_iterator(void)
     {
     }
-    map_iterator(node_pointer current) : _base(current)
+
+    map_iterator(node_type *current) : _base(current)
     {
-        if (current == NULL)
-            _base = node_pointer(value_type());
     }
 
     map_iterator(const map_iterator &other) : _base(other._base)
@@ -49,6 +50,14 @@ template < typename node_type > class map_iterator : public iterator< bidirectio
 
     ~map_iterator(void)
     {
+    }
+
+    /**************************************************************************
+     *              Getters
+     **************************************************************************/
+    node_pointer base() const
+    {
+        return _base;
     }
 
     /**************************************************************************
@@ -84,12 +93,16 @@ template < typename node_type > class map_iterator : public iterator< bidirectio
     {
         return _base->getPair();
     }
+    pointer *operator->(void) const
+    {
+        return &(this->operator*());
+    }
 
   private:
-    node_type *_base;
-    node_type *_next(node_type *current, bool down = false, bool up = false, bool left = false, bool right = false)
+    node_pointer _base;
+    node_pointer _next(node_pointer current, bool down = false, bool up = false, bool left = false, bool right = false)
     {
-        node_type *parent = current->parent();
+        node_pointer parent = current->parent();
         if (up && (left || (right && !parent)))
             return current;
         if (down && !current->left())
@@ -102,9 +115,10 @@ template < typename node_type > class map_iterator : public iterator< bidirectio
             return _next(current->right(), true, false, false, true);
         return current;
     }
-    node_type *_previous(node_type *current, bool down = false, bool up = false, bool left = false, bool right = false)
+    node_pointer _previous(node_pointer current, bool down = false, bool up = false, bool left = false,
+                           bool right = false)
     {
-        node_type *parent = current->parent();
+        node_pointer parent = current->parent();
         if (up && (right || (left && !parent)))
             return current;
         if (down && !current->right())
@@ -120,5 +134,25 @@ template < typename node_type > class map_iterator : public iterator< bidirectio
         return current;
     }
 };
+
+template < typename T > map_iterator< T > operator+(size_t n, map_iterator< T > &it)
+{
+    return it += n;
+}
+
+template < typename T > map_iterator< T > operator-(size_t n, map_iterator< T > &it)
+{
+    return it -= n;
+}
+
+template < typename T > bool operator==(const map_iterator< T > &it1, const map_iterator< T > &it2)
+{
+    return it1.base() == it2.base();
+}
+
+template < typename T > bool operator!=(const map_iterator< T > &it1, const map_iterator< T > &it2)
+{
+    return !(it1 == it2);
+}
 
 } // namespace ft
