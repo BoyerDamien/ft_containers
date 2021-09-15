@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 14:30:47 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/15 15:12:45 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/15 15:23:49 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,7 @@ class map
             _last->setRightSafe(n);
             _root = n;
             _n++;
+            std::cout << "First" << std::endl;
             return ft::pair< iterator, bool >(iterator(_root), true);
         }
 
@@ -188,7 +189,12 @@ class map
 
             node_type *child = new node_type(val.first, val.second);
             node_type *parent = r.base();
+
             parent->setChild(child);
+            if (parent->left())
+                std::cout << "left = " << parent->left()->getPair() << std::endl;
+            if (parent->right())
+                std::cout << "right = " << parent->right()->getPair() << std::endl;
 
             _n++;
         }
