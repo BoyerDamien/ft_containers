@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 14:30:47 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/15 14:57:05 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/15 15:12:45 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,19 +102,6 @@ class map
     /************************************************************************************
      *          Iterators
      ***********************************************************************************/
-    node_type *_first(node_type *node)
-    {
-        if (node && node->left())
-            return _first(node->left());
-        return node;
-    }
-
-    node_type *_bLast(node_type *node)
-    {
-        if (node && node->right())
-            return _bLast(node->right());
-        return node;
-    }
 
     iterator begin(void)
     {
@@ -182,25 +169,6 @@ class map
      *                      Modifiers
      ***********************************************************************************/
 
-    iterator _findLeaf(const key_type &k, node_type *node) const
-    {
-        if (node && node != _last)
-        {
-            value_type val = node->getPair();
-            bool result_right = key_comp()(val.first, k);
-            bool result_left = key_comp()(k, val.first);
-
-            if (!(!result_left && !result_right))
-            {
-                if (result_left && node->left() && node->left() != _last)
-                    return _findLeaf(k, node->left());
-                if (result_right && node->right() && node->right() != _last)
-                    return _findLeaf(k, node->right());
-            }
-        }
-        return iterator(node);
-    }
-
     pair< iterator, bool > insert(const value_type &val)
     {
         if (!_root)
@@ -231,24 +199,6 @@ class map
     /************************************************************************************
      *                      Operations
      ***********************************************************************************/
-    iterator _find(const key_type &k, node_type *node) const
-    {
-        if (node && node != _last)
-        {
-            value_type val = node->getPair();
-            bool result_right = key_comp()(val.first, k);
-            bool result_left = key_comp()(k, val.first);
-
-            if (!(!result_left && !result_right))
-            {
-                if (result_left && node->left() && node->left() != _last)
-                    return _find(k, node->left());
-                if (result_right && node->right() && node->right() != _last)
-                    return _find(k, node->right());
-            }
-        }
-        return iterator(_last);
-    }
 
     iterator find(const key_type &k)
     {
@@ -265,17 +215,6 @@ class map
         return find(k) != end();
     }
 
-    iterator _lower(const key_type &k, node_type *node)
-    {
-        if (node && node != _last && node->left())
-        {
-            value_type val = node->getPair();
-            if (key_comp()(k, val.first) && node->left())
-                return _lower(k, node->left());
-        }
-        return iterator(node);
-    }
-
     iterator lower_bound(const key_type &k)
     {
         return _lower(k, _root);
@@ -284,17 +223,6 @@ class map
     const_iterator lower_bound(const key_type &k) const
     {
         return const_iterator(lower_bound(k).getNode());
-    }
-
-    iterator _upper(const key_type &k, node_type *node)
-    {
-        if (node && node != _last && node->right())
-        {
-            value_type val = node->getPair();
-            if (key_comp()(val.first, k) && node->right())
-                return _upper(k, node->right());
-        }
-        return iterator(node);
     }
 
     iterator upper_bound(const key_type &k)
@@ -320,6 +248,83 @@ class map
   private:
     node_type *_root, *_last;
     size_type _n;
+
+    /**************************************************************************************
+     *              Private member functions
+     *************************************************************************************/
+    node_type *_first(node_type *node)
+    {
+        if (node && node->left())
+            return _first(node->left());
+        return node;
+    }
+
+    node_type *_bLast(node_type *node)
+    {
+        if (node && node->right())
+            return _bLast(node->right());
+        return node;
+    }
+
+    iterator _findLeaf(const key_type &k, node_type *node) const
+    {
+        if (node && node != _last)
+        {
+            value_type val = node->getPair();
+            bool result_right = key_comp()(val.first, k);
+            bool result_left = key_comp()(k, val.first);
+
+            if (!(!result_left && !result_right))
+            {
+                if (result_left && node->left() && node->left() != _last)
+                    return _findLeaf(k, node->left());
+                if (result_right && node->right() && node->right() != _last)
+                    return _findLeaf(k, node->right());
+            }
+        }
+        return iterator(node);
+    }
+
+    iterator _find(const key_type &k, node_type *node) const
+    {
+        if (node && node != _last)
+        {
+            value_type val = node->getPair();
+            bool result_right = key_comp()(val.first, k);
+            bool result_left = key_comp()(k, val.first);
+
+            if (!(!result_left && !result_right))
+            {
+                if (result_left && node->left() && node->left() != _last)
+                    return _find(k, node->left());
+                if (result_right && node->right() && node->right() != _last)
+                    return _find(k, node->right());
+            }
+        }
+        return iterator(_last);
+    }
+
+    iterator _lower(const key_type &k, node_type *node)
+    {
+        if (node && node != _last && node->left())
+        {
+            value_type val = node->getPair();
+            if (key_comp()(k, val.first) && node->left())
+                return _lower(k, node->left());
+        }
+        return iterator(node);
+    }
+
+    iterator _upper(const key_type &k, node_type *node)
+    {
+        if (node && node != _last && node->right())
+        {
+            value_type val = node->getPair();
+            if (key_comp()(val.first, k) && node->right())
+                return _upper(k, node->right());
+        }
+        return iterator(node);
+    }
 };
 
 } // namespace ft
