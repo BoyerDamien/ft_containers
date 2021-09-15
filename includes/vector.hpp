@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 18:54:43 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/14 19:00:32 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/15 13:37:54 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@
 #include "iterator_traits.hpp"
 #include "iterators/reverse_iterator.hpp"
 #include "iterators/vector_iterator.hpp"
+#include "type_traits.hpp"
 #include <cstddef>
 #include <cstring>
 #include <iostream>
 #include <iterator>
+#include <memory>
 #include <ostream>
 #include <stdexcept>
 
@@ -75,14 +77,9 @@ template < typename T, class Alloc = std::allocator< T > > class vector
             alloc.construct(_content + i, val);
     }
 
-    vector(pointer first, pointer last, allocator_type alloc = allocator_type())
-        : _n(last - first), _capacity(_n), _content(_alloc(_capacity))
-    {
-        for (size_type i = 0; first + i != last; i++)
-            alloc.construct(_content + i, *(first + i));
-    }
-
-    vector(iterator first, iterator last, allocator_type alloc = allocator_type())
+    template < typename InputIterator >
+    vector(typename enable_if< !is_integral< InputIterator >::value, InputIterator >::type first, InputIterator last,
+           allocator_type alloc = allocator_type())
         : _n(last - first), _capacity(_n), _content(_alloc(_capacity))
     {
         for (size_type i = 0; first + i != last; i++)
