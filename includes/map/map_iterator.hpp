@@ -6,48 +6,44 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/05 09:33:43 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/10 23:42:00 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/15 14:28:55 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_ITERATOR_HPP
-#define MAP_ITERATOR_HPP
-#include "category.hpp"
-#include "iterator_base.hpp"
-#include "map/pair.hpp"
-#include "map/rbt_element.hpp"
+#include "iterator.hpp"
+#include "iterator_traits.hpp"
+#include "map/bst_element.hpp"
+#include "utility.hpp"
 
 namespace ft
 {
 
-template < typename node > class map_iterator : public ft::iterator_base< typename node::value_type, node >
+template < typename node_type > class map_iterator : public iterator< bidirectional_iterator_tag, node_type >
 {
   public:
-    typedef node node_type;
-    typedef typename node_type::value_type value_type;
-    typedef map_iterator< node_type > self;
-    typedef ft::iterator_base< value_type, node_type > base;
-    typedef typename base::pointer pointer;
-    typedef typename base::reference reference;
-    typedef typename base::difference_type difference_type;
-    typedef typename base::size_type size_type;
+    typedef typename iterator< bidirectional_iterator_tag, node_type >::value_type value_type;
+    typedef typename iterator< bidirectional_iterator_tag, node_type >::difference_type difference_type;
+    typedef typename iterator< bidirectional_iterator_tag, node_type >::pointer pointer;
+    typedef typename iterator< bidirectional_iterator_tag, node_type >::reference reference;
+    typedef node_type *node_pointer;
     typedef bidirectional_iterator_tag iterator_category;
 
-    map_iterator(void) : base(NULL)
+    map_iterator(void) : _base(node_pointer(value_type()))
     {
     }
-    map_iterator(node_type *current) : base(current)
+    map_iterator(node_pointer current) : _base(current)
+    {
+        if (current == NULL)
+            _base = node_pointer(value_type());
+    }
+
+    map_iterator(const map_iterator &other) : _base(other._base)
     {
     }
 
-    map_iterator(const self &other) : base(other)
+    map_iterator &operator=(const map_iterator &other)
     {
-    }
-
-    self &operator=(const self &other)
-    {
-        this->setCurrent(other._current);
-        this->setNull(other._null);
+        _base = other._base;
         return *this;
     }
 
@@ -59,41 +55,38 @@ template < typename node > class map_iterator : public ft::iterator_base< typena
      *				Operator overloading
      *************************************************************************/
 
-    self &operator++(void)
+    map_iterator &operator++(void)
     {
-        if (this->getNode())
-            this->setCurrent(_next(this->getNode()));
+        _base = _next(_base);
         return *this;
     }
 
-    self operator++(int)
+    map_iterator operator++(int)
     {
-        self tmp = *this;
-        if (this->getNode())
-            this->setCurrent(_next(this->getNode()));
+        map_iterator tmp = *this;
+        _base = _next(_base);
         return tmp;
     }
-    self &operator--(void)
+    map_iterator &operator--(void)
     {
-        if (this->getNode())
-            this->setCurrent(_previous(this->getNode()));
+        _base = _previous(_base);
         return *this;
     }
 
-    self operator--(int)
+    map_iterator operator--(int)
     {
-        self tmp = *this;
-        if (this->getNode())
-            this->setCurrent(_previous(this->getNode()));
+        map_iterator tmp = *this;
+        _base = _previous(_base);
         return tmp;
     }
 
     reference operator*(void) const
     {
-        return this->getNode()->getPair();
+        return _base->getPair();
     }
 
   private:
+    node_type *_base;
     node_type *_next(node_type *current, bool down = false, bool up = false, bool left = false, bool right = false)
     {
         node_type *parent = current->parent();
@@ -129,5 +122,3 @@ template < typename node > class map_iterator : public ft::iterator_base< typena
 };
 
 } // namespace ft
-
-#endif
