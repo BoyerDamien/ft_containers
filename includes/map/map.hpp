@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 14:30:47 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/15 15:23:49 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/16 13:11:30 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,7 @@ class map
             node_type *child = new node_type(val.first, val.second);
             node_type *parent = r.base();
 
+            std::cout << "parent = " << parent->getPair() << std::endl;
             parent->setChild(child);
             if (parent->left())
                 std::cout << "left = " << parent->left()->getPair() << std::endl;
