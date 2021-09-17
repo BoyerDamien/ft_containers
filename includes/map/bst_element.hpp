@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 14:30:36 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/15 14:30:42 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/17 10:03:12 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,26 +37,25 @@ class bst_element
      ********************************************************************************/
 
     bst_element(allocator_type alloc = allocator_type())
-        : _pair(alloc.allocate(1)), _parent(NULL), _right(NULL), _left(NULL), _black(false)
+        : _pair(alloc.allocate(1)), _parent(NULL), _right(NULL), _left(NULL)
     {
         alloc.construct(_pair, value_type());
     }
 
     bst_element(key_type key, mapped_type value, allocator_type alloc = allocator_type())
-        : _pair(alloc.allocate(1)), _parent(NULL), _right(NULL), _left(NULL), _black(false)
+        : _pair(alloc.allocate(1)), _parent(NULL), _right(NULL), _left(NULL)
     {
         alloc.construct(_pair, value_type(key, value));
     }
 
     bst_element(value_type pair, allocator_type alloc = allocator_type())
-        : _pair(alloc.allocate(1)), _parent(NULL), _right(NULL), _left(NULL), _black(false)
+        : _pair(alloc.allocate(1)), _parent(NULL), _right(NULL), _left(NULL)
     {
         alloc.construct(_pair, value_type(pair.first, pair.second));
     }
 
     bst_element(const bst_element &other, allocator_type alloc = allocator_type())
-        : _pair(alloc.allocate(1)), _parent(other._parent), _right(other._right), _left(other._left),
-          _black(other._black)
+        : _pair(alloc.allocate(1)), _parent(other._parent), _right(other._right), _left(other._left)
     {
         alloc.construct(_pair, value_type(other._pair->first, other._pair->second));
     }
@@ -70,7 +69,6 @@ class bst_element
         _parent = other._parent;
         _right = other._right;
         _left = other._left;
-        _black = other._black;
         return *this;
     }
 
@@ -171,19 +169,43 @@ class bst_element
         _pair->second = pair.second;
     }
 
-    void setColor(const bool color)
+    pointer max(pointer node) const
     {
-        _black = color;
+        if (node && node->_right)
+            return max(node->_right);
+        return node;
     }
 
-    bool black(void) const
+    pointer min(pointer node) const
     {
-        return _black;
+        if (node && node->_left)
+            return min(node->_left);
+        return node;
+    }
+
+    pointer back(pointer node) const
+    {
+        if (node && node->_parent && node->_parent->_left == node)
+            return node->_parent;
+        if (node && node->_parent && node->_parent->_right == node)
+            return back(node->_parent);
+        return node;
+    }
+
+    pointer next(void) const
+    {
+        if (_right)
+            return min(_right);
+        return back(_parent);
+    }
+    pointer previous(void) const
+    {
+        if (_left)
+            return max(_left);
     }
 
   private:
     pair_pointer _pair;
     pointer _parent, _right, _left;
-    bool _black;
 };
 } // namespace ft

@@ -14,7 +14,7 @@ CostDataFile:
 Site: dessmachine
 
 # Build name is osname-revision-compiler, i.e. Linux-2.4.2-2smp-c++
-BuildName: Linux-clang++-12
+BuildName: Linux-clang++-10
 
 # Subprojects
 LabelsForSubprojects: 
@@ -62,15 +62,13 @@ UpdateOptions:
 UpdateType: git
 
 # Compiler info
-Compiler: /bin/clang++-12
-CompilerVersion: 12.0.0
+Compiler: /bin/clang++-10
+CompilerVersion: 10.0.0
 
 # Dynamic analysis (MemCheck)
 PurifyCommand: 
 ValgrindCommand: 
 ValgrindCommandOptions: 
-DrMemoryCommand: 
-DrMemoryCommandOptions: 
 MemoryCheckType: 
 MemoryCheckSanitizerOptions: 
 MemoryCheckCommand: /usr/bin/valgrind
