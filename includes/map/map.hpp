@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 14:30:47 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/16 13:11:30 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/17 20:45:26 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,12 +125,22 @@ class map
 
     reverse_iterator rbegin(void)
     {
-        return reverse_iterator(_bLast(_root));
+        return reverse_iterator(--end());
     }
 
     const_reverse_iterator rbegin() const
     {
-        return const_reverse_iterator(_bLast(_root));
+        return const_reverse_iterator(--end());
+    }
+
+    reverse_iterator rend(void)
+    {
+        return reverse_iterator(--begin());
+    }
+
+    const_reverse_iterator rend() const
+    {
+        return const_reverse_iterator(--begin());
     }
 
     /************************************************************************************

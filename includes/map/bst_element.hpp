@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 14:30:36 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/17 10:03:12 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/17 20:42:35 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,12 +183,17 @@ class bst_element
         return node;
     }
 
-    pointer back(pointer node) const
+    pointer backRight(pointer node) const
     {
-        if (node && node->_parent && node->_parent->_left == node)
-            return node->_parent;
         if (node && node->_parent && node->_parent->_right == node)
-            return back(node->_parent);
+            return backRight(node->_parent);
+        return node;
+    }
+
+    pointer backLeft(pointer node) const
+    {
+        if (node && node->_parent && node->_parent->_left == node && node->_parent->_right != node)
+            return backLeft(node->_parent);
         return node;
     }
 
@@ -196,12 +201,13 @@ class bst_element
     {
         if (_right)
             return min(_right);
-        return back(_parent);
+        return backRight(_parent);
     }
     pointer previous(void) const
     {
         if (_left)
             return max(_left);
+        return backLeft(_parent);
     }
 
   private:

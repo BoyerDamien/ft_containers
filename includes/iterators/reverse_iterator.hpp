@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 12:53:18 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/14 19:28:11 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/17 20:53:39 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ template < class Iterator > class reverse_iterator
     }
     reverse_iterator &operator=(const reverse_iterator< Iterator > &rev_it)
     {
-        this->_base = rev_it;
+        _base = rev_it;
         return *this;
     }
     ~reverse_iterator(void)
@@ -71,37 +71,37 @@ template < class Iterator > class reverse_iterator
     reverse_iterator< iterator_type > operator++(int)
     {
         reverse_iterator< iterator_type > temp = *this;
-        --this->_base;
+        _base = --_base;
         return temp;
     }
     reverse_iterator< iterator_type > &operator++(void)
     {
-        --this->_base;
+        _base = --_base;
         return *this;
     }
     reverse_iterator< iterator_type > &operator+=(difference_type n)
     {
-        return reverse_iterator< iterator_type >(this->_base - n);
+        return reverse_iterator< iterator_type >(_base - n);
     }
 
     reverse_iterator< iterator_type > &operator-(difference_type n) const
     {
-        return reverse_iterator< iterator_type >(this->_base + n);
+        return reverse_iterator< iterator_type >(_base + n);
     }
     reverse_iterator< iterator_type > operator--(int)
     {
         reverse_iterator< iterator_type > temp = *this;
-        ++this->_base;
+        _base = ++_base;
         return temp;
     }
     reverse_iterator< iterator_type > &operator--(void)
     {
-        ++this->_base;
+        _base = ++_base;
         return *this;
     }
     reverse_iterator< iterator_type > &operator-=(difference_type n) const
     {
-        return reverse_iterator< iterator_type >(this->_base + n);
+        return reverse_iterator< iterator_type >(_base + n);
     }
 
     pointer operator->(void) const
@@ -111,7 +111,7 @@ template < class Iterator > class reverse_iterator
 
     reference operator[](difference_type n) const
     {
-        return this->_base[-n - 1];
+        return _base[-n - 1];
     }
 
     bool operator==(const reverse_iterator &other) const

@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/05 09:33:43 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/17 09:39:35 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/17 20:42:09 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ class map_iterator : public iterator< bidirectional_iterator_tag, typename node_
     }
     map_iterator &operator--(void)
     {
-        _base = _base->previous;
+        _base = _base->previous();
         return *this;
     }
 
