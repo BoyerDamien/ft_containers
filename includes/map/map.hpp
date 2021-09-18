@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 14:30:47 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/18 15:29:02 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/18 15:39:13 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -424,11 +424,16 @@ void swap(map< Key, T, Compare, Alloc > &x, map< Key, T, Compare, Alloc > &y)
 }
 
 template < class Key, class T, class Compare, class Alloc >
+bool operator==(const map< Key, T, Compare, Alloc > &lhs, const map< Key, T, Compare, Alloc > &rhs)
+{
+    return ft::equal(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+}
+
+template < class Key, class T, class Compare, class Alloc >
 bool operator!=(const map< Key, T, Compare, Alloc > &lhs, const map< Key, T, Compare, Alloc > &rhs)
 {
     return !(lhs == rhs);
 }
-
 template < class Key, class T, class Compare, class Alloc >
 bool operator<(const map< Key, T, Compare, Alloc > &lhs, const map< Key, T, Compare, Alloc > &rhs)
 {
