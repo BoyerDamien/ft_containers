@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 14:30:47 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/17 20:45:26 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/18 12:58:05 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "map_iterator.hpp"
 #include "utility.hpp"
 #include <functional>
+#include <iostream>
 #include <memory>
 
 namespace ft
@@ -105,12 +106,16 @@ class map
 
     iterator begin(void)
     {
-        return iterator(_first(_root));
+        if (_root && _root->left())
+            return iterator(_root->min(_root->left()));
+        return iterator(_root);
     }
 
     const_iterator begin(void) const
     {
-        return const_iterator(_first(_root));
+        if (_root && _root->left())
+            return const_iterator(_root->min(_root->left()));
+        return const_iterator(_root);
     }
 
     iterator end(void)
@@ -179,38 +184,51 @@ class map
      *                      Modifiers
      ***********************************************************************************/
 
-    pair< iterator, bool > insert(const value_type &val)
+    ft::pair< iterator, bool > insert(const value_type &val)
     {
         if (!_root)
         {
-            node_type *n = new node_type(val.first, val.second);
-            n->setParent(_last);
-            _last->setLeftSafe(n);
-            _last->setRightSafe(n);
-            _root = n;
+            _root = new node_type(val.first, val.second);
+            _root->setParent(_last);
+            _last->setLeftSafe(_root);
+            _last->setRightSafe(_root);
             _n++;
-            std::cout << "First" << std::endl;
-            return ft::pair< iterator, bool >(iterator(_root), true);
+            return ft::make_pair< iterator, bool >(iterator(_root), true);
         }
-
-        if (!count(val.first))
+        else
         {
             iterator r = _findLeaf(val.first, _root);
-
             node_type *child = new node_type(val.first, val.second);
             node_type *parent = r.base();
 
-            std::cout << "parent = " << parent->getPair() << std::endl;
             parent->setChild(child);
-            if (parent->left())
-                std::cout << "left = " << parent->left()->getPair() << std::endl;
-            if (parent->right())
-                std::cout << "right = " << parent->right()->getPair() << std::endl;
 
-            _n++;
+            if (parent && parent->getPair().first != val.first)
+            {
+                _n++;
+                return ft::make_pair< iterator, bool >(iterator(child), true);
+            }
+            return ft::make_pair< iterator, bool >(iterator(parent), false);
         }
+    }
 
-        return ft::pair< iterator, bool >(iterator(_root), false);
+    void erase(iterator position)
+    {
+        node_type *n = position.base();
+        if (n && n->parent())
+        {
+            node_type *parent = n->parent();
+            if (n->isLeftChild())
+                parent->deleteLeftChild();
+            else if (n->isRightChild())
+                parent->deleteRightChild();
+            else
+            {
+                parent->deleteLeftChild();
+                parent->setRightSafe(parent->left());
+                _root = parent->right();
+            }
+        }
     }
 
     /************************************************************************************
@@ -269,19 +287,6 @@ class map
     /**************************************************************************************
      *              Private member functions
      *************************************************************************************/
-    node_type *_first(node_type *node)
-    {
-        if (node && node->left())
-            return _first(node->left());
-        return node;
-    }
-
-    node_type *_bLast(node_type *node)
-    {
-        if (node && node->right())
-            return _bLast(node->right());
-        return node;
-    }
 
     iterator _findLeaf(const key_type &k, node_type *node) const
     {

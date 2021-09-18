@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 14:30:36 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/18 10:20:23 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/18 12:57:10 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ class bst_element
         return *this;
     }
 
-    ~bst_element()
+    virtual ~bst_element()
     {
         allocator_type alloc = allocator_type();
         alloc.destroy(_pair);
@@ -95,26 +95,20 @@ class bst_element
     {
         return _parent;
     }
-    pointer grandParent(void) const
-    {
-        pointer p = parent();
-        if (p)
-            return p->parent();
-        return NULL;
-    }
-    pointer uncle(void) const
-    {
-        pointer gp = grandParent();
-        if (gp && gp->left() != this)
-            return gp->left();
-        if (gp && gp->right() != this)
-            return gp->right();
-        return NULL;
-    }
 
     value_type &getPair(void) const
     {
         return *_pair;
+    }
+
+    bool isRightChild() const
+    {
+        return (_parent && _parent->_right == this && _parent->_left != this);
+    }
+
+    bool isLeftChild() const
+    {
+        return (_parent && _parent->_left == this && _parent->_right != this);
     }
     /*********************************************************************************
      *                  Setters
@@ -156,7 +150,10 @@ class bst_element
         bool result2 = key_compare()(_pair->first, child->_pair->first);
 
         if (!result1 && !result2)
+        {
             _pair->second = child->_pair->second;
+            delete child;
+        }
         else if (result1)
             setLeft(child);
         else if (result2)
@@ -169,6 +166,9 @@ class bst_element
         _pair->second = pair.second;
     }
 
+    /****************************************************************************
+     *                  Operations
+     ****************************************************************************/
     pointer max(pointer node) const
     {
         if (node && node->_right)
@@ -216,6 +216,68 @@ class bst_element
         if (_parent && _parent->_right == this)
             return _parent;
         return backPrev(_parent);
+    }
+
+    void deleteLeftChild(void)
+    {
+        if (_left && !_left->_left && !_left->_right)
+        {
+            delete _left;
+            _left = NULL;
+        }
+        else if (_left && _left->_left && !_left->_right)
+        {
+            pointer tmp = _left->_left;
+            delete _left;
+            _left = tmp;
+            _left->setParent(this);
+        }
+        else if (_left && !_left->_left && _left->_right)
+        {
+            pointer tmp = _left->_right;
+            delete _left;
+            _left = tmp;
+            _left->setParent(this);
+        }
+        else if (_left && _left->_left && _left->_right)
+        {
+            pointer tmp = _left->next();
+            tmp->setChild(_left->_right);
+            tmp->setChild(_left->_left);
+            _left = tmp;
+            _left->setParent(this);
+        }
+    }
+
+    void deleteRightChild(void)
+    {
+        if (_right && !_right->_left && !_right->_right)
+        {
+            delete _right;
+            _right = NULL;
+        }
+        else if (_right && _right->_left && !_right->_right)
+        {
+            pointer tmp = _right->_left;
+            delete _right;
+            _right = tmp;
+            _right->setParent(this);
+        }
+        else if (_right && !_right->_left && _right->_right)
+        {
+            pointer tmp = _right->_right;
+            delete _right;
+            _right = tmp;
+            _right->setParent(this);
+        }
+        else if (_right && _right->_left && _right->_right)
+        {
+            pointer tmp = _right->next();
+            tmp->setChild(_right->_right);
+            tmp->setChild(_right->_left);
+            _right = tmp;
+            _right->setParent(this);
+        }
     }
 
   private:
