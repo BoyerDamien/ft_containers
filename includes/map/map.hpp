@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 14:30:47 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/18 13:41:53 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/18 15:03:01 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,23 @@ class map
         (void)alloc;
     }
 
+    template < class InputIterator >
+    map(InputIterator first, InputIterator last, const key_compare &comp = key_compare(),
+        const allocator_type &alloc = allocator_type())
+        : _root(NULL), _last(new node_type()), _n(0)
+    {
+        insert(first, last);
+    }
+
+    map(const map &other) : _root(NULL), _last(new node_type()), _n(0)
+    {
+        insert(other._root);
+        insert(other.begin(), other.end());
+    }
+
     ~map(void)
     {
-        while (_n > 0)
-            erase(begin());
+        clear();
         delete _last;
     }
 
@@ -228,22 +241,54 @@ class map
 
     void erase(iterator position)
     {
-        node_type *n = position.base();
-        if (n && n->parent())
+        if (_n)
         {
-            node_type *parent = n->parent();
-            if (n->isLeftChild())
-                parent->deleteLeftChild();
-            else if (n->isRightChild())
-                parent->deleteRightChild();
-            else
+            node_type *n = position.base();
+            if (n && n->parent())
             {
-                parent->deleteLeftChild();
-                parent->setRightSafe(parent->left());
-                _root = parent->right();
+                node_type *parent = n->parent();
+                if (n->isLeftChild())
+                    parent->deleteLeftChild();
+                else if (n->isRightChild())
+                    parent->deleteRightChild();
+                else
+                {
+                    parent->deleteLeftChild();
+                    parent->setRightSafe(parent->left());
+                    _root = parent->right();
+                }
+                _n--;
             }
-            _n--;
         }
+    }
+
+    size_type erase(const key_type &k)
+    {
+        if (_n)
+        {
+            iterator f = find(k);
+            if (f != end())
+            {
+                erase(f);
+                return 1;
+            }
+        }
+        return 0;
+    }
+
+    void erase(iterator first, iterator last)
+    {
+        if (first != last && _n)
+        {
+            iterator tmp = iterator(first.base()->next());
+            erase(first);
+            erase(tmp, last);
+        }
+    }
+
+    void clear(void)
+    {
+        erase(begin(), end());
     }
 
     /************************************************************************************
@@ -272,7 +317,7 @@ class map
 
     const_iterator lower_bound(const key_type &k) const
     {
-        return const_iterator(lower_bound(k).getNode());
+        return const_iterator(lower_bound(k).base());
     }
 
     iterator upper_bound(const key_type &k)
@@ -282,7 +327,7 @@ class map
 
     const_iterator upper_bound(const key_type &k) const
     {
-        return const_iterator(upper_bound(k).getNode());
+        return const_iterator(upper_bound(k).base());
     }
 
     ft::pair< iterator, iterator > equal_range(const key_type &k)

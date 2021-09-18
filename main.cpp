@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 16:45:01 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/18 13:00:25 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/18 14:48:55 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,13 @@
 
 int main(void)
 {
-    ft::map< const std::string, int > m;
-    ft::pair< const std::string, int > p = ft::make_pair< const std::string, int >("a", 1);
+    ft::pair< const std::string, int > l[] = {
+        ft::make_pair< const std::string, int >("c", 3), ft::make_pair< const std::string, int >("e", 5),
+        ft::make_pair< const std::string, int >("a", 1), ft::make_pair< const std::string, int >("d", 4),
+        ft::make_pair< const std::string >("b", 2),
+    };
 
-    ft::pair< const std::string, int > p2 = ft::make_pair< const std::string, int >("b", 2);
-
-    ft::pair< const std::string, int > p3 = ft::make_pair< const std::string, int >("c", 3);
-
-    ft::pair< const std::string, int > p4 = ft::make_pair< const std::string, int >("d", 5);
-
-    m.insert(p);
-    m.insert(p2);
-    m.insert(p3);
-    m.insert(p4);
-
-    m.erase(++m.begin());
+    ft::map< const std::string, int > m(l, l + sizeof(l) / sizeof(ft::pair< const std::string, int >));
 
     for (ft::map< const std::string, int >::iterator it = m.begin(); it != m.end(); it++)
     {
@@ -44,5 +36,7 @@ int main(void)
     {
         std::cout << *it << std::endl;
     }
+    m.clear();
+    std::cout << "AFTER clear = " << m.size() << std::endl;
     return 0;
 }
