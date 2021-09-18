@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 14:30:47 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/18 12:58:05 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/18 13:41:53 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,9 @@ class map
 
     ~map(void)
     {
-        delete _root;
+        while (_n > 0)
+            erase(begin());
+        delete _last;
     }
 
     /************************************************************************************
@@ -212,6 +214,18 @@ class map
         }
     }
 
+    ft::pair< iterator, bool > insert(iterator position, value_type &val)
+    {
+        static_cast< void >(position);
+        return insert(val);
+    }
+
+    template < class InputIterator > void insert(InputIterator first, InputIterator last)
+    {
+        for (; first != last; first++)
+            insert(*first);
+    }
+
     void erase(iterator position)
     {
         node_type *n = position.base();
@@ -228,6 +242,7 @@ class map
                 parent->setRightSafe(parent->left());
                 _root = parent->right();
             }
+            _n--;
         }
     }
 

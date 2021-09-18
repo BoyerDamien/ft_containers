@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 16:45:01 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/18 12:59:18 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/18 13:00:25 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int main(void)
     }
 
     std::cout << std::endl << std::endl;
-    // int i = 0;
+
     for (ft::map< const std::string, int >::reverse_iterator it = m.rbegin(); it != m.rend(); it++)
     {
         std::cout << *it << std::endl;
