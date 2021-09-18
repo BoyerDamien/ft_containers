@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 14:30:36 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/17 20:42:35 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/18 10:20:23 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,17 +183,21 @@ class bst_element
         return node;
     }
 
-    pointer backRight(pointer node) const
+    pointer backNext(pointer node) const
     {
         if (node && node->_parent && node->_parent->_right == node)
-            return backRight(node->_parent);
+            return backNext(node->_parent);
+        if (node && node->_parent && node->_parent->_left == node)
+            return node->_parent;
         return node;
     }
 
-    pointer backLeft(pointer node) const
+    pointer backPrev(pointer node) const
     {
-        if (node && node->_parent && node->_parent->_left == node && node->_parent->_right != node)
-            return backLeft(node->_parent);
+        if (node && node->_parent && node->_parent->_left == node)
+            return backPrev(node->_parent);
+        if (node && node->_parent && node->_parent->_right == node)
+            return node->_parent;
         return node;
     }
 
@@ -201,13 +205,17 @@ class bst_element
     {
         if (_right)
             return min(_right);
-        return backRight(_parent);
+        if (_parent && _parent->_left == this)
+            return _parent;
+        return backNext(_parent);
     }
     pointer previous(void) const
     {
         if (_left)
             return max(_left);
-        return backLeft(_parent);
+        if (_parent && _parent->_right == this)
+            return _parent;
+        return backPrev(_parent);
     }
 
   private:
