@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 17:01:18 by dess              #+#    #+#             */
-/*   Updated: 2021/09/19 18:22:09 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/19 18:32:56 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,11 @@ bool unittest::test_vector(void)
         ::Test("test vector erase()", unittest::test_erase, unittest::check_with_cap, state),
         ::Test("test vector swap()", unittest::test_swap, unittest::check_with_cap, state),
         ::Test("test vector clear()", unittest::test_clear, unittest::check_with_cap, state),
+        ::Test("test vector operator<() and operator>()", unittest::test_operator_inf_sup, unittest::check_with_cap,
+               state),
+        ::Test("test vector operator==()", unittest::test_operator_eq, unittest::check_with_cap, state),
+        ::Test("test vector operator!=()", unittest::test_operator_diff, unittest::check_with_cap, state),
 
-        //         ::Test("test vector operator==()", unittest::test_operator_eq< test_type, ref_type >,
-        //         unittest::check_with_cap),
-        //         ::Test("test vector operator!=()", unittest::test_operator_diff< test_type, ref_type >,
-        //                unittest::check_with_cap),
-        //         ::Test("test vector operator<() and operator>()", unittest::test_operator_inf_sup< test_type,
-        //         ref_type >,
-        //                unittest::check_with_cap),
     };
 
     for (size_t i = 0; i < sizeof(tests) / sizeof(tests[0]); i++)
