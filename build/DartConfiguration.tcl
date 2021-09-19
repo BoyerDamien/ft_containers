@@ -14,7 +14,7 @@ CostDataFile:
 Site: dessmachine
 
 # Build name is osname-revision-compiler, i.e. Linux-2.4.2-2smp-c++
-BuildName: Linux-clang++-10
+BuildName: Linux-clang++
 
 # Subprojects
 LabelsForSubprojects: 
@@ -62,7 +62,7 @@ UpdateOptions:
 UpdateType: git
 
 # Compiler info
-Compiler: /bin/clang++-10
+Compiler: /usr/bin/clang++
 CompilerVersion: 10.0.0
 
 # Dynamic analysis (MemCheck)

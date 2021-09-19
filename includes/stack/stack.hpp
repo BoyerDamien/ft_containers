@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 15:06:25 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/18 15:19:57 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/19 10:34:22 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,14 @@ template < class T, class Container = vector< T > > class stack
         _content.pop_back();
     }
 
-    friend bool operator==(const stack< T, Container > &lhs, const stack< T, Container > &rhs)
+    bool operator==(const stack &rhs)
     {
-        return lhs._container == rhs._container;
+        return _content == rhs._content;
     }
 
-    friend bool operator<(const stack< T, Container > &lhs, const stack< T, Container > &rhs)
+    bool operator<(const stack &rhs)
     {
-        return lhs._container < rhs._container;
+        return _content < rhs._content;
     }
 
   private:
