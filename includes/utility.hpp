@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 13:42:31 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/15 14:42:35 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/19 10:45:11 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ template < typename key_type, typename mapped_type > struct pair
 {
     typedef key_type first_type;
     typedef mapped_type second_type;
-    typedef pair< first_type, second_type > _self;
 
     first_type first;
     second_type second;
@@ -30,7 +29,7 @@ template < typename key_type, typename mapped_type > struct pair
     {
     }
 
-    pair(const _self &other) : first(other.first), second(other.second)
+    pair(const pair &other) : first(other.first), second(other.second)
     {
     }
 
@@ -38,7 +37,7 @@ template < typename key_type, typename mapped_type > struct pair
     {
     }
 
-    _self &operator=(const _self &other)
+    pair &operator=(const pair &other)
     {
         first = other.first;
         second = other.second;

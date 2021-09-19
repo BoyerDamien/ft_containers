@@ -6,12 +6,11 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 17:59:07 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/18 15:44:45 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/19 10:44:06 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ALGORITHMS_HPP
-#define ALGORITHMS_HPP
+#pragma once
 #include "iterator_traits.hpp"
 #include <iostream>
 
@@ -49,5 +48,3 @@ template < class InputIt1, class InputIt2 > bool equal(InputIt1 first1, InputIt1
 }
 
 } // namespace ft
-
-#endif
