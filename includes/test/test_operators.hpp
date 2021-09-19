@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 09:46:17 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/19 18:32:37 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/19 18:40:35 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,20 +97,20 @@ void test_operator_inf_sup(void (*check)(test_type &, ref_type &), state_type st
     unittest::assert((test >= test2) == (test_ref >= test_ref2), "not equal");
 }
 
-template < typename test_type, typename ref_type > void test_pair_operator(void (*check)(test_type &, ref_type &))
+template < typename test_type, typename ref_type, typename state_type >
+void test_pair_operator(void (*check)(test_type &, ref_type &), state_type state)
 {
-    int keys[] = {1, 2, 3, 4, 5};
-    int values[] = {5, 4, 3, 2, 1};
-    size_t size = sizeof(values) / sizeof(int);
 
-    for (size_t i = 0; i < size; i++)
+    int size = len(state);
+
+    for (int i = 0; i < size; i++)
     {
-        test_type test(keys[i], values[i]);
-        ref_type test_ref(keys[i], values[i]);
+        test_type test(state[i], state[i]);
+        ref_type test_ref(state[i], state[i]);
         check(test, test_ref);
 
-        test_type test2(keys[size - 1 - i], values[size - 1 - i]);
-        ref_type test_ref2(keys[size - 1 - i], values[size - 1 - i]);
+        test_type test2(state[size - 1 - i], state[size - 1 - i]);
+        ref_type test_ref2(state[size - 1 - i], state[size - 1 - i]);
         check(test2, test_ref2);
 
         unittest::assert((test == test2) == (test_ref == test_ref2), "wrong equal eval");
