@@ -15,6 +15,9 @@
 
 #include <cstddef>
 
+namespace ft
+{
+
 /*
  *		Reimplemantation of iterator base structure
  *		Ref: https://www.cplusplus.com/reference/iterator/iterator
@@ -28,3 +31,4 @@ struct iterator
     typedef Reference reference;
     typedef Category iterator_category;
 };
+} // namespace ft

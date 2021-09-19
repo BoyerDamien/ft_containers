@@ -6,13 +6,15 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 12:53:18 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/17 20:53:39 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/19 10:39:50 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef REVERSE_ITERATOR_HPP
-#define REVERSE_ITERATOR_HPP
+#pragma once
 #include "iterator_traits.hpp"
+
+namespace ft
+{
 
 /*
  *		Reimplementation of reverse_iterator
@@ -172,5 +174,4 @@ reverse_iterator< iter > operator+(typename reverse_iterator< iter >::difference
 {
     return reverse_iterator< iter >(x.base() - n);
 }
-
-#endif
+} // namespace ft

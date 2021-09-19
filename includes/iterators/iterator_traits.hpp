@@ -6,13 +6,15 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 10:51:00 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/14 11:18:55 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/19 10:38:35 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 #include <cstddef>
 
+namespace ft
+{
 /*
  *		Reimplementaiton of all iterator tags
  *		Ref: https://www.cplusplus.com/reference/iterator/iterator/
@@ -76,3 +78,4 @@ template < typename T > struct iterator_traits< const T * >
     typedef const T *pointer;
     typedef const T &reference;
 };
+} // namespace ft
