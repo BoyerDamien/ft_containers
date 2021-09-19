@@ -6,13 +6,14 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 17:15:48 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/19 16:53:38 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/19 19:42:15 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TEST_UTILS_HPP
 #define TEST_UTILS_HPP
 #include <iostream>
+#include <map>
 
 namespace unittest
 {
@@ -45,6 +46,18 @@ template < typename test_type, typename ref_type > void check_pair(test_type &te
 {
     assert(test.first == test_ref.first, "wrong first check equal");
     assert(test.second == test_ref.second, "wrong second check equal");
+}
+
+template < typename test_type, typename ref_type > void check_map(test_type &test, ref_type &test_ref)
+{
+    typename test_type::iterator b1 = test.begin();
+    typename ref_type::iterator b2 = test_ref.begin();
+
+    for (; (b1 != test.end()) && (b2 != test_ref.end()); b1++, (void)b2++)
+    {
+        assert((*b1).first == (*b2).first, "wrong key");
+        assert((*b1).second == (*b2).second, "wrong value");
+    }
 }
 
 template < typename state_type > int len(state_type state)

@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 14:16:41 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/19 12:54:27 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/19 18:50:30 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ namespace unittest
 bool test_vector(void);
 bool test_pair(void);
 bool test_stack(void);
+bool test_map(void);
 
 } // namespace unittest

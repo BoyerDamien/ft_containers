@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 14:30:47 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/18 15:39:13 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/19 20:11:32 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "utility.hpp"
 #include <functional>
 #include <iostream>
+#include <map>
 #include <memory>
 
 namespace ft
@@ -27,6 +28,9 @@ template < typename key, typename T, typename Compare = std::less< key >,
            typename Alloc = std::allocator< ft::pair< const key, T > > >
 class map
 {
+  protected:
+    typedef bst_element< const key, T, Compare, Alloc > node_type;
+
   public:
     typedef key key_type;
 
@@ -46,11 +50,9 @@ class map
 
     typedef typename allocator_type::const_pointer const_pointer;
 
-    typedef bst_element< key_type, mapped_type, key_compare, allocator_type > node_type;
+    typedef map_iterator< value_type, node_type > iterator;
 
-    typedef map_iterator< node_type > iterator;
-
-    typedef map_iterator< const node_type > const_iterator;
+    typedef map_iterator< const value_type, node_type > const_iterator;
 
     typedef reverse_iterator< const_iterator > const_reverse_iterator;
 
@@ -106,7 +108,6 @@ class map
 
     map(const map &other) : _root(NULL), _last(new node_type()), _n(0)
     {
-        insert(other._root);
         insert(other.begin(), other.end());
     }
 
