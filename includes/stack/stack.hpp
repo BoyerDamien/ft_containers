@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 15:06:25 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/19 10:50:24 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/19 10:59:02 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ template < class T, class Container = vector< T > > class stack
     {
     }
 
-    stack(const stack &other) : _content(container_type(other.begin(), other.end()))
+    stack(const stack &other) : _content(container_type(other._content))
     {
     }
 
     stack &operator=(const stack &other)
     {
-        _content = container_type(other.begin(), other.end());
+        _content = container_type(other._content);
         return *this;
     }
 

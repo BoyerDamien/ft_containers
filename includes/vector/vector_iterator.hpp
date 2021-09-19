@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 12:03:13 by dess              #+#    #+#             */
-/*   Updated: 2021/09/14 18:51:20 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/19 14:56:10 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,18 @@
 
 namespace ft
 {
-template < typename T > class vector_iterator : public iterator< random_access_iterator_tag, T >
+template < typename T > class vector_iterator
 {
+  protected:
+    typedef iterator_traits< T > __traits;
+
   public:
-    typedef typename iterator< random_access_iterator_tag, T >::value_type value_type;
-    typedef typename iterator< random_access_iterator_tag, T >::difference_type difference_type;
-    typedef typename iterator< random_access_iterator_tag, T >::pointer pointer;
-    typedef typename iterator< random_access_iterator_tag, T >::reference reference;
+    typedef typename __traits::value_type value_type;
+    typedef typename __traits::difference_type difference_type;
+    typedef typename __traits::pointer pointer;
+    typedef typename __traits::reference reference;
+    typedef typename __traits::iterator_category iterator_category;
     typedef pointer iterator_type;
-    typedef random_access_iterator_tag iterator_category;
 
     vector_iterator(void) : _base(pointer(value_type()))
     {

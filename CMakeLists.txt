@@ -13,6 +13,8 @@ set(
 
 add_executable(ft_container 
     main.cpp
+    ${SOURCE}assert.cpp
+    ${SOURCE}test_vector.cpp
 )
 
 include_directories(

@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 17:07:59 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/10 17:00:22 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/19 18:16:43 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,168 +17,148 @@
 
 #include "./test_utils.hpp"
 
-namespace unittest {
+namespace unittest
+{
 
-template <typename test_type, typename ref_type>
-void test_push_back(void (*check)(test_type &, ref_type &)) {
-  int init[] = {1, 2};
+template < typename test_type, typename ref_type, typename state_type >
+void test_push_back(void (*check)(test_type &, ref_type &), state_type state)
+{
+    test_type test;
+    ref_type test_ref;
 
-  test_type test(init, init + sizeof(init) / sizeof(int));
-  ref_type test_ref(init, init + sizeof(init) / sizeof(int));
-
-  test.push_back(3);
-  test_ref.push_back(3);
-  check(test, test_ref);
-
-  test.push_back(4);
-  test_ref.push_back(4);
-
-  check(test, test_ref);
-}
-
-template <typename test_type, typename ref_type>
-void test_pop_front(void (*check)(test_type &, ref_type &)) {
-  int init[] = {1, 2, 5};
-
-  test_type test(init, init + sizeof(init) / sizeof(int));
-  ref_type test_ref(init, init + sizeof(init) / sizeof(int));
-
-  check(test, test_ref);
-
-  for (int i = 0; i < 3; i++) {
-    test.pop_front();
-    test_ref.pop_front();
+    int i = 0;
+    while (state[i])
+    {
+        test.push_back(state[i]);
+        test_ref.push_back(state[i]);
+        check(test, test_ref);
+        i++;
+    }
     check(test, test_ref);
-  }
 }
 
-template <typename test_type, typename ref_type>
-void test_pop_back(void (*check)(test_type &, ref_type &)) {
-  int init[] = {1, 2, 5};
+template < typename test_type, typename ref_type, typename state_type >
+void test_pop_back(void (*check)(test_type &, ref_type &), state_type state)
+{
+    int size = len(state);
+    test_type test(state, state + size);
+    ref_type test_ref(state, state + size);
 
-  test_type test(init, init + sizeof(init) / sizeof(int));
-  ref_type test_ref(init, init + sizeof(init) / sizeof(int));
-
-  check(test, test_ref);
-
-  for (int i = 0; i < 3; i++) {
-    test.pop_back();
-    test_ref.pop_back();
     check(test, test_ref);
-  }
+
+    for (int i = 0; i < len(state); i++)
+    {
+        test.pop_back();
+        test_ref.pop_back();
+        check(test, test_ref);
+    }
 }
 
-template <typename test_type, typename ref_type>
-void test_clear(void (*check)(test_type &, ref_type &)) {
-  test_type test(10, 2);
-  ref_type test_ref(10, 2);
+template < typename test_type, typename ref_type, typename state_type >
+void test_clear(void (*check)(test_type &, ref_type &), state_type state)
+{
 
-  assert(test.size() == test_ref.size(), "wrong size at init");
-  check(test, test_ref);
+    int size = len(state);
+    test_type test(state, state + size);
+    ref_type test_ref(state, state + size);
 
-  test.clear();
-  test_ref.clear();
-
-  assert(test.empty() == test_ref.empty(), "not empty after clear");
-  check(test, test_ref);
-}
-
-template <typename test_type, typename ref_type>
-void test_erase(void (*check)(test_type &, ref_type &)) {
-  int init[] = {1, 2, 3, 4};
-  test_type test(init, init + sizeof(init) / sizeof(int));
-  ref_type test_ref(init, init + sizeof(init) / sizeof(int));
-  check(test, test_ref);
-
-  test.erase(test.begin());
-  test_ref.erase(test_ref.begin());
-  check(test, test_ref);
-
-  test.erase(test.begin(), test.end());
-  test_ref.erase(test_ref.begin(), test_ref.end());
-  check(test, test_ref);
-}
-
-template <typename test_type, typename ref_type>
-void test_insert(void (*check)(test_type &, ref_type &)) {
-  int init[] = {1, 2, 3, 4};
-
-  test_type test(init, init + sizeof(init) / sizeof(int));
-  ref_type test_ref(init, init + sizeof(init) / sizeof(int));
-
-  test.insert(test.begin(), 0);
-  test_ref.insert(test_ref.begin(), 0);
-  check(test, test_ref);
-
-  test.insert(test.end(), 5);
-  test_ref.insert(test_ref.end(), 5);
-  check(test, test_ref);
-}
-
-template <typename test_type, typename ref_type>
-void test_swap(void (*check)(test_type &, ref_type &)) {
-  ref_type test_ref(4, 4);
-  ref_type test_ref2(2, 2);
-
-  test_type test(4, 4);
-  test_type test2(2, 2);
-
-  test_ref.swap(test_ref2);
-  test.swap(test2);
-
-  check(test, test_ref);
-  check(test2, test_ref2);
-}
-
-template <typename test_type, typename ref_type>
-void test_push_front(void (*check)(test_type &, ref_type &)) {
-  test_type test;
-  ref_type test_ref;
-
-  for (int i = 0; i < 5; i++) {
-    test.push_front(i);
-    test_ref.push_front(i);
+    assert(test.size() == test_ref.size(), "wrong size at init");
     check(test, test_ref);
-  }
-}
 
-template <typename test_type, typename ref_type>
-void test_resize(void (*check)(test_type &, ref_type &)) {
-  int init[] = {0, 1, 2, 3};
-  int test_size[] = {2, 10, 1, 0, 3};
+    test.clear();
+    test_ref.clear();
 
-  test_type test(init, init + sizeof(init) / sizeof(int));
-  ref_type test_ref(init, init + sizeof(init) / sizeof(int));
-
-  for (int i = 0; i < 4; i++) {
-    test.resize(test_size[i]);
-    test_ref.resize(test_size[i]);
+    assert(test.empty() == test_ref.empty(), "not empty after clear");
     check(test, test_ref);
-  }
 }
 
-template <typename test_type, typename ref_type>
-void test_assign(void (*check)(test_type &, ref_type &)) {
-  int init[] = {0, 1, 2, 3};
+template < typename test_type, typename ref_type, typename state_type >
+void test_erase(void (*check)(test_type &, ref_type &), state_type state)
+{
+    int size = len(state);
+    test_type test(state, state + size);
+    ref_type test_ref(state, state + size);
 
-  test_type test(init, init + sizeof(init) / sizeof(int));
-  ref_type test_ref(init, init + sizeof(init) / sizeof(int));
+    test.erase(test.begin());
+    test_ref.erase(test_ref.begin());
+    check(test, test_ref);
 
-  test_type test2(init, init + sizeof(init) / sizeof(int));
-  ref_type test_ref2(init, init + sizeof(init) / sizeof(int));
-
-  test.assign(test2.begin(), test2.begin());
-  test_ref.assign(test_ref2.begin(), test_ref2.begin());
-
-  check(test, test_ref);
-  check(test2, test_ref2);
-
-  test.assign(test2.begin(), test2.end());
-  test_ref.assign(test_ref2.begin(), test_ref2.end());
-
-  check(test, test_ref);
-  check(test2, test_ref2);
+    test.erase(test.begin(), test.end());
+    test_ref.erase(test_ref.begin(), test_ref.end());
+    check(test, test_ref);
 }
 
-}  // namespace unittest
+template < typename test_type, typename ref_type, typename state_type >
+void test_insert(void (*check)(test_type &, ref_type &), state_type state)
+{
+    test_type test;
+    ref_type test_ref;
+
+    int i = 0;
+    while (i < len(state))
+    {
+        test.insert(test.begin(), state[i]);
+        test_ref.insert(test_ref.begin(), state[i]);
+        check(test, test_ref);
+        i++;
+    }
+
+    while (i)
+    {
+        test.insert(test.end(), state[i - 1]);
+        test_ref.insert(test_ref.end(), state[i - 1]);
+        check(test, test_ref);
+        i--;
+    }
+
+    test.insert(++test.begin(), state[0]);
+    test_ref.insert(++test_ref.begin(), state[0]);
+    check(test, test_ref);
+
+    test.insert(--test.end(), state[1]);
+    test_ref.insert(--test_ref.end(), state[1]);
+    check(test, test_ref);
+}
+
+template < typename test_type, typename ref_type, typename state_type >
+void test_swap(void (*check)(test_type &, ref_type &), state_type state)
+{
+    int size = len(state);
+    test_type test(state, state + size / 2);
+    ref_type test_ref(state, state + size / 2);
+
+    test_type test2(state, state + size);
+    ref_type test_ref2(state, state + size);
+
+    test_ref.swap(test_ref2);
+    test.swap(test2);
+
+    check(test, test_ref);
+    check(test2, test_ref2);
+}
+
+template < typename test_type, typename ref_type, typename state_type >
+void test_assign(void (*check)(test_type &, ref_type &), state_type state)
+{
+    int size = len(state);
+    test_type test(state, state + size);
+    ref_type test_ref(state, state + size);
+
+    test_type test2(state, state + size);
+    ref_type test_ref2(state, state + size);
+
+    test.assign(test2.begin(), test2.begin());
+    test_ref.assign(test_ref2.begin(), test_ref2.begin());
+
+    check(test, test_ref);
+    check(test2, test_ref2);
+
+    test.assign(test2.begin(), test2.end());
+    test_ref.assign(test_ref2.begin(), test_ref2.end());
+
+    check(test, test_ref);
+    check(test2, test_ref2);
+}
+
+} // namespace unittest
 #endif

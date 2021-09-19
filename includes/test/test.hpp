@@ -6,12 +6,11 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 12:35:32 by dboyer            #+#    #+#             */
-/*   Updated: 2021/05/26 11:56:08 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/19 16:45:39 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_HPP
-#define TEST_HPP
+#pragma once
 #include <exception>
 #include <iostream>
 
@@ -24,11 +23,11 @@ namespace unittest
 class FailedException : public std::exception
 {
   public:
-    const char *what( void ) const throw()
+    const char *what(void) const throw()
     {
         return _msg.c_str();
     }
-    FailedException( std::string msg ) : _msg( msg )
+    FailedException(std::string msg) : _msg(msg)
     {
     }
     virtual ~FailedException() throw()
@@ -38,41 +37,42 @@ class FailedException : public std::exception
   private:
     std::string _msg;
 };
-template < typename test_type, typename ref_type > class Test
+template < typename test_type, typename ref_type, typename state_type > class Test
 {
   public:
-    Test< test_type, ref_type >( std::string testName,
-                                 void ( *f )( void ( * )( test_type &, ref_type & ) ),
-                                 void ( *check )( test_type &, ref_type & ) )
-        : _testName( testName ), _f( f ), _check( check )
+    typedef void (*check_fun)(test_type &, ref_type &);
+    typedef void (*fun)(check_fun, state_type);
+
+    Test(std::string testName, fun f, check_fun check, state_type initState = state_type())
+        : _testName(testName), _f(f), _check(check), _state(initState)
     {
     }
 
-    Test< test_type, ref_type >( const Test &x )
-        : _testName( x._testName ), _f( x._f ), _check( x._check )
+    Test(const Test &x) : _testName(x._testName), _f(x._f), _check(x._check), _state(x._state)
     {
     }
 
-    Test &operator=( const Test &x )
+    Test &operator=(const Test &x)
     {
         _check = x._check;
         _testName = x._testName;
         _f = x._f;
+        _state = x._state;
     }
 
-    ~Test( void )
+    ~Test(void)
     {
     }
 
-    bool run( void ) const
+    bool run(void) const
     {
         try
         {
-            _f( _check );
+            _f(_check, _state);
             std::cout << GREEN << "Run " << _testName << " [OK]" << WHITE << std::endl;
             return true;
         }
-        catch ( const std::exception &e )
+        catch (const std::exception &e)
         {
             std::cerr << RED << "Run " << _testName << " [KO]" << WHITE << std::endl;
             std::cerr << RED << "Error: " << e.what() << WHITE << std::endl;
@@ -82,9 +82,9 @@ template < typename test_type, typename ref_type > class Test
 
   private:
     std::string _testName;
-    void ( *_f )( void ( * )( test_type &, ref_type & ) );
-    void ( *_check )( test_type &, ref_type & );
+    fun _f;
+    check_fun _check;
+    state_type _state;
 };
 
 } // namespace unittest
-#endif

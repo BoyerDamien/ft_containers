@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 09:59:10 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/15 10:38:07 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/19 13:09:38 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ template < typename Derived, typename Base > struct is_base_of
 
 template < typename T, typename U > struct is_type_equal
 {
-    const static bool value = is_base_of< T, U >::value;
+    const static bool value = false;
 };
 
 template < typename T > struct is_type_equal< T, T >

@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 18:54:43 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/15 13:58:03 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/19 14:56:36 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@ template < typename T, class Alloc = std::allocator< T > > class vector
 
     typedef typename allocator_type::size_type size_type;
 
-    typedef vector_iterator< value_type > iterator;
+    typedef vector_iterator< pointer > iterator;
 
-    typedef const iterator const_iterator;
+    typedef vector_iterator< const_pointer > const_iterator;
+
+    typedef reverse_iterator< const_iterator > const_reverse_iterator;
 
     typedef reverse_iterator< iterator > reverse_iterator;
-
-    typedef const reverse_iterator const_reverse_iterator;
 
     typedef typename Alloc::template rebind< value_type >::other node_allocator_type;
 
@@ -207,7 +207,7 @@ template < typename T, class Alloc = std::allocator< T > > class vector
 
     const_iterator begin(void) const
     {
-        return static_cast< const_iterator >(iterator(_content));
+        return const_iterator(_content);
     }
     iterator end(void)
     {
@@ -216,7 +216,7 @@ template < typename T, class Alloc = std::allocator< T > > class vector
 
     const_iterator end(void) const
     {
-        return static_cast< const_iterator >(iterator(_content + _n));
+        return const_iterator(_content + _n);
     }
 
     reverse_iterator rbegin(void)
@@ -372,8 +372,8 @@ template < typename T, class Alloc = std::allocator< T > > class vector
  *****************************************************************************/
 template < typename T > bool operator==(const ft::vector< T > &l1, const ft::vector< T > &l2)
 {
-    typename ft::vector< T >::iterator beg1 = l1.begin();
-    typename ft::vector< T >::iterator beg2 = l2.begin();
+    typename ft::vector< T >::const_iterator beg1 = l1.begin();
+    typename ft::vector< T >::const_iterator beg2 = l2.begin();
 
     while (beg1 != l1.end())
     {
@@ -392,8 +392,8 @@ template < typename T > bool operator!=(const ft::vector< T > &l1, const ft::vec
 
 template < typename T > bool operator<(const ft::vector< T > &l1, const ft::vector< T > &l2)
 {
-    typename ft::vector< T >::iterator beg1 = l1.begin();
-    typename ft::vector< T >::iterator beg2 = l2.begin();
+    typename ft::vector< T >::const_iterator beg1 = l1.begin();
+    typename ft::vector< T >::const_iterator beg2 = l2.begin();
 
     while (beg1 != l1.end())
     {
@@ -409,8 +409,8 @@ template < typename T > bool operator<(const ft::vector< T > &l1, const ft::vect
 
 template < typename T > bool operator<=(const ft::vector< T > &l1, const ft::vector< T > &l2)
 {
-    typename ft::vector< T >::iterator beg1 = l1.begin();
-    typename ft::vector< T >::iterator beg2 = l2.begin();
+    typename ft::vector< T >::const_iterator beg1 = l1.begin();
+    typename ft::vector< T >::const_iterator beg2 = l2.begin();
 
     while (beg1 != l1.end())
     {
@@ -426,8 +426,8 @@ template < typename T > bool operator<=(const ft::vector< T > &l1, const ft::vec
 
 template < typename T > bool operator>(const ft::vector< T > &l1, const ft::vector< T > &l2)
 {
-    typename ft::vector< T >::iterator beg1 = l1.begin();
-    typename ft::vector< T >::iterator beg2 = l2.begin();
+    typename ft::vector< T >::const_iterator beg1 = l1.begin();
+    typename ft::vector< T >::const_iterator beg2 = l2.begin();
 
     while (beg2 != l2.end())
     {
@@ -443,8 +443,8 @@ template < typename T > bool operator>(const ft::vector< T > &l1, const ft::vect
 
 template < typename T > bool operator>=(const ft::vector< T > &l1, const ft::vector< T > &l2)
 {
-    typename ft::vector< T >::iterator beg1 = l1.begin();
-    typename ft::vector< T >::iterator beg2 = l2.begin();
+    typename ft::vector< T >::const_iterator beg1 = l1.begin();
+    typename ft::vector< T >::const_iterator beg2 = l2.begin();
 
     while (beg2 != l2.end())
     {
