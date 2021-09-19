@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 15:06:25 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/19 10:34:22 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/19 10:50:24 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,23 @@ template < class T, class Container = vector< T > > class stack
     typedef Container container_type;
     typedef typename Container::size_type size_type;
 
+    explicit stack(const container_type &ctnr = container_type()) : _content(ctnr)
+    {
+    }
+
+    stack(const stack &other) : _content(container_type(other.begin(), other.end()))
+    {
+    }
+
+    stack &operator=(const stack &other)
+    {
+        _content = container_type(other.begin(), other.end());
+        return *this;
+    }
+
+    ~stack(void)
+    {
+    }
     /**************************************************************************
      *              Member functions
      *************************************************************************/
