@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 18:47:10 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/21 16:31:07 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/21 22:46:01 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,13 @@ bool unittest::test_map(void)
         ::Test("test map copy constructor", unittest::test_copy_constructor, unittest::check_map, state),
         ::Test("test map assignation constructor", unittest::test_assignation_constructor, unittest::check_map, state),
         ::Test("test map begin", unittest::test_begin, unittest::check_map, state),
-        // ::Test("test map rbegin", unittest::test_rbegin, unittest::check_with_cap, state),
-        // ::Test("test map iterator incrementation/decrementation", unittest::test_iterator_inc_dec,
-        //        unittest::check_with_cap, state),
-        // ::Test("test map rev_iterator incrementation/decrementation", unittest::test_rev_iterator_inc_dec,
-        //        unittest::check_with_cap, state),
-        // ::Test("test map size()", unittest::test_size, unittest::check_with_cap, state),
-        // ::Test("test map max_size()", unittest::test_max_size, unittest::check_with_cap),
-        // ::Test("test map capacity()", unittest::test_capacity, unittest::check_with_cap),
+        ::Test("test map rbegin", unittest::test_rbegin, unittest::check_map, state),
+        ::Test("test map iterator incrementation/decrementation", unittest::test_map_iterator_inc_dec,
+               unittest::check_map, state),
+        ::Test("test map rev_iterator incrementation/decrementation", unittest::test_map_rev_iterator_inc_dec,
+               unittest::check_map, state),
+        ::Test("test map size()", unittest::test_size, unittest::check_map, state),
+        ::Test("test map max_size()", unittest::test_max_size, unittest::check_map, state),
         // ::Test("test map empty()", unittest::test_empty, unittest::check_with_cap, state),
         // ::Test("test map resize()", unittest::test_resize, unittest::check_with_cap, state),
         // ::Test("test map reserve()", unittest::test_reserve, unittest::check_with_cap),
