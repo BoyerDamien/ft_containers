@@ -6,13 +6,14 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 17:05:44 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/21 12:11:26 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/21 16:29:29 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TEST_CONSTRUCTORS_HPP
 #define TEST_CONSTRUCTORS_HPP
 #include "./test_utils.hpp"
+#include <ostream>
 
 namespace unittest
 {
@@ -51,6 +52,19 @@ void test_constructor_iter(void (*check)(test_type &, ref_type &), state_type st
 template < typename test_type, typename ref_type, typename state_type >
 void test_copy_constructor(void (*check)(test_type &, ref_type &), state_type state)
 {
+    test_type test = test_type(state.test_state, state.test_state + state.len);
+    ref_type test_ref = ref_type(state.ref_state, state.ref_state + state.len);
+
+    test_type cp_test(test);
+    ref_type cp_ref(test_ref);
+
+    assert((test == cp_test) && (test_ref == cp_ref), "wrong copy value");
+    check(test, test_ref);
+}
+
+template < typename test_type, typename ref_type, typename state_type >
+void test_pair_copy_constructor(void (*check)(test_type &, ref_type &), state_type state)
+{
     test_type test = test_type(state.test_state[0]);
     ref_type test_ref = ref_type(state.ref_state[0]);
 
@@ -62,10 +76,23 @@ void test_copy_constructor(void (*check)(test_type &, ref_type &), state_type st
 }
 
 template < typename test_type, typename ref_type, typename state_type >
-void test_assignation_constructor(void (*check)(test_type &, ref_type &), state_type state)
+void test_pair_assignation_constructor(void (*check)(test_type &, ref_type &), state_type state)
 {
     test_type test = test_type(state.test_state[0]);
     ref_type test_ref = ref_type(state.ref_state[0]);
+
+    test_type test_cp = test;
+    ref_type ref_cp = test_ref;
+
+    assert(test == test_cp && test_ref == ref_cp, "wrong assignation value");
+    check(test, test_ref);
+}
+
+template < typename test_type, typename ref_type, typename state_type >
+void test_assignation_constructor(void (*check)(test_type &, ref_type &), state_type state)
+{
+    test_type test = test_type(state.test_state, state.test_state + state.len);
+    ref_type test_ref = ref_type(state.ref_state, state.ref_state + state.len);
 
     test_type test_cp = test;
     ref_type ref_cp = test_ref;

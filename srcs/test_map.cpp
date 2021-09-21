@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 18:47:10 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/21 12:18:22 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/21 16:31:07 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,9 @@ bool unittest::test_map(void)
         ::Test("test map iterator intern_type", unittest::test_bidirectional_iterator_intern_type, unittest::check_map),
         ::Test("test map default constructor", unittest::test_default_constructor, unittest::check_map),
         ::Test("test map constructor with iterator", unittest::test_constructor_iter, unittest::check_map, state),
-        // ::Test("test map copy constructor", unittest::test_copy_constructor, unittest::check_with_cap),
-        // ::Test("test map assignation constructor", unittest::test_assignation_constructor,
-        // unittest::check_with_cap),
-        // ::Test("test map begin", unittest::test_begin, unittest::check_with_cap, state),
+        ::Test("test map copy constructor", unittest::test_copy_constructor, unittest::check_map, state),
+        ::Test("test map assignation constructor", unittest::test_assignation_constructor, unittest::check_map, state),
+        ::Test("test map begin", unittest::test_begin, unittest::check_map, state),
         // ::Test("test map rbegin", unittest::test_rbegin, unittest::check_with_cap, state),
         // ::Test("test map iterator incrementation/decrementation", unittest::test_iterator_inc_dec,
         //        unittest::check_with_cap, state),

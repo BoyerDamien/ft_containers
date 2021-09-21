@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 14:46:13 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/20 12:26:36 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/21 12:29:56 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ bool unittest::test_pair(void)
     const ::Test tests[] = {
 
         ::Test("test pair default constructor", unittest::test_default_constructor, unittest::check_pair),
-        ::Test("test pair copy constructor", unittest::test_copy_constructor, unittest::check_pair, state),
-        ::Test("test pair assignation constructor", unittest::test_assignation_constructor, unittest::check_pair,
+        ::Test("test pair copy constructor", unittest::test_pair_copy_constructor, unittest::check_pair, state),
+        ::Test("test pair assignation constructor", unittest::test_pair_assignation_constructor, unittest::check_pair,
                state),
         ::Test("test pair operators", unittest::test_pair_operator, unittest::check_pair, state),
     };

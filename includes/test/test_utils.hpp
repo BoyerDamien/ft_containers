@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 17:15:48 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/20 12:11:36 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/21 16:25:54 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ template < typename test_type, typename ref_type > void check_map(test_type &tes
     typename test_type::iterator b1 = test.begin();
     typename ref_type::iterator b2 = test_ref.begin();
 
+    assert(test.size() == test_ref.size(), "wrong size");
     for (; (b1 != test.end()) && (b2 != test_ref.end()); b1++, (void)b2++)
     {
         assert((*b1).first == (*b2).first, "wrong key");

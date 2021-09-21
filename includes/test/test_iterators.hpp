@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 17:10:45 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/20 12:06:46 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/21 20:33:10 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void test_begin(void (*check)(test_type &, ref_type &), state_type state)
     check(test, test_ref);
 
     assert(test.begin() != test.end() && test_ref.begin() != test_ref.end(), "begin == end");
-    assert(*test.begin() == *test_ref.begin(), "begin != end");
 }
 
 template < typename test_type, typename ref_type, typename state_type >
