@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 17:10:45 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/19 17:15:04 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/20 12:06:46 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,8 @@ namespace unittest
 template < typename test_type, typename ref_type, typename state_type >
 void test_begin(void (*check)(test_type &, ref_type &), state_type state)
 {
-    int size = len(state);
-    test_type test(state, state + size);
-    ref_type test_ref(state, state + size);
+    test_type test(state.test_state, state.test_state + state.len);
+    ref_type test_ref(state.ref_state, state.ref_state + state.len);
 
     check(test, test_ref);
 
@@ -35,9 +34,8 @@ void test_begin(void (*check)(test_type &, ref_type &), state_type state)
 template < typename test_type, typename ref_type, typename state_type >
 void test_rbegin(void (*check)(test_type &, ref_type &), state_type state)
 {
-    int size = len(state);
-    test_type test(state, state + size);
-    ref_type test_ref(state, state + size);
+    test_type test(state.test_state, state.test_state + state.len);
+    ref_type test_ref(state.ref_state, state.ref_state + state.len);
 
     check(test, test_ref);
 
@@ -49,9 +47,8 @@ template < typename test_type, typename ref_type, typename state_type >
 void test_iterator_inc_dec(void (*check)(test_type &, ref_type &), state_type state)
 {
 
-    int size = len(state);
-    test_type test(state, state + size);
-    ref_type test_ref(state, state + size);
+    test_type test(state.test_state, state.test_state + state.len);
+    ref_type test_ref(state.ref_state, state.ref_state + state.len);
     check(test, test_ref);
 
     assert(test.begin()++ == test.begin() && test_ref.begin()++ == test_ref.begin(),
@@ -65,9 +62,9 @@ void test_iterator_inc_dec(void (*check)(test_type &, ref_type &), state_type st
 template < typename test_type, typename ref_type, typename state_type >
 void test_rev_iterator_inc_dec(void (*check)(test_type &, ref_type &), state_type state)
 {
-    int size = len(state);
-    test_type test(state, state + size);
-    ref_type test_ref(state, state + size);
+    test_type test(state.test_state, state.test_state + state.len);
+    ref_type test_ref(state.ref_state, state.ref_state + state.len);
+
     check(test, test_ref);
 
     assert(test.rbegin()++ == test.rbegin() && test_ref.rbegin()++ == test_ref.rbegin(),

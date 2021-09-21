@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 14:18:02 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/19 17:40:56 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/20 12:09:46 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ namespace unittest
 template < typename test_type, typename ref_type, typename state_type >
 void test_operator_access(void (*check)(test_type &, ref_type &), state_type state)
 {
-    int size = len(state);
-    test_type test(state, state + size);
-    ref_type test_ref(state, state + size);
+    test_type test(state.test_state, state.test_state + state.len);
+    ref_type test_ref(state.ref_state, state.ref_state + state.len);
+
     check(test, test_ref);
 
-    for (size_t i = 0; i < size; i++)
+    for (size_t i = 0; i < state.len; i++)
     {
         assert(test[i] == test_ref[i], "wrong value");
     }
@@ -41,9 +41,9 @@ void test_operator_access(void (*check)(test_type &, ref_type &), state_type sta
 template < typename test_type, typename ref_type, typename state_type >
 void test_front(void (*check)(test_type &, ref_type &), state_type state)
 {
-    int size = len(state);
-    test_type test(state, state + size);
-    ref_type test_ref(state, state + size);
+    test_type test(state.test_state, state.test_state + state.len);
+    ref_type test_ref(state.ref_state, state.ref_state + state.len);
+
     check(test, test_ref);
 
     assert(test.front() == test_ref.front(), "wrong value");
@@ -52,9 +52,9 @@ void test_front(void (*check)(test_type &, ref_type &), state_type state)
 template < typename test_type, typename ref_type, typename state_type >
 void test_back(void (*check)(test_type &, ref_type &), state_type state)
 {
-    int size = len(state);
-    test_type test(state, state + size);
-    ref_type test_ref(state, state + size);
+    test_type test(state.test_state, state.test_state + state.len);
+    ref_type test_ref(state.ref_state, state.ref_state + state.len);
+
     check(test, test_ref);
 
     assert(test.back() == test_ref.back(), "wrong value");
@@ -63,12 +63,12 @@ void test_back(void (*check)(test_type &, ref_type &), state_type state)
 template < typename test_type, typename ref_type, typename state_type >
 void test_at(void (*check)(test_type &, ref_type &), state_type state)
 {
-    int size = len(state);
-    test_type test(state, state + size);
-    ref_type test_ref(state, state + size);
+    test_type test(state.test_state, state.test_state + state.len);
+    ref_type test_ref(state.ref_state, state.ref_state + state.len);
+
     check(test, test_ref);
 
-    for (size_t i = 0; i < size; i++)
+    for (size_t i = 0; i < state.len; i++)
         assert(test.at(i) == test_ref.at(i), "wrong value");
 
     test.clear();
@@ -76,7 +76,7 @@ void test_at(void (*check)(test_type &, ref_type &), state_type state)
 
     try
     {
-        assert(test.at(size + 1) == 1, "no exception error");
+        assert(test.at(state.len + 1) == 1, "no exception error");
     }
     catch (std::out_of_range &e)
     {

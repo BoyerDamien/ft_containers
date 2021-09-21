@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/05 09:33:43 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/19 19:28:33 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/21 11:45:26 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,21 @@
 #include "iterator_traits.hpp"
 #include "map/bst_element.hpp"
 #include "utility.hpp"
+#include <cstddef>
 
 namespace ft
 {
 
-template < typename T, typename node_type > class map_iterator : public iterator< bidirectional_iterator_tag, T >
+template < typename T, typename node_type > class map_iterator
 {
-  public:
-    typedef typename iterator< bidirectional_iterator_tag, T >::value_type value_type;
-    typedef typename iterator< bidirectional_iterator_tag, T >::difference_type difference_type;
-    typedef typename iterator< bidirectional_iterator_tag, T >::pointer pointer;
-    typedef typename iterator< bidirectional_iterator_tag, T >::reference reference;
+  protected:
     typedef node_type *node_pointer;
+
+  public:
+    typedef T value_type;
+    typedef ptrdiff_t difference_type;
+    typedef value_type *pointer;
+    typedef value_type &reference;
     typedef bidirectional_iterator_tag iterator_category;
 
     map_iterator(void)

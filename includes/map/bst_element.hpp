@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 14:30:36 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/19 19:48:03 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/20 11:06:38 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,21 @@
 
 namespace ft
 {
-template < typename key_type, typename mapped_type, typename Compare,
-           typename Alloc = std::allocator< ft::pair< key_type, mapped_type > > >
-class bst_element
+template < typename T, typename Compare, typename Alloc = std::allocator< T > > class bst_element
 {
+  protected:
+    typedef bst_element< T, Compare, Alloc > node_type;
+
   public:
     typedef Alloc allocator_type;
-    typedef ft::pair< key_type, mapped_type > value_type;
     typedef Compare key_compare;
-    typedef bst_element< key_type, mapped_type, key_compare > *pointer;
-    typedef typename allocator_type::pointer pair_pointer;
-    typedef typename allocator_type::reference pair_reference;
-    typedef typename allocator_type::difference_type pair_difference_type;
-    typedef typename allocator_type::size_type pair_size_type;
+    typedef T value_type;
+    typedef value_type *pointer;
+    typedef value_type &reference;
+    typedef typename allocator_type::difference_type difference_type;
+    typedef typename allocator_type::size_type size_type;
+    typedef typename value_type::first_type key_type;
+    typedef typename value_type::second_type mapped_type;
 
     /*********************************************************************************
      *                  Constructors
@@ -81,17 +83,17 @@ class bst_element
     /*********************************************************************************
      *                  Getters
      ********************************************************************************/
-    pointer right(void) const
+    node_type *right(void) const
     {
         return _right;
     }
 
-    pointer left(void) const
+    node_type *left(void) const
     {
         return _left;
     }
 
-    pointer parent(void) const
+    node_type *parent(void) const
     {
         return _parent;
     }
@@ -114,12 +116,12 @@ class bst_element
      *                  Setters
      ********************************************************************************/
 
-    void setParent(pointer parent)
+    void setParent(node_type *parent)
     {
         _parent = parent;
     }
 
-    void setRight(pointer right)
+    void setRight(node_type *right)
     {
         if (_right)
             _right->setParent(right);
@@ -127,7 +129,7 @@ class bst_element
         _right = right;
     }
 
-    void setLeft(pointer left)
+    void setLeft(node_type *left)
     {
         if (_left)
             _left->setParent(left);
@@ -135,16 +137,16 @@ class bst_element
         _left = left;
     }
 
-    void setLeftSafe(pointer left)
+    void setLeftSafe(node_type *left)
     {
         _left = left;
     }
-    void setRightSafe(pointer right)
+    void setRightSafe(node_type *right)
     {
         _right = right;
     }
 
-    void setChild(pointer child)
+    void setChild(node_type *child)
     {
         bool result1 = key_compare()(child->_pair->first, _pair->first);
         bool result2 = key_compare()(_pair->first, child->_pair->first);
@@ -169,21 +171,21 @@ class bst_element
     /****************************************************************************
      *                  Operations
      ****************************************************************************/
-    pointer max(pointer node) const
+    node_type *max(node_type *node) const
     {
         if (node && node->_right)
             return max(node->_right);
         return node;
     }
 
-    pointer min(pointer node) const
+    node_type *min(node_type *node) const
     {
         if (node && node->_left)
             return min(node->_left);
         return node;
     }
 
-    pointer backNext(pointer node) const
+    node_type *backNext(node_type *node) const
     {
         if (node && node->_parent && node->_parent->_right == node)
             return backNext(node->_parent);
@@ -192,7 +194,7 @@ class bst_element
         return node;
     }
 
-    pointer backPrev(pointer node) const
+    node_type *backPrev(node_type *node) const
     {
         if (node && node->_parent && node->_parent->_left == node)
             return backPrev(node->_parent);
@@ -201,7 +203,7 @@ class bst_element
         return node;
     }
 
-    pointer next(void) const
+    node_type *next(void) const
     {
         if (_right)
             return min(_right);
@@ -209,7 +211,7 @@ class bst_element
             return _parent;
         return backNext(_parent);
     }
-    pointer previous(void) const
+    node_type *previous(void) const
     {
         if (_left)
             return max(_left);
@@ -227,21 +229,21 @@ class bst_element
         }
         else if (_left && _left->_left && !_left->_right)
         {
-            pointer tmp = _left->_left;
+            node_type *tmp = _left->_left;
             delete _left;
             _left = tmp;
             _left->setParent(this);
         }
         else if (_left && !_left->_left && _left->_right)
         {
-            pointer tmp = _left->_right;
+            node_type *tmp = _left->_right;
             delete _left;
             _left = tmp;
             _left->setParent(this);
         }
         else if (_left && _left->_left && _left->_right)
         {
-            pointer tmp = _left->next();
+            node_type *tmp = _left->next();
             tmp->setChild(_left->_right);
             tmp->setChild(_left->_left);
             _left = tmp;
@@ -258,21 +260,21 @@ class bst_element
         }
         else if (_right && _right->_left && !_right->_right)
         {
-            pointer tmp = _right->_left;
+            node_type *tmp = _right->_left;
             delete _right;
             _right = tmp;
             _right->setParent(this);
         }
         else if (_right && !_right->_left && _right->_right)
         {
-            pointer tmp = _right->_right;
+            node_type *tmp = _right->_right;
             delete _right;
             _right = tmp;
             _right->setParent(this);
         }
         else if (_right && _right->_left && _right->_right)
         {
-            pointer tmp = _right->next();
+            node_type *tmp = _right->next();
             tmp->setChild(_right->_right);
             tmp->setChild(_right->_left);
             _right = tmp;
@@ -281,7 +283,7 @@ class bst_element
     }
 
   private:
-    pair_pointer _pair;
-    pointer _parent, _right, _left;
+    pointer _pair;
+    node_type *_parent, *_right, *_left;
 };
 } // namespace ft

@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 13:42:31 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/19 10:45:11 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/21 12:09:04 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ template < typename key_type, typename mapped_type > struct pair
     {
     }
 
-    pair(const pair &other) : first(other.first), second(other.second)
+    pair(const first_type &first, const second_type &second) : first(first), second(second)
     {
     }
 
-    pair(const first_type &first, const second_type &second) : first(first), second(second)
+    pair(const pair &other) : first(other.first), second(other.second)
     {
     }
 
@@ -91,7 +91,7 @@ std::ostream &operator<<(std::ostream &os, const ft::pair< key_type, mapped_type
     return os << "(" << p.first << ", " << p.second << ")";
 }
 
-template < class T1, class T2 > ft::pair< T1, T2 > make_pair(T1 t, T2 u)
+template < typename T1, typename T2 > ft::pair< T1, T2 > make_pair(T1 t, T2 u)
 {
     return ft::pair< T1, T2 >(t, u);
 }

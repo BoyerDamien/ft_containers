@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 17:01:18 by dess              #+#    #+#             */
-/*   Updated: 2021/09/19 18:32:56 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/20 12:19:31 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,13 @@
 typedef int type;
 typedef ft::vector< type > test_type;
 typedef std::vector< type > ref_type;
-typedef unittest::Test< test_type, ref_type, type * > Test;
+typedef unittest::state< type, type > state_type;
+typedef unittest::Test< test_type, ref_type, state_type > Test;
 
 bool unittest::test_vector(void)
 {
-    int state[] = {5, 3, 1, 2, 6, 0};
+    int init[] = {5, 2, 1, 3, 0};
+    state_type state(5, init, init);
 
     const ::Test tests[] = {
 
@@ -33,10 +35,12 @@ bool unittest::test_vector(void)
         ::Test("test vector iterator intern_type", unittest::test_random_access_iterator_intern_type,
                unittest::check_with_cap),
         ::Test("test vector default constructor", unittest::test_default_constructor, unittest::check_with_cap),
-        ::Test("test vector constructor with size", unittest::test_constructor_size, unittest::check_with_cap),
-        ::Test("test vector constructor with iterator", unittest::test_constructor_iter, unittest::check_with_cap),
-        ::Test("test vector copy constructor", unittest::test_copy_constructor, unittest::check_with_cap),
-        ::Test("test vector assignation constructor", unittest::test_assignation_constructor, unittest::check_with_cap),
+        ::Test("test vector constructor with size", unittest::test_constructor_size, unittest::check_with_cap, state),
+        ::Test("test vector constructor with iterator", unittest::test_constructor_iter, unittest::check_with_cap,
+               state),
+        ::Test("test vector copy constructor", unittest::test_copy_constructor, unittest::check_with_cap, state),
+        ::Test("test vector assignation constructor", unittest::test_assignation_constructor, unittest::check_with_cap,
+               state),
         ::Test("test vector begin", unittest::test_begin, unittest::check_with_cap, state),
         ::Test("test vector rbegin", unittest::test_rbegin, unittest::check_with_cap, state),
         ::Test("test vector iterator incrementation/decrementation", unittest::test_iterator_inc_dec,

@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 14:30:47 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/19 20:11:32 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/21 12:15:36 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,6 @@ template < typename key, typename T, typename Compare = std::less< key >,
            typename Alloc = std::allocator< ft::pair< const key, T > > >
 class map
 {
-  protected:
-    typedef bst_element< const key, T, Compare, Alloc > node_type;
-
   public:
     typedef key key_type;
 
@@ -50,17 +47,19 @@ class map
 
     typedef typename allocator_type::const_pointer const_pointer;
 
-    typedef map_iterator< value_type, node_type > iterator;
+    typedef typename allocator_type::difference_type difference_type;
 
-    typedef map_iterator< const value_type, node_type > const_iterator;
+    typedef typename allocator_type::size_type size_type;
+
+    typedef map_iterator< value_type, bst_element< value_type, key_compare, allocator_type > > iterator;
+
+    typedef map_iterator< const value_type, bst_element< value_type, key_compare, allocator_type > > const_iterator;
 
     typedef reverse_iterator< const_iterator > const_reverse_iterator;
 
     typedef reverse_iterator< iterator > reverse_iterator;
 
-    typedef typename allocator_type::difference_type difference_type;
-
-    typedef typename allocator_type::size_type size_type;
+    typedef bst_element< value_type, key_compare > node_type;
 
     typedef typename Alloc::template rebind< node_type >::other node_allocator_type;
 
@@ -229,16 +228,19 @@ class map
         }
     }
 
-    ft::pair< iterator, bool > insert(iterator position, value_type &val)
+    iterator insert(iterator position, const value_type &val)
     {
         static_cast< void >(position);
-        return insert(val);
+        return insert(val).first;
     }
 
     template < class InputIterator > void insert(InputIterator first, InputIterator last)
     {
-        for (; first != last; first++)
-            insert(*first);
+        while (first != last)
+        {
+            insert(value_type((*first).first, (*first).second));
+            first++;
+        }
     }
 
     void erase(iterator position)

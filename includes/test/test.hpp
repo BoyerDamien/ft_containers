@@ -6,11 +6,12 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 12:35:32 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/19 16:45:39 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/20 12:00:46 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
+#include <cstddef>
 #include <exception>
 #include <iostream>
 
@@ -37,6 +38,22 @@ class FailedException : public std::exception
   private:
     std::string _msg;
 };
+
+template < typename test_type, typename ref_type > struct state
+{
+    int len;
+    test_type *test_state;
+    ref_type *ref_state;
+
+    state(void) : len(0)
+    {
+    }
+
+    state(int len, test_type *test_state, ref_type *ref_state) : len(len), test_state(test_state), ref_state(ref_state)
+    {
+    }
+};
+
 template < typename test_type, typename ref_type, typename state_type > class Test
 {
   public:

@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 17:12:28 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/19 18:04:13 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/20 12:08:46 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,8 @@ void test_size(void (*check)(test_type &, ref_type &), state_type state)
     unittest::assert(test.empty() == test_ref.empty(), "wrong size");
     check(test, test_ref);
 
-    int size = len(state);
-    test_type test2(state, state + size);
-    ref_type test_ref2(state, state + size);
+    test_type test2(state.test_state, state.test_state + state.len);
+    ref_type test_ref2(state.ref_state, state.ref_state + state.len);
 
     unittest::assert(test2.empty() == test_ref2.empty(), "wrong size");
     unittest::assert(test2.size() == test_ref2.size(), "wrong size");
@@ -92,10 +91,8 @@ template < typename test_type, typename ref_type, typename state_type >
 void test_resize(void (*check)(test_type &, ref_type &), state_type state)
 {
     int test_size[] = {2, 10, 1, 0, 3};
-
-    int size = len(state);
-    test_type test(state, state + size);
-    ref_type test_ref(state, state + size);
+    test_type test(state.test_state, state.test_state + state.len);
+    ref_type test_ref(state.ref_state, state.ref_state + state.len);
     check(test, test_ref);
 
     for (int i = 0; i < 5; i++)
@@ -115,9 +112,9 @@ void test_empty(void (*check)(test_type &, ref_type &), state_type state)
 
     assert(test.empty() == test_ref.empty(), "wrong empty value");
 
-    int size = len(state);
-    test_type test2(state, state + size);
-    ref_type test_ref2(state, state + size);
+    test_type test2(state.test_state, state.test_state + state.len);
+    ref_type test_ref2(state.ref_state, state.ref_state + state.len);
+
     check(test2, test_ref2);
 
     assert(test2.empty() == test_ref2.empty(), "wrong empty value");

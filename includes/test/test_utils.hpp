@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 17:15:48 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/19 19:42:15 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/20 12:11:36 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,5 @@ template < typename test_type, typename ref_type > void check_map(test_type &tes
     }
 }
 
-template < typename state_type > int len(state_type state)
-{
-    int i = 0;
-    while (state[i])
-        i++;
-    return i;
-}
 } // namespace unittest
 #endif

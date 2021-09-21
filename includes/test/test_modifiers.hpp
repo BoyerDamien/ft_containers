@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 17:07:59 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/19 18:16:43 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/20 12:13:39 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ void test_push_back(void (*check)(test_type &, ref_type &), state_type state)
     ref_type test_ref;
 
     int i = 0;
-    while (state[i])
+    while (i < state.len)
     {
-        test.push_back(state[i]);
-        test_ref.push_back(state[i]);
+        test.push_back(state.test_state[i]);
+        test_ref.push_back(state.ref_state[i]);
         check(test, test_ref);
         i++;
     }
@@ -40,13 +40,12 @@ void test_push_back(void (*check)(test_type &, ref_type &), state_type state)
 template < typename test_type, typename ref_type, typename state_type >
 void test_pop_back(void (*check)(test_type &, ref_type &), state_type state)
 {
-    int size = len(state);
-    test_type test(state, state + size);
-    ref_type test_ref(state, state + size);
+    test_type test(state.test_state, state.test_state + state.len);
+    ref_type test_ref(state.ref_state, state.ref_state + state.len);
 
     check(test, test_ref);
 
-    for (int i = 0; i < len(state); i++)
+    for (int i = 0; i < state.len; i++)
     {
         test.pop_back();
         test_ref.pop_back();
@@ -58,9 +57,8 @@ template < typename test_type, typename ref_type, typename state_type >
 void test_clear(void (*check)(test_type &, ref_type &), state_type state)
 {
 
-    int size = len(state);
-    test_type test(state, state + size);
-    ref_type test_ref(state, state + size);
+    test_type test(state.test_state, state.test_state + state.len);
+    ref_type test_ref(state.ref_state, state.ref_state + state.len);
 
     assert(test.size() == test_ref.size(), "wrong size at init");
     check(test, test_ref);
@@ -75,9 +73,8 @@ void test_clear(void (*check)(test_type &, ref_type &), state_type state)
 template < typename test_type, typename ref_type, typename state_type >
 void test_erase(void (*check)(test_type &, ref_type &), state_type state)
 {
-    int size = len(state);
-    test_type test(state, state + size);
-    ref_type test_ref(state, state + size);
+    test_type test(state.test_state, state.test_state + state.len);
+    ref_type test_ref(state.ref_state, state.ref_state + state.len);
 
     test.erase(test.begin());
     test_ref.erase(test_ref.begin());
@@ -95,40 +92,39 @@ void test_insert(void (*check)(test_type &, ref_type &), state_type state)
     ref_type test_ref;
 
     int i = 0;
-    while (i < len(state))
+    while (i < state.len)
     {
-        test.insert(test.begin(), state[i]);
-        test_ref.insert(test_ref.begin(), state[i]);
+        test.insert(test.begin(), state.test_state[i]);
+        test_ref.insert(test_ref.begin(), state.ref_state[i]);
         check(test, test_ref);
         i++;
     }
 
     while (i)
     {
-        test.insert(test.end(), state[i - 1]);
-        test_ref.insert(test_ref.end(), state[i - 1]);
+        test.insert(test.end(), state.test_state[i - 1]);
+        test_ref.insert(test_ref.end(), state.ref_state[i - 1]);
         check(test, test_ref);
         i--;
     }
 
-    test.insert(++test.begin(), state[0]);
-    test_ref.insert(++test_ref.begin(), state[0]);
+    test.insert(++test.begin(), state.test_state[0]);
+    test_ref.insert(++test_ref.begin(), state.ref_state[0]);
     check(test, test_ref);
 
-    test.insert(--test.end(), state[1]);
-    test_ref.insert(--test_ref.end(), state[1]);
+    test.insert(--test.end(), state.test_state[1]);
+    test_ref.insert(--test_ref.end(), state.ref_state[1]);
     check(test, test_ref);
 }
 
 template < typename test_type, typename ref_type, typename state_type >
 void test_swap(void (*check)(test_type &, ref_type &), state_type state)
 {
-    int size = len(state);
-    test_type test(state, state + size / 2);
-    ref_type test_ref(state, state + size / 2);
+    test_type test(state.test_state, state.test_state + state.len / 2);
+    ref_type test_ref(state.ref_state, state.ref_state + state.len / 2);
 
-    test_type test2(state, state + size);
-    ref_type test_ref2(state, state + size);
+    test_type test2(state.test_state, state.test_state + state.len);
+    ref_type test_ref2(state.ref_state, state.ref_state + state.len);
 
     test_ref.swap(test_ref2);
     test.swap(test2);
@@ -140,12 +136,11 @@ void test_swap(void (*check)(test_type &, ref_type &), state_type state)
 template < typename test_type, typename ref_type, typename state_type >
 void test_assign(void (*check)(test_type &, ref_type &), state_type state)
 {
-    int size = len(state);
-    test_type test(state, state + size);
-    ref_type test_ref(state, state + size);
+    test_type test(state.test_state, state.test_state + state.len);
+    ref_type test_ref(state.ref_state, state.ref_state + state.len);
 
-    test_type test2(state, state + size);
-    ref_type test_ref2(state, state + size);
+    test_type test2(state.test_state, state.test_state + state.len);
+    ref_type test_ref2(state.ref_state, state.ref_state + state.len);
 
     test.assign(test2.begin(), test2.begin());
     test_ref.assign(test_ref2.begin(), test_ref2.begin());

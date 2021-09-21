@@ -6,17 +6,20 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 12:49:47 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/19 20:25:39 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/20 10:59:45 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
+#include "ft_containers.hpp"
 #include "iterators/iterator.hpp"
 #include "type_traits.hpp"
 #include "vector/vector.hpp"
 #include <deque>
 #include <iterator>
+#include <map>
 #include <memory>
+#include <utility>
 #include <vector>
 
 namespace unittest
@@ -124,31 +127,40 @@ void test_bidirectional_iterator_intern_type(void (*check)(test_type &, ref_type
 
     typedef typename test_type::iterator test_iterator;
     typedef typename ref_type::iterator ref_iterator;
+    typedef std::allocator<
+        std::pair< typename test_iterator::value_type::first_type, typename test_iterator::value_type::second_type > >
+        allocator_type;
 
-    assert(ft::is_type_equal< typename test_iterator::value_type, typename ref_iterator::value_type >::value,
+    assert(ft::is_type_equal< typename allocator_type::value_type, typename ref_iterator::value_type >::value,
            "wrong value_type");
-    assert(ft::is_type_equal< typename test_iterator::pointer, typename ref_iterator::pointer >::value,
+    assert(ft::is_type_equal< typename allocator_type::pointer, typename ref_iterator::pointer >::value,
            "wrong pointer type");
-    assert(ft::is_type_equal< typename test_iterator::difference_type, typename ref_iterator::difference_type >::value,
+    assert(ft::is_type_equal< typename allocator_type::difference_type, typename ref_iterator::difference_type >::value,
            "wrong difference_type");
-    assert(ft::is_type_equal< typename test_iterator::reference, typename ref_iterator::reference >::value,
+    assert(ft::is_type_equal< typename allocator_type::reference, typename ref_iterator::reference >::value,
            "wrong reference type");
     assert(ft::is_bidirectional_iterator< typename test_type::iterator::iterator_category >::value,
            "wrong iterator category");
 
     typedef typename test_type::const_iterator const_test_iterator;
     typedef typename ref_type::const_iterator const_ref_iterator;
+    typedef ft::pair< typename const_ref_iterator::value_type::first_type,
+                      typename const_ref_iterator::value_type::second_type >
+        value_type;
+    typedef std::allocator< value_type > const_allocator_type;
 
-    assert(
-        ft::is_type_equal< typename const_test_iterator::value_type, typename const_ref_iterator::value_type >::value,
-        "wrong const value_type");
-    assert(ft::is_type_equal< typename const_test_iterator::pointer, typename const_ref_iterator::pointer >::value,
+    assert(ft::is_type_equal< const value_type, typename const_test_iterator::value_type >::value,
+           "wrong const value_type");
+    assert(ft::is_type_equal< const value_type *, typename const_test_iterator::pointer >::value,
            "wrong const pointer type");
-    assert(ft::is_type_equal< typename const_test_iterator::difference_type,
+
+    assert(ft::is_type_equal< const value_type &, typename const_test_iterator::reference >::value,
+           "wrong const reference type");
+
+    assert(ft::is_type_equal< typename const_allocator_type::difference_type,
                               typename const_ref_iterator::difference_type >::value,
            "wrong const difference_type");
-    assert(ft::is_type_equal< typename const_test_iterator::reference, typename const_ref_iterator::reference >::value,
-           "wrong const reference type");
+
     assert(ft::is_bidirectional_iterator< typename test_type::iterator::iterator_category >::value,
            "wrong const iterator category");
 }
