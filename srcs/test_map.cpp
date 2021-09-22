@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 18:47:10 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/21 22:46:01 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/22 10:47:18 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ bool unittest::test_map(void)
 
         ft::make_pair(2, 2),
 
-        ft::make_pair(6, 6),
+        ft::make_pair(4, 4),
 
         ft::make_pair(0, 0),
     };
@@ -49,7 +49,7 @@ bool unittest::test_map(void)
 
         std::make_pair(2, 2),
 
-        std::make_pair(6, 6),
+        std::make_pair(4, 4),
 
         std::make_pair(0, 0),
     };
@@ -72,17 +72,16 @@ bool unittest::test_map(void)
                unittest::check_map, state),
         ::Test("test map size()", unittest::test_size, unittest::check_map, state),
         ::Test("test map max_size()", unittest::test_max_size, unittest::check_map, state),
-        // ::Test("test map empty()", unittest::test_empty, unittest::check_with_cap, state),
-        // ::Test("test map resize()", unittest::test_resize, unittest::check_with_cap, state),
-        // ::Test("test map reserve()", unittest::test_reserve, unittest::check_with_cap),
+        ::Test("test map empty()", unittest::test_empty, unittest::check_map, state),
+        ::Test("test map at()", unittest::test_at, unittest::check_map, state),
+        ::Test("test map operator[]()", unittest::test_operator_access, unittest::check_map, state),
+        ::Test("test map insert()", unittest::test_insert, unittest::check_map, state),
         // ::Test("test map front()", unittest::test_front, unittest::check_with_cap, state),
         // ::Test("test map back()", unittest::test_back, unittest::check_with_cap, state),
-        // ::Test("test map at()", unittest::test_at, unittest::check_with_cap, state),
-        // ::Test("test map operator[]()", unittest::test_operator_access, unittest::check_with_cap, state),
         // ::Test("test map assign()", unittest::test_assign, unittest::check_with_cap, state),
         // ::Test("test map push_back()", unittest::test_push_back, unittest::check_with_cap, state),
         // ::Test("test map pop_back()", unittest::test_pop_back, unittest::check_with_cap, state),
-        // ::Test("test map insert()", unittest::test_insert, unittest::check_with_cap, state),
+
         // ::Test("test map erase()", unittest::test_erase, unittest::check_with_cap, state),
         // ::Test("test map swap()", unittest::test_swap, unittest::check_with_cap, state),
         // ::Test("test map clear()", unittest::test_clear, unittest::check_with_cap, state),

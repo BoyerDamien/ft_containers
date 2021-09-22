@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 14:30:47 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/21 12:34:34 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/22 10:39:36 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -351,6 +351,36 @@ class map
         return ft::pair< const_iterator, const_iterator >(lower_bound(k), upper_bound(k));
     }
 
+    /**************************************************************************************
+     *                  Accessors
+     *************************************************************************************/
+    mapped_type &at(const key_type &k)
+    {
+        if (_n)
+        {
+            iterator f = find(k);
+            if (f != end())
+                return (*f).second;
+        }
+        throw(std::out_of_range("Error: out of range"));
+    }
+
+    const mapped_type &at(const key_type &k) const
+    {
+        return at(k);
+    }
+
+    mapped_type &operator[](const key_type &k)
+    {
+        if (_n)
+        {
+            iterator f = find(k);
+            if (f != end())
+                return (*f).second;
+        }
+        return (*(insert(value_type(k, mapped_type())).first)).second;
+    }
+
   private:
     node_type *_root, *_last;
     size_type _n;
@@ -394,7 +424,7 @@ class map
                     return _find(k, node->right());
             }
         }
-        return iterator(_last);
+        return iterator(node);
     }
 
     iterator _lower(const key_type &k, node_type *node)
