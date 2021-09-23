@@ -36,6 +36,8 @@ ft_containers
 .idea
 .idea/
 .idea/*
+.clangd/
+.vscode/
 
 # compile_commands
 compile_commands.json
@@ -44,3 +46,7 @@ compile_commands.json
 .cache/*
 
 *vgcore*
+
+# Build
+build/
+.cache/

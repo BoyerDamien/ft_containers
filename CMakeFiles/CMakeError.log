@@ -1,0 +1,28 @@
+Determining if the C compiler works failed with the following output:
+Change Dir: /home/dboyer/code/ft_containers/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_57679/fast && No such file or directory
+Generator: execution of make failed. Make command was: /usr/bin/gmake cmTC_57679/fast && 
+
+
+Determining if the C compiler works failed with the following output:
+Change Dir: /home/dboyer/code/ft_containers/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_768b1/fast && No such file or directory
+Generator: execution of make failed. Make command was: /usr/bin/gmake cmTC_768b1/fast && 
+
+
+Determining if the C compiler works failed with the following output:
+Change Dir: /home/dboyer/code/ft_containers/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_41b47/fast && No such file or directory
+Generator: execution of make failed. Make command was: /usr/bin/gmake cmTC_41b47/fast && 
+
+
+Determining if the C compiler works failed with the following output:
+Change Dir: /home/dboyer/code/ft_containers/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_83f15/fast && No such file or directory
+Generator: execution of make failed. Make command was: /usr/bin/gmake cmTC_83f15/fast && 
+
+

@@ -6,178 +6,141 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 18:21:32 by dboyer            #+#    #+#             */
-/*   Updated: 2021/06/04 15:17:32 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/23 17:14:32 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_OPERATIONS_HPP
-#define TEST_OPERATIONS_HPP
-#include "./test_utils.hpp"
 #include <iostream>
+
+#include "./test_utils.hpp"
+#include "utility.hpp"
 
 namespace unittest
 {
-
-template < typename test_type, typename ref_type >
-void test_merge( void ( *check )( test_type &, ref_type & ) ) throw( std::exception )
+template < typename test_type, typename ref_type, typename state_type >
+void test_find(void (*check)(test_type &, ref_type &), state_type state)
 {
+    test_type test = test_type(state.test_state, state.test_state + state.len);
+    ref_type test_ref = ref_type(state.ref_state, state.ref_state + state.len);
 
-    int init[] = { 1, 2, 3 };
-    int init2[] = { 4, 5, 6 };
+    check(test, test_ref);
 
-    test_type test( init, init + sizeof( init ) / sizeof( int ) );
-    ref_type test_ref( init, init + sizeof( init ) / sizeof( int ) );
+    assert(test.find(state.test_state[0].first) != test.end() &&
+               test_ref.find(state.ref_state[0].first) != test_ref.end(),
+           "wrong iterator value after find");
+    unittest::check_pair(*(test.find(state.test_state[0].first)), state.test_state[0]);
 
-    test_type test2( init2, init2 + sizeof( init2 ) / sizeof( int ) );
-    ref_type test_ref2( init2, init2 + sizeof( init2 ) / sizeof( int ) );
+    typename test_type::key_type k = (*test.begin()).first;
+    test.erase(test.begin());
+    test_ref.erase(test_ref.begin());
 
-    test.merge( test2 );
-    test_ref.merge( test_ref2 );
-    check( test, test_ref );
-    check( test2, test_ref2 );
-
-    test.resize( 0 );
-    test_ref.resize( 0 );
-    test.merge( test2 );
-    test_ref.merge( test_ref2 );
-    check( test, test_ref );
-    check( test2, test_ref2 );
-
-    test.resize( 0 );
-    test2.resize( 0 );
-    test_ref.resize( 0 );
-    test_ref2.resize( 0 );
-    test.merge( test2 );
-    test_ref.merge( test_ref2 );
-    check( test, test_ref );
-    check( test2, test_ref2 );
+    assert(test.find(k) == test.end() && test_ref.find(k) == test_ref.end(), "wrong iterator value after wrong find");
 }
 
-template < typename test_type, typename ref_type >
-void test_splice( void ( *check )( test_type &, ref_type & ) ) throw( std::exception )
+template < typename test_type, typename ref_type, typename state_type >
+void test_count(void (*check)(test_type &, ref_type &), state_type state)
 {
-    int init[] = { 1, 2, 3 };
-    int init2[] = { 4, 5, 6 };
+    test_type test = test_type(state.test_state, state.test_state + state.len);
+    ref_type test_ref = ref_type(state.ref_state, state.ref_state + state.len);
 
-    test_type test( init, init + sizeof( init ) / sizeof( int ) );
-    test_type test2( init2, init2 + sizeof( init2 ) / sizeof( int ) );
+    check(test, test_ref);
 
-    ref_type test_ref( init, init + sizeof( init ) / sizeof( int ) );
-    ref_type test_ref2( init2, init2 + sizeof( init2 ) / sizeof( int ) );
+    assert(test.count(state.test_state[0].first) == test_ref.count(state.ref_state[0].first),
+           "wrong iterator value after find");
 
-    test.splice( test.end(), test2 );
-    test_ref.splice( test_ref.end(), test_ref2 );
+    typename test_type::key_type k = (*test.begin()).first;
+    test.erase(test.begin());
+    test_ref.erase(test_ref.begin());
 
-    check( test, test_ref );
-    check( test2, test_ref2 );
-
-    test2.resize( 10, 2 );
-    test_ref2.resize( 10, 2 );
-    test.splice( test.begin(), test2 );
-    test_ref.splice( test_ref.begin(), test_ref2 );
-    check( test, test_ref );
-    check( test2, test_ref2 );
-
-    test2.resize( 10, 2 );
-    test_ref2.resize( 10, 2 );
-    test.splice( ++test.begin(), test2 );
-    test_ref.splice( ++test_ref.begin(), test_ref2 );
-    check( test, test_ref );
-    check( test2, test_ref2 );
+    assert(test.count(k) == test_ref.count(k), "wrong iterator value after wrong find");
 }
 
-template < typename test_type, typename ref_type >
-void test_remove( void ( *check )( test_type &, ref_type & ) ) throw( std::exception )
+template < typename test_type, typename ref_type, typename state_type >
+void test_lower_bound(void (*check)(test_type &, ref_type &), state_type state)
 {
-    int init[] = { -1, 1, 2, 3, 4, 4, 4, 4, 5, 1, 2, 6, 7, 8, 8, 10 };
+    test_type test = test_type(state.test_state, state.test_state + state.len);
+    ref_type test_ref = ref_type(state.ref_state, state.ref_state + state.len);
 
-    test_type test( init, init + sizeof( init ) / sizeof( int ) );
-    ref_type test_ref( init, init + sizeof( init ) / sizeof( int ) );
+    check(test, test_ref);
 
-    for ( int i = -1; i < 11; i++ )
+    if (test.lower_bound(state.test_state[0].first) != test.end())
     {
-        test.remove( i );
-        test_ref.remove( i );
-        check( test, test_ref );
+        unittest::check_pair(*test.lower_bound(state.test_state[0].first),
+                             *test_ref.lower_bound(state.ref_state[0].first));
+    }
+
+    typename test_type::key_type k = test.begin()->first;
+    test.erase(test.begin());
+    test_ref.erase(test_ref.begin());
+
+    if (test.lower_bound(k) != test.end())
+    {
+        unittest::check_pair(*test.lower_bound(k), *test_ref.lower_bound(k));
+    }
+    if (test.lower_bound(state.test_state[(int)state.len / 2].first) != test.end())
+    {
+        unittest::check_pair(*test.lower_bound(state.test_state[(int)state.len / 2].first),
+                             *test_ref.lower_bound(state.ref_state[(int)state.len / 2].first));
     }
 }
 
-template < typename number > bool is_four( const number &n )
+template < typename test_type, typename ref_type, typename state_type >
+void test_upper_bound(void (*check)(test_type &, ref_type &), state_type state)
 {
-    return n == 4;
+    test_type test = test_type(state.test_state, state.test_state + state.len);
+    ref_type test_ref = ref_type(state.ref_state, state.ref_state + state.len);
+
+    check(test, test_ref);
+
+    if (test.upper_bound(state.test_state[0].first) != test.end())
+    {
+        unittest::check_pair(*test.upper_bound(state.test_state[0].first),
+                             *test_ref.upper_bound(state.ref_state[0].first));
+    }
+
+    typename test_type::key_type k = test.begin()->first;
+    test.erase(test.begin());
+    test_ref.erase(test_ref.begin());
+
+    if (test.upper_bound(k) != test.end())
+    {
+        unittest::check_pair(*test.upper_bound(k), *test_ref.upper_bound(k));
+    }
+    if (test.upper_bound(state.test_state[(int)state.len / 2].first) != test.end())
+    {
+        unittest::check_pair(*test.upper_bound(state.test_state[(int)state.len / 2].first),
+                             *test_ref.upper_bound(state.ref_state[(int)state.len / 2].first));
+    }
 }
 
-template < typename test_type, typename ref_type >
-void test_remove_if( void ( *check )( test_type &, ref_type & ) ) throw( std::exception )
+template < typename test_type, typename ref_type, typename state_type >
+void test_equal_range(void (*check)(test_type &, ref_type &), state_type state)
 {
-    int init[] = { -1, 1, 2, 3, 4, 4, 4, 4, 5, 1, 2, 6, 7, 8, 8, 10 };
+    test_type test = test_type(state.test_state, state.test_state + state.len);
+    ref_type test_ref = ref_type(state.ref_state, state.ref_state + state.len);
 
-    test_type test( init, init + sizeof( init ) / sizeof( int ) );
-    ref_type test_ref( init, init + sizeof( init ) / sizeof( int ) );
+    check(test, test_ref);
 
-    test.remove_if( is_four< int > );
-    test_ref.remove_if( is_four< int > );
-    check( test, test_ref );
-}
+    ft::pair< typename test_type::iterator, typename test_type::iterator > res =
+        test.equal_range(state.test_state[0].first);
+    std::pair< typename ref_type::iterator, typename ref_type::iterator > res_ref =
+        test_ref.equal_range(state.ref_state[0].first);
 
-template < typename test_type, typename ref_type >
-void test_unique( void ( *check )( test_type &, ref_type & ) ) throw( std::exception )
-{
-    int init[] = { -1, 1, 2, 3, 4, 4, 4, 4, 5, 1, 2, 6, 7, 8, 8, 10 };
+    if (res.first != test.end())
+        unittest::check_pair(*res.first, *res_ref.first);
+    if (res.second != test.end())
+        unittest::check_pair(*res.second, *res_ref.second);
 
-    test_type test( init, init + sizeof( init ) / sizeof( int ) );
-    ref_type test_ref( init, init + sizeof( init ) / sizeof( int ) );
+    typename test_type::key_type k = test.begin()->first;
+    test.erase(test.begin());
+    test_ref.erase(test_ref.begin());
 
-    test.unique();
-    test_ref.unique();
-    check( test, test_ref );
+    res = test.equal_range(state.test_state[k].first);
+    res_ref = test_ref.equal_range(state.ref_state[k].first);
 
-    test.unique();
-    test_ref.unique();
-    check( test, test_ref );
-}
-
-template < typename number > bool compare( const number &n1, const number &n2 )
-{
-    return n1 >= n2;
-}
-
-template < typename test_type, typename ref_type >
-void test_sort( void ( *check )( test_type &, ref_type & ) ) throw( std::exception )
-{
-    int init[] = { 2, 5, 3, 4, 1, -3, -5 };
-
-    test_type test( init, init + sizeof( init ) / sizeof( int ) );
-    ref_type test_ref( init, init + sizeof( init ) / sizeof( int ) );
-
-    test_type test2( init, init + sizeof( init ) / sizeof( int ) );
-    ref_type test_ref2( init, init + sizeof( init ) / sizeof( int ) );
-
-    test.sort();
-    test_ref.sort();
-    check( test, test_ref );
-
-    test2.sort( compare< int > );
-    test_ref2.sort( compare< int > );
-    check( test2, test_ref2 );
-}
-
-template < typename test_type, typename ref_type >
-void test_reverse( void ( *check )( test_type &, ref_type & ) ) throw( std::exception )
-{
-    int init[] = { 1, 2, 3, 4, 5 };
-
-    test_type test( init, init + sizeof( init ) / sizeof( int ) );
-    ref_type test_ref( init, init + sizeof( init ) / sizeof( int ) );
-
-    test.reverse();
-    test_ref.reverse();
-    check( test, test_ref );
-
-    test.reverse();
-    test_ref.reverse();
-    check( test, test_ref );
+    if (res.first != test.end())
+        unittest::check_pair(*res.first, *res_ref.first);
+    if (res.second != test.end())
+        unittest::check_pair(*res.second, *res_ref.second);
 }
 } // namespace unittest
-
-#endif

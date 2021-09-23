@@ -1,3 +1,4 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -10,22 +11,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ITERATOR_HPP
-#define ITERATOR_HPP
-#include "./category.hpp"
-#include "./iterator_base.hpp"
-#include "./iterator_traits.hpp"
-#include "./list_iterator.hpp"
-#include "./reverse_iterator.hpp"
-#include "./vector_iterator.hpp"
+#pragma once
+
 #include <cstddef>
+#include <iterator>
+
+namespace ft
+{
 
 /*
  *		Reimplemantation of iterator base structure
  *		Ref: https://www.cplusplus.com/reference/iterator/iterator
  */
-template < class Category, class T, class Distance = ptrdiff_t, class Pointer = T *,
-           class Reference = T & >
+template < class Category, class T, class Distance = ptrdiff_t, class Pointer = T *, class Reference = T & >
 struct iterator
 {
     typedef T value_type;
@@ -34,5 +32,4 @@ struct iterator
     typedef Reference reference;
     typedef Category iterator_category;
 };
-
-#endif
+} // namespace ft

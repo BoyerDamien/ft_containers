@@ -6,96 +6,144 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 14:18:02 by dboyer            #+#    #+#             */
-/*   Updated: 2021/06/02 15:01:51 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/23 17:57:12 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_ACCESSORS_HPP
-#define TEST_ACCESSORS_HPP
+#pragma once
 
-#include "test/test_utils.hpp"
 #include <exception>
 #include <iostream>
 #include <stdexcept>
 
+#include "test/test_utils.hpp"
+
 namespace unittest
 {
 
-template < typename test_type, typename ref_type >
-void test_operator_access( void ( *check )( test_type &,
-                                            ref_type & ) ) throw( std::exception )
+template < typename test_type, typename ref_type, typename state_type >
+void test_operator_access(void (*check)(test_type &, ref_type &), state_type state)
 {
-    int init[] = { 1, 2, 3, 4, 5 };
+    test_type test(state.test_state, state.test_state + state.len);
+    ref_type test_ref(state.ref_state, state.ref_state + state.len);
 
-    test_type test( init, init + sizeof( init ) / sizeof( int ) );
-    ref_type test_ref( init, init + sizeof( init ) / sizeof( int ) );
-    check( test, test_ref );
+    check(test, test_ref);
 
-    for ( size_t i = 0; i < sizeof( init ) / sizeof( int ); i++ )
+    for (size_t i = 0; i < state.len; i++)
     {
-        assert( test[ i ] == test_ref[ i ], "wrong value" );
+        assert(test[i] == test_ref[i], "wrong value");
     }
     test.clear();
     test_ref.clear();
-    assert( test[ 0 ] == test[ 0 ], "wrong value" );
+    assert(test[0] == test_ref[0], "wrong value");
 }
 
-template < typename test_type, typename ref_type >
-void test_front( void ( *check )( test_type &, ref_type & ) ) throw( std::exception )
+template < typename test_type, typename ref_type, typename state_type >
+void test_front(void (*check)(test_type &, ref_type &), state_type state)
 {
-    int init[] = { 1, 2, 3, 4, 5 };
+    test_type test(state.test_state, state.test_state + state.len);
+    ref_type test_ref(state.ref_state, state.ref_state + state.len);
 
-    test_type test( init, init + sizeof( init ) / sizeof( int ) );
-    ref_type test_ref( init, init + sizeof( init ) / sizeof( int ) );
-    check( test, test_ref );
-    assert( test.front() == test_ref.front(), "wrong value" );
+    check(test, test_ref);
 
-    /*test.clear();
-    test_ref.clear();
-    assert( test.front() == test_ref.front(), "wrong value" );*/
+    assert(test.front() == test_ref.front(), "wrong value");
 }
 
-template < typename test_type, typename ref_type >
-void test_back( void ( *check )( test_type &, ref_type & ) ) throw( std::exception )
+template < typename test_type, typename ref_type, typename state_type >
+void test_back(void (*check)(test_type &, ref_type &), state_type state)
 {
-    int init[] = { 1, 2, 3, 4, 5 };
+    test_type test(state.test_state, state.test_state + state.len);
+    ref_type test_ref(state.ref_state, state.ref_state + state.len);
 
-    test_type test( init, init + sizeof( init ) / sizeof( int ) );
-    ref_type test_ref( init, init + sizeof( init ) / sizeof( int ) );
-    check( test, test_ref );
-    assert( test.back() == test_ref.back(), "wrong value" );
+    check(test, test_ref);
 
-    /*test.clear();
-    test_ref.clear();
-    std::cout << test.back() << test_ref.back() << std::endl;
-    assert( test.back() == test_ref.back(), "wrong value" );*/
+    assert(test.back() == test_ref.back(), "wrong value");
 }
 
-template < typename test_type, typename ref_type >
-void test_at( void ( *check )( test_type &, ref_type & ) ) throw( std::exception )
+template < typename test_type, typename ref_type, typename state_type >
+void test_at(void (*check)(test_type &, ref_type &), state_type state)
 {
-    int init[] = { 1, 2, 3, 4, 5 };
+    test_type test(state.test_state, state.test_state + state.len);
+    ref_type test_ref(state.ref_state, state.ref_state + state.len);
 
-    test_type test( init, init + sizeof( init ) / sizeof( int ) );
-    ref_type test_ref( init, init + sizeof( init ) / sizeof( int ) );
-    check( test, test_ref );
+    check(test, test_ref);
 
-    for ( size_t i = 0; i < sizeof( init ) / sizeof( int ); i++ )
-        assert( test.at( i ) == test_ref.at( i ), "wrong value" );
+    for (size_t i = 0; i < state.len; i++)
+        assert(test.at(i) == test_ref.at(i), "wrong value");
 
     test.clear();
     test_ref.clear();
 
     try
     {
-        assert( test.at( 0 ) == 1, "no exception error" );
-        assert( test.at( 100 ) == 1, "no exception error" );
+        test.at(state.len + 1);
+        assert(1 == 0, "no exception error");
     }
-    catch ( std::out_of_range &e )
+    catch (std::out_of_range &e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+
+    try
+    {
+        test.at(-1);
+        assert(1 == 0, "no exception error");
+    }
+    catch (std::out_of_range &e)
     {
         std::cerr << e.what() << std::endl;
     }
 }
-} // namespace unittest
 
-#endif
+template < typename test_type, typename ref_type, typename state_type >
+void test_map_at(void (*check)(test_type &, ref_type &), state_type state)
+{
+    test_type test(state.test_state, state.test_state + state.len);
+    ref_type test_ref(state.ref_state, state.ref_state + state.len);
+
+    check(test, test_ref);
+
+    for (size_t i = 0; i < state.len; i++)
+    {
+        assert(test.at(i).first == test_ref.at(i).first, "wrong value");
+        assert(test.at(i).second == test_ref.at(i).second, "wrong value");
+    }
+
+    test.clear();
+    test_ref.clear();
+
+    try
+    {
+        std::cout << test.at(state.len + 1) << std::endl;
+    }
+    catch (std::out_of_range &e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+
+    try
+    {
+        std::cout << test.at(-1) << std::endl;
+    }
+    catch (std::out_of_range &e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+}
+
+template < typename test_type, typename ref_type, typename state_type >
+void test_stack_top(void (*check)(test_type &, ref_type &), state_type state)
+{
+    test_type test;
+    ref_type test_ref;
+
+    for (int i = 0; i < state.len; i++)
+    {
+        test.push(state.test_state[i]);
+        test_ref.push(state.ref_state[i]);
+
+        check_stack(test, test_ref);
+        assert(test.top() == test_ref.top(), "wrong top value");
+    }
+}
+} // namespace unittest

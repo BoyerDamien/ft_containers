@@ -6,14 +6,43 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 10:51:00 by dboyer            #+#    #+#             */
-/*   Updated: 2021/03/18 10:55:36 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/19 10:38:35 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ITERATOR_TRAITS_HPP
-#define ITERATOR_TRAITS_HPP
-#include "category.hpp"
+#pragma once
 #include <cstddef>
+
+namespace ft
+{
+/*
+ *		Reimplementaiton of all iterator tags
+ *		Ref: https://www.cplusplus.com/reference/iterator/iterator/
+ */
+typedef struct input_iterator_tag
+{
+
+} input_iterator_tag;
+
+typedef struct output_iterator_tag
+{
+
+} output_iterator_tag;
+
+typedef struct forward_iterator_tag : public input_iterator_tag
+{
+
+} forward_iterator_tag;
+
+typedef struct bidirectional_iterator_tag : public forward_iterator_tag
+{
+
+} bidirectional_iterator_tag;
+
+typedef struct random_access_iterator_tag : public bidirectional_iterator_tag
+{
+
+} random_access_iterator_tag;
 
 /*
  *		Reimplementation of iterator_traits
@@ -49,5 +78,4 @@ template < typename T > struct iterator_traits< const T * >
     typedef const T *pointer;
     typedef const T &reference;
 };
-
-#endif
+} // namespace ft
