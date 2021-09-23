@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 17:07:59 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/23 18:00:19 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/23 19:16:14 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,7 @@ void test_assign(void (*check)(test_type &, ref_type &), state_type state)
 template < typename test_type, typename ref_type, typename state_type >
 void test_stack_push(void (*check)(test_type &, ref_type &), state_type state)
 {
+
     test_type test;
     ref_type test_ref;
 
@@ -165,13 +166,15 @@ void test_stack_push(void (*check)(test_type &, ref_type &), state_type state)
     {
         test.push(state.test_state[i]);
         test_ref.push(state.ref_state[i]);
-        check_stack(test, test_ref);
+        check(test, test_ref);
     }
 }
 
 template < typename test_type, typename ref_type, typename state_type >
 void test_stack_pop(void (*check)(test_type &, ref_type &), state_type state)
 {
+    (void)check;
+
     test_type test;
     ref_type test_ref;
 

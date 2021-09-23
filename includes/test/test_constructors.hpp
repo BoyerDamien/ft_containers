@@ -6,13 +6,14 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 17:05:44 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/22 09:41:34 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/23 20:04:58 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_CONSTRUCTORS_HPP
-#define TEST_CONSTRUCTORS_HPP
-#include "./test_utils.hpp"
+#pragma once
+
+#include "test_utils.hpp"
+#include <iostream>
 #include <ostream>
 
 namespace unittest
@@ -21,7 +22,7 @@ namespace unittest
 template < typename test_type, typename ref_type, typename state_type >
 void test_default_constructor(void (*check)(test_type &, ref_type &), state_type state)
 {
-
+    (void)state;
     test_type test;
     ref_type test_ref;
 
@@ -102,5 +103,3 @@ void test_assignation_constructor(void (*check)(test_type &, ref_type &), state_
 }
 
 } // namespace unittest
-
-#endif

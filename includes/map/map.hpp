@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 14:30:47 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/23 16:29:23 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/23 19:16:33 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ class map
         const allocator_type &alloc = allocator_type())
         : _root(NULL), _last(new node_type()), _n(0)
     {
+        (void)comp;
+        (void)alloc;
         insert(first, last);
     }
 

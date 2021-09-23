@@ -6,13 +6,13 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/05 09:33:43 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/23 15:35:05 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/23 19:58:50 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#include "iterator.hpp"
-#include "iterator_traits.hpp"
+#include "iterators/iterator.hpp"
+#include "iterators/iterator_traits.hpp"
 #include "map/bst_element.hpp"
 #include "utility.hpp"
 #include <cstddef>

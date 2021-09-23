@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 14:18:02 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/23 17:57:12 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/23 19:18:17 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void test_operator_access(void (*check)(test_type &, ref_type &), state_type sta
 
     check(test, test_ref);
 
-    for (size_t i = 0; i < state.len; i++)
+    for (int i = 0; i < state.len; i++)
     {
         assert(test[i] == test_ref[i], "wrong value");
     }
@@ -68,7 +68,7 @@ void test_at(void (*check)(test_type &, ref_type &), state_type state)
 
     check(test, test_ref);
 
-    for (size_t i = 0; i < state.len; i++)
+    for (int i = 0; i < state.len; i++)
         assert(test.at(i) == test_ref.at(i), "wrong value");
 
     test.clear();
@@ -142,7 +142,7 @@ void test_stack_top(void (*check)(test_type &, ref_type &), state_type state)
         test.push(state.test_state[i]);
         test_ref.push(state.ref_state[i]);
 
-        check_stack(test, test_ref);
+        check(test, test_ref);
         assert(test.top() == test_ref.top(), "wrong top value");
     }
 }
