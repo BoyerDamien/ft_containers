@@ -6,15 +6,11 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 16:45:01 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/23 17:22:47 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/23 18:53:30 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_containers.hpp"
-#include "unittest.hpp"
-#include <iostream>
-#include <map>
-#include <vector>
 
 int main(void)
 {
