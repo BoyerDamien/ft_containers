@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 18:54:43 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/22 09:42:50 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/23 18:40:36 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -467,5 +467,10 @@ template < typename T > std::ostream &operator<<(std::ostream &os, const ft::vec
 
     os << "]";
     return os;
+}
+
+template < class T, class Alloc > void swap(vector< T, Alloc > &x, vector< T, Alloc > &y)
+{
+    x.swap(y);
 }
 } // namespace ft
