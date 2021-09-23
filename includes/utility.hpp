@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 13:42:31 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/21 12:09:04 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/23 10:47:17 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,26 +25,15 @@ template < typename key_type, typename mapped_type > struct pair
     first_type first;
     second_type second;
 
-    pair() : first(key_type()), second(second_type())
+    pair(void) : first(first_type()), second(second_type())
+    {
+    }
+
+    template < class U, class V > pair(const pair< U, V > &pr) : first(pr.first), second(pr.second)
     {
     }
 
     pair(const first_type &first, const second_type &second) : first(first), second(second)
-    {
-    }
-
-    pair(const pair &other) : first(other.first), second(other.second)
-    {
-    }
-
-    pair &operator=(const pair &other)
-    {
-        first = other.first;
-        second = other.second;
-        return *this;
-    }
-
-    ~pair()
     {
     }
 };

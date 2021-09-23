@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 14:30:47 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/22 10:39:36 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/23 10:20:03 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,15 @@ class map
 
     typedef typename allocator_type::size_type size_type;
 
-    typedef map_iterator< value_type, bst_element< value_type, key_compare, allocator_type > > iterator;
+    typedef bst_element< value_type, key_compare, allocator_type > node_type;
 
-    typedef map_iterator< const value_type, bst_element< value_type, key_compare, allocator_type > > const_iterator;
+    typedef map_iterator< value_type, node_type > iterator;
+
+    typedef map_iterator< const value_type, node_type > const_iterator;
 
     typedef reverse_iterator< const_iterator > const_reverse_iterator;
 
     typedef reverse_iterator< iterator > reverse_iterator;
-
-    typedef bst_element< value_type, key_compare > node_type;
 
     typedef typename Alloc::template rebind< node_type >::other node_allocator_type;
 
