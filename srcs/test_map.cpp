@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 18:47:10 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/23 10:52:13 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/23 11:31:37 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,9 @@ bool unittest::test_map(void)
         ::Test("test map erase()", unittest::test_erase, unittest::check_map, state),
         ::Test("test map swap()", unittest::test_swap, unittest::check_map, state),
         ::Test("test map clear()", unittest::test_clear, unittest::check_map, state),
-        //::Test("test map operator<() and operator>()", unittest::test_operator_inf_sup, unittest::check_map, state),
-        // ::Test("test map operator==()", unittest::test_operator_eq, unittest::check_with_cap, state),
-        // ::Test("test map operator!=()", unittest::test_operator_diff, unittest::check_with_cap, state),
-
+        ::Test("test map operator<() and operator>()", unittest::test_operator_inf_sup, unittest::check_map, state),
+        ::Test("test map operator==()", unittest::test_operator_eq, unittest::check_map, state),
+        ::Test("test map operator!=()", unittest::test_operator_diff, unittest::check_map, state),
     };
 
     for (size_t i = 0; i < sizeof(tests) / sizeof(tests[0]); i++)

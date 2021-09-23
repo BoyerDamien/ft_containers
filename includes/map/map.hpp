@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 14:30:47 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/23 10:20:03 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/23 11:30:28 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,14 +124,18 @@ class map
     {
         if (_root && _root->left())
             return iterator(_root->min(_root->left()));
-        return iterator(_root);
+        if (_root)
+            return iterator(_root);
+        return iterator(_last);
     }
 
     const_iterator begin(void) const
     {
         if (_root && _root->left())
             return const_iterator(_root->min(_root->left()));
-        return const_iterator(_root);
+        if (_root)
+            return const_iterator(_root);
+        return const_iterator(_last);
     }
 
     iterator end(void)
