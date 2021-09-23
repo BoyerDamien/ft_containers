@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 18:47:10 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/23 15:20:54 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/23 16:52:38 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,9 @@ bool unittest::test_map(void)
         ::Test("test map operator!=()", unittest::test_operator_diff, unittest::check_map, state),
         ::Test("test map find()", unittest::test_find, unittest::check_map, state),
         ::Test("test map count()", unittest::test_count, unittest::check_map, state),
-        ::Test("test lower_bound()", unittest::test_lower_bound, unittest::check_map, state),
-        ::Test("test upper_bound()", unittest::test_upper_bound, unittest::check_map, state),
+        ::Test("test map lower_bound()", unittest::test_lower_bound, unittest::check_map, state),
+        ::Test("test map upper_bound()", unittest::test_upper_bound, unittest::check_map, state),
+        ::Test("test map equal_range()", unittest::test_equal_range, unittest::check_map, state),
     };
 
     for (size_t i = 0; i < sizeof(tests) / sizeof(tests[0]); i++)
