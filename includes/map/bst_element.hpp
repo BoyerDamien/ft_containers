@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 14:30:36 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/20 11:06:38 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/23 15:33:13 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ template < typename T, typename Compare, typename Alloc = std::allocator< T > > 
         return _parent;
     }
 
-    value_type &getPair(void) const
+    value_type &getPair(void)
     {
         return *_pair;
     }

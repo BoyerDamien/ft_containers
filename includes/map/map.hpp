@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 14:30:47 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/23 11:30:28 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/23 16:29:23 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -327,7 +327,15 @@ class map
 
     iterator lower_bound(const key_type &k)
     {
-        return _lower(k, _root);
+        iterator it = begin();
+
+        while (it != end())
+        {
+            if (!key_comp()(it->first, k))
+                return it;
+            it++;
+        }
+        return it;
     }
 
     const_iterator lower_bound(const key_type &k) const
@@ -337,7 +345,15 @@ class map
 
     iterator upper_bound(const key_type &k)
     {
-        return _upper(k, _root);
+        iterator it = begin();
+
+        while (it != end())
+        {
+            if (key_comp()(k, it->first))
+                return it;
+            it++;
+        }
+        return it;
     }
 
     const_iterator upper_bound(const key_type &k) const
@@ -426,31 +442,11 @@ class map
                     return _find(k, node->left());
                 if (result_right && node->right() && node->right() != _last)
                     return _find(k, node->right());
+                return iterator(_last);
             }
+            return iterator(node);
         }
-        return iterator(node);
-    }
-
-    iterator _lower(const key_type &k, node_type *node)
-    {
-        if (node && node != _last && node->left())
-        {
-            value_type val = node->getPair();
-            if (key_comp()(k, val.first) && node->left())
-                return _lower(k, node->left());
-        }
-        return iterator(node);
-    }
-
-    iterator _upper(const key_type &k, node_type *node)
-    {
-        if (node && node != _last && node->right())
-        {
-            value_type val = node->getPair();
-            if (key_comp()(val.first, k) && node->right())
-                return _upper(k, node->right());
-        }
-        return iterator(node);
+        return iterator(_last);
     }
 };
 

@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/05 09:33:43 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/23 10:37:20 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/23 15:35:05 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ template < typename T, typename node_type > class map_iterator
     {
         return _base->getPair();
     }
-    pointer *operator->(void) const
+    pointer operator->(void) const
     {
         return &(this->operator*());
     }
