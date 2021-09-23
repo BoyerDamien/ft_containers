@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 14:18:02 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/22 10:46:10 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/23 17:57:12 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,22 @@ void test_map_at(void (*check)(test_type &, ref_type &), state_type state)
     catch (std::out_of_range &e)
     {
         std::cerr << e.what() << std::endl;
+    }
+}
+
+template < typename test_type, typename ref_type, typename state_type >
+void test_stack_top(void (*check)(test_type &, ref_type &), state_type state)
+{
+    test_type test;
+    ref_type test_ref;
+
+    for (int i = 0; i < state.len; i++)
+    {
+        test.push(state.test_state[i]);
+        test_ref.push(state.ref_state[i]);
+
+        check_stack(test, test_ref);
+        assert(test.top() == test_ref.top(), "wrong top value");
     }
 }
 } // namespace unittest

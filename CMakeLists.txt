@@ -17,6 +17,7 @@ add_executable(ft_container
     ${SOURCE}test_vector.cpp
     ${SOURCE}test_pair.cpp
     ${SOURCE}test_map.cpp
+    ${SOURCE}test_stack.cpp
 )
 
 include_directories(

@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 09:46:17 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/20 12:26:10 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/23 18:22:18 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,30 @@ void test_operator_eq(void (*check)(test_type &, ref_type &), state_type state)
     check(test, test_ref);
     check(test2, test_ref2);
     unittest::assert((test == test2) == (test_ref == test_ref2), "not equal");
+}
+
+template < typename test_type, typename ref_type, typename state_type >
+void test_stack_operator_eq(void (*check)(test_type &, ref_type &), state_type state)
+{
+
+    test_type test;
+    ref_type test_ref;
+    test_type test2;
+    ref_type test_ref2;
+    for (int i = 0; i < state.len; i++)
+    {
+        test.push(state.test_state[i]);
+        test_ref.push(state.ref_state[i]);
+        test2.push(state.test_state[i]);
+        test_ref2.push(state.ref_state[i]);
+    }
+    check(test, test_ref);
+    check(test2, test_ref2);
+    unittest::assert((test == test2) == (test_ref == test_ref2), "not equal");
+
+    test.pop();
+    test_ref.pop();
+    unittest::assert((test != test2) == (test_ref != test_ref2), "not equal");
 }
 
 template < typename test_type, typename ref_type, typename state_type >
@@ -93,6 +117,37 @@ void test_operator_inf_sup(void (*check)(test_type &, ref_type &), state_type st
     unittest::assert((test2 <= test) == (test_ref2 <= test_ref), "not equal");
     unittest::assert(!(test > test2) == !(test_ref > test_ref2), "not equal");
     unittest::assert((test >= test2) == (test_ref >= test_ref2), "not equal");
+}
+
+template < typename test_type, typename ref_type, typename state_type >
+void test_stack_operator_inf_sup(void (*check)(test_type &, ref_type &), state_type state)
+{
+
+    test_type test;
+    ref_type test_ref;
+
+    for (int i = 0; i < state.len / 2; i++)
+    {
+        test.push(state.test_state[i]);
+        test_ref.push(state.ref_state[i]);
+    }
+
+    test_type test2;
+    ref_type test_ref2;
+
+    for (int i = 0; i < state.len; i++)
+    {
+        test2.push(state.test_state[i]);
+        test_ref2.push(state.ref_state[i]);
+    }
+
+    check(test, test_ref);
+    check(test2, test_ref2);
+
+    unittest::assert((test2 < test) == (test_ref2 < test_ref), "greater or equal");
+    unittest::assert((test2 <= test) == (test_ref2 <= test_ref), "greater");
+    unittest::assert((test > test2) == (test_ref > test_ref2), "less or equal");
+    unittest::assert((test >= test2) == (test_ref >= test_ref2), "less");
 }
 
 template < typename test_type, typename ref_type, typename state_type >

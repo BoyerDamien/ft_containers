@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 15:06:25 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/19 10:59:02 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/23 18:18:07 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,8 @@ template < class T, class Container = vector< T > > class stack
     typedef Container container_type;
     typedef typename Container::size_type size_type;
 
-    explicit stack(const container_type &ctnr = container_type()) : _content(ctnr)
+    stack(const container_type &ctnr = container_type()) : _content(ctnr)
     {
-    }
-
-    stack(const stack &other) : _content(container_type(other._content))
-    {
-    }
-
-    stack &operator=(const stack &other)
-    {
-        _content = container_type(other._content);
-        return *this;
     }
 
     ~stack(void)
@@ -74,14 +64,13 @@ template < class T, class Container = vector< T > > class stack
         _content.pop_back();
     }
 
-    bool operator==(const stack &rhs)
+    friend bool operator==(const stack< T, Container > &lhs, const stack< T, Container > &rhs)
     {
-        return _content == rhs._content;
+        return lhs._content == rhs._content;
     }
-
-    bool operator<(const stack &rhs)
+    friend bool operator<(const stack< T, Container > &lhs, const stack< T, Container > &rhs)
     {
-        return _content < rhs._content;
+        return lhs._content < rhs._content;
     }
 
   private:

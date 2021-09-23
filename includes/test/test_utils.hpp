@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 17:15:48 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/21 16:25:54 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/23 17:45:06 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,12 @@ template < typename test_type, typename ref_type > void check_map(test_type &tes
     }
 }
 
+template < typename test_type, typename ref_type > void check_stack(test_type &test, ref_type &test_ref)
+{
+    assert(test.empty() == test_ref.empty(), "wrong empty value");
+    assert(test.size() == test_ref.size(), "wrong empty value");
+    if (test_ref.size() != 0)
+        assert(test.top() == test_ref.top(), "wrong empty value");
+}
 } // namespace unittest
 #endif

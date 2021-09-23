@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 17:12:28 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/20 12:08:46 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/23 17:52:01 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,27 @@ void test_size(void (*check)(test_type &, ref_type &), state_type state)
     unittest::assert(test2.empty() == test_ref2.empty(), "wrong size");
     unittest::assert(test2.size() == test_ref2.size(), "wrong size");
     check(test2, test_ref2);
+}
+
+template < typename test_type, typename ref_type, typename state_type >
+void test_stack_size(void (*check)(test_type &, ref_type &), state_type state)
+{
+    test_type test;
+    ref_type test_ref;
+
+    unittest::assert(test.size() == test_ref.size(), "wrong size");
+    unittest::assert(test.empty() == test_ref.empty(), "wrong size");
+    check(test, test_ref);
+
+    for (int i = 0; i < state.len; i++)
+    {
+        test.push(state.test_state[i]);
+        test_ref.push(state.ref_state[i]);
+    }
+
+    unittest::assert(test.empty() == test_ref.empty(), "wrong size");
+    unittest::assert(test.size() == test_ref.size(), "wrong size");
+    check(test, test_ref);
 }
 
 template < typename test_type, typename ref_type, typename state_type >
@@ -122,6 +143,33 @@ void test_empty(void (*check)(test_type &, ref_type &), state_type state)
     test2.clear();
     test_ref2.clear();
     assert(test2.empty() == test_ref2.empty(), "wrong empty value");
+}
+
+template < typename test_type, typename ref_type, typename state_type >
+void test_stack_empty(void (*check)(test_type &, ref_type &), state_type state)
+{
+    test_type test;
+    ref_type test_ref;
+    check(test, test_ref);
+
+    assert(test.empty() == test_ref.empty(), "wrong empty value");
+
+    for (int i = 0; i < state.len; i++)
+    {
+        test.push(state.test_state[i]);
+        test_ref.push(state.ref_state[i]);
+    }
+
+    check(test, test_ref);
+
+    assert(test.empty() == test_ref.empty(), "wrong empty value");
+
+    while (test.size())
+    {
+        test.pop();
+        test_ref.pop();
+    }
+    assert(test.empty() == test_ref.empty(), "wrong empty value");
 }
 
 } // namespace unittest

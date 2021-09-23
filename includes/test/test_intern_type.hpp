@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 12:49:47 by dboyer            #+#    #+#             */
-/*   Updated: 2021/09/20 10:59:45 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/23 17:44:40 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ void test_random_access_iterator_intern_type(void (*check)(test_type &, ref_type
     assert(ft::is_random_access_iterator< typename test_type::iterator::iterator_category >::value,
            "wrong const iterator category");
 }
+
 template < typename test_type, typename ref_type, typename state_type >
 void test_bidirectional_iterator_intern_type(void (*check)(test_type &, ref_type &), state_type state)
 {
@@ -163,5 +164,21 @@ void test_bidirectional_iterator_intern_type(void (*check)(test_type &, ref_type
 
     assert(ft::is_bidirectional_iterator< typename test_type::iterator::iterator_category >::value,
            "wrong const iterator category");
+}
+
+template < typename test_type, typename ref_type, typename state_type >
+void test_stack_intern_types(void (*check)(test_type &, ref_type &), state_type state)
+{
+    (void)check;
+    (void)state;
+
+    assert(ft::is_type_equal< typename test_type::container_type, ft::vector< typename test_type::value_type > >::value,
+           "wrong container type");
+
+    assert(ft::is_type_equal< typename test_type::size_type, typename ref_type::size_type >::value,
+           "wrong size_type type");
+
+    assert(ft::is_type_equal< typename test_type::value_type, typename ref_type::value_type >::value,
+           "wrong value_type type");
 }
 } // namespace unittest
