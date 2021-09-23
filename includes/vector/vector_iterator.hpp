@@ -6,14 +6,14 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 12:03:13 by dess              #+#    #+#             */
-/*   Updated: 2021/09/23 15:37:02 by dboyer           ###   ########.fr       */
+/*   Updated: 2021/09/23 19:59:55 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include "iterator.hpp"
-#include "iterator_traits.hpp"
+#include "iterators/iterator.hpp"
+#include "iterators/iterator_traits.hpp"
 #include <cstddef>
 
 namespace ft
